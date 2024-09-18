@@ -1,13 +1,102 @@
 components:
-- components: []
+- components:
+  - layout_properties: {grid_position: 'CKFKRL,IXSBNL'}
+    name: label_3
+    properties: {background: 'theme:Primary Overlay 1', bold: true, font_size: 16, foreground: 'theme:On Background', icon: 'fa:book', text: Kaimai Member's Journals}
+    type: Label
+  - layout_properties: {grid_position: 'DTXZAA,XIPERJ'}
+    name: spacer_1
+    properties: {height: 32}
+    type: Spacer
+  - components:
+    - layout_properties: {grid_position: 'RGAZJT,EWBWCL'}
+      name: label_2
+      properties: {align: center, background: 'theme:Surface Variant', bold: true, foreground: 'theme:On Surface Variant', text: Web-Journal 1}
+      type: Label
+    layout_properties: {grid_position: 'MBZRCV,JELNDB'}
+    name: outlined_card_2
+    properties: {background: 'theme:Surface Variant', role: outlined-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'SQIJNS,KPKHRG'}
+      name: label_2_copy
+      properties: {align: center, background: 'theme:Surface Variant', bold: true, foreground: 'theme:On Surface Variant', text: Web-Journal 2}
+      type: Label
+    layout_properties: {grid_position: 'MBZRCV,CIQOCH'}
+    name: outlined_card_3
+    properties: {background: 'theme:Surface Variant', role: outlined-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'VOSNZC,MYZDUM'}
+      name: label_2_copy_2
+      properties: {align: center, background: 'theme:Surface Variant', bold: true, foreground: 'theme:On Surface Variant', text: Web-Journal 3}
+      type: Label
+    layout_properties: {grid_position: 'MBZRCV,SDKZPQ'}
+    name: outlined_card_4
+    properties: {background: 'theme:Surface Variant', role: outlined-card}
+    type: ColumnPanel
   layout_properties: {slot: default}
   name: content_panel
   properties: {col_widths: '{}'}
   type: ColumnPanel
-- layout_properties: {slot: nav-right}
+- components:
+  - layout_properties: {}
+    name: label_login
+    properties: {text: ''}
+    type: Label
+  - layout_properties: {}
+    name: link_1
+    properties: {text: admin}
+    type: Link
+  layout_properties: {slot: nav-right}
   name: navbar_links
   properties: {}
   type: FlowPanel
+- layout_properties: {slot: title}
+  name: label_1
+  properties: {text: Kaimai Portal}
+  type: Label
+- components:
+  - layout_properties: {grid_position: 'BPCVNV,CNIFDH'}
+    name: outlined_button_1
+    properties: {icon: 'fa:book', role: outlined-button, text: Journals}
+    type: Button
+  layout_properties: {slot: left-nav}
+  name: column_panel_1
+  properties: {}
+  type: ColumnPanel
+- components:
+  - components:
+    - layout_properties: {grid_position: 'MWBMJX,EGNQGF'}
+      name: label_2_copy_3
+      properties: {align: center, background: 'theme:Surface Variant', bold: true, foreground: 'theme:On Surface Variant', text: Web-Journal 4}
+      type: Label
+    layout_properties: {grid_position: 'MBZRCV,JELNDB'}
+    name: outlined_card_2_copy
+    properties: {background: 'theme:Surface Variant', role: outlined-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'HQKXAB,CWYYUN'}
+      name: label_2_copy_4
+      properties: {align: center, background: 'theme:Surface Variant', bold: true, foreground: 'theme:On Surface Variant', text: Web-Journal 5}
+      type: Label
+    layout_properties: {grid_position: 'MBZRCV,CIQOCH'}
+    name: outlined_card_3_copy
+    properties: {background: 'theme:Surface Variant', role: outlined-card}
+    type: ColumnPanel
+  - components:
+    - layout_properties: {grid_position: 'XTXVOW,KSVQJO'}
+      name: label_2_copy_5
+      properties: {align: center, background: 'theme:Surface Variant', bold: true, foreground: 'theme:On Surface Variant', text: Web-Journal 6}
+      type: Label
+    layout_properties: {grid_position: 'MBZRCV,SDKZPQ'}
+    name: outlined_card_4_copy
+    properties: {background: 'theme:Surface Variant', role: outlined-card}
+    type: ColumnPanel
+  layout_properties: {slot: default}
+  name: content_panel_copy
+  properties: {col_widths: '{}'}
+  type: ColumnPanel
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
