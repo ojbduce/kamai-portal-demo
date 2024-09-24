@@ -1,0 +1,18 @@
+components:
+- layout_properties: {slot: default}
+  name: panel_1
+  properties: {}
+  type: form:Panel
+- layout_properties: {slot: default}
+  name: standard_1
+  properties: {}
+  type: form:Panel.standard
+container:
+  properties:
+    html: |-
+      <center style="font-style:italic; color:#888; margin: 3em;">
+        (Insert your custom HTML here)
+      </center>
+      <div anvil-slot="default"></div>
+  type: HtmlTemplate
+is_package: true
