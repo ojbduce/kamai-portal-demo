@@ -31,6 +31,7 @@ db_schema:
     title: Users
 dependencies: []
 name: Kamai Portal Demo
+native_deps: {head_html: ''}
 package_name: Kamai_Portal_Demo
 renamed: true
 runtime_options:
@@ -51,5 +52,5 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/facebook.yml
-startup: {module: Banner, type: form}
+startup: {module: Panel, type: form}
 startup_form: null
