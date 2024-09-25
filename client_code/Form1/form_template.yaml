@@ -1,0 +1,32 @@
+components: []
+container:
+  properties:
+    html: |-
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Header with Navbar</title>
+        <div class="top-banner">
+              Full Page Header/Banner
+          </div>
+
+          <style>
+              /* Inline Styling for the top banner (like the black "Anvil" header) */
+              .top-banner {
+                  background-color: #6750A4;
+                  color: white;
+                  padding: 20px;
+                  text-align: center;
+                  font-size: 1.5em;
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  z-index: 1100; /* Ensure it's above the app-bar */
+              }
+
+      <div anvil-slot="default"></div>
+  type: HtmlTemplate
+is_package: true

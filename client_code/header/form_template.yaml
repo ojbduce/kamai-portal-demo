@@ -5,30 +5,6 @@ components:
   type: form:Main_Copy
 container:
   properties:
-    html: |-
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Header with Navbar</title>
-          <style>
-              /* Inline Styling for the top banner (like the black "Anvil" header) */
-              .top-banner {
-                  background-color: #6750A4;
-                  color: white;
-                  padding: 20px;
-                  text-align: center;
-                  font-size: 1.5em;
-                  position: fixed;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  z-index: 1100; /* Ensure it's above the app-bar */
-              }
-
-
-
-      <div anvil-slot="default"></div>
+    html: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Header with Navbar</title>\n  <div class=\"top-banner\">\n        Full Page Header/Banner\n    </div>\n\n    <style>\n        /* Inline Styling for the top banner (like the black \"Anvil\" header) */\n        .top-banner {\n            background-color: white;\n            color: black;\n            padding: 20px;\n            text-align: center;\n            font-size: 1.5em;\n            position: fixed;\n            top: 0;\n            left: 0;\n            width: 100%;\n            z-index: 1100; /* Ensure it's above the app-bar */\n        }\n \n    \n\n<div anvil-slot=\"default\"></div>"
   type: HtmlTemplate
 is_package: true
