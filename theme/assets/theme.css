@@ -172,10 +172,11 @@ color: %color:On Primary Container%;
 .app-bar {
   z-index: 1000;
   position: fixed;
-  top: 0;
-  top: %anvil-banner-height%;
+  top: 80px;
+  /*top: %anvil-banner-height%; */
   right: 0;
   left: 0;
+  margin: 0; /* Ensure no margin */
 /*   flex: 0 0;
   flex-basis: auto;
   flex-basis: content; */
@@ -226,7 +227,7 @@ color: %color:On Primary Container%;
 
 .nav-holder .left-nav {
   position: fixed;
-/*   top: 0; */
+  top: 80px; 
   left: 0;
   flex-shrink: 0;
   min-width: 240px;

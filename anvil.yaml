@@ -52,5 +52,5 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/facebook.yml
-startup: {module: Panel, type: form}
+startup: {module: header, type: form}
 startup_form: null

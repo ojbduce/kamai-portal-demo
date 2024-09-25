@@ -1,0 +1,52 @@
+components:
+- layout_properties: {slot: default}
+  name: new_form_1
+  properties: {}
+  type: form:New_Form
+container:
+  properties:
+    html: |-
+      <center style="font-style:italic; color:#888; margin: 3em;">
+        (<!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Full-Page Banner</title>
+          <style>
+              /* Styling for the full-page banner */
+              .banner {
+                  background-color: #6750A4;
+                  width: 100%;
+                  height: 100vh; /* Full page height */
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+              }
+
+              /* Optional: Add some text in the center */
+              .banner-text {
+                  color: white;
+                  font-size: 2em;
+                  font-family: Arial, sans-serif;
+              }
+
+              /* Reset default body margin and padding */
+              body, html {
+                  margin: 0;
+                  padding: 0;
+                  height: 100%;
+              }
+          </style>
+      </head>
+      <body>
+          <div class="banner">
+              <div class="banner-text">This is a full-page banner</div>
+          </div>
+      </body>
+      </html>
+
+      </center>
+      <div anvil-slot="default"></div>
+  type: HtmlTemplate
+is_package: true

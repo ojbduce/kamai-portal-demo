@@ -1,4 +1,4 @@
-from ._anvil_designer import Form2Template
+from ._anvil_designer import headerTemplate
 from anvil import *
 import anvil.facebook.auth
 import anvil.google.auth, anvil.google.drive
@@ -9,7 +9,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class Form2(Form2Template):
+class header(headerTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)

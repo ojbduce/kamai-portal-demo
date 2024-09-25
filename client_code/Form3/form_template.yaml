@@ -1,5 +1,0 @@
-components: []
-container:
-  properties: {html: '@theme:with_banner.html'}
-  type: HtmlTemplate
-is_package: true
