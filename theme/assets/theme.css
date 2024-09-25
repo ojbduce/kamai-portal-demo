@@ -427,8 +427,9 @@
     
     line-height: 40px;
     font-size: 20px;
+    background: linear-gradient(0deg, %color:Primary Overlay 2%, %color:Primary Overlay 2%), %color:Background%;
   
-    background-color: %color:Surface%;
+    /*background-color: %color:Background%;*/
     transition: background-color 250ms;
     -webkit-transition: background-color 250ms;
     -moz-transition: background-color 250ms;
