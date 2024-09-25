@@ -399,12 +399,30 @@
     overflow-x: hidden;
     margin-top: calc(80px + 56px); /* Banner height + App-bar height */
   }
+
+  .custom-top-banner {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.5em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1100;
+}
   
   /* Components: App Bar */
   .app-bar {
-    min-height: 56px;
-    padding: 0 16px 0 72px;
+    z-index: 1000;
     position: fixed;
+    /* top: 80px; -- Remove this line, as it's now set dynamically by JavaScript */
+    right: 0;
+    left: 0;
+    margin: 0; /* Ensure no margin */
+    min-height: 56px; /* Keep this line */
+    padding: 0 16px 0 72px;
     width: 100%;
     
     line-height: 40px;
