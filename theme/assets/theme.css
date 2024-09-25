@@ -177,6 +177,7 @@
     right: 0;
     left: 0;
     margin: 0; /* Ensure no margin */
+    min-height: 56px;
   /*   flex: 0 0;
     flex-basis: auto;
     flex-basis: content; */
@@ -227,7 +228,7 @@
   
   .nav-holder .left-nav {
     position: fixed;
-    top: 80px; 
+    top: calc(80px + 56px);
     left: 0;
     flex-shrink: 0;
     min-width: 240px;
@@ -285,8 +286,8 @@
     overflow-x: hidden;
     overflow-y: auto;
     position: fixed;
-    top: 80px; 
-    height: calc(100% - 54px); /*todo: fix on mobile*/
+    top: calc(80px + 56px); /* Account for the app-bar height */
+  height: calc(100% - 80px - 56px); /* Adjust the height to account for both the top offset and app-bar */
   }
   
   
@@ -1047,4 +1048,5 @@
   .anvil-spinner {
       --anvil-spinner-bg: %color:Surface Variant%;
   }
+  
   
