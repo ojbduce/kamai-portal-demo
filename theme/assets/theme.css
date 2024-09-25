@@ -158,9 +158,10 @@
   /* Page structure: App bar with optional left nav */
   .structure {
   /*   display: flex;
-    flex-direction: column; */
+    flex-direction: column; 
     min-height: 100vh;
-    min-height: calc(100vh - %anvil-banner-height%);
+    min-height: calc(100vh - %anvil-banner-height%);*/
+    min-height: calc(100vh - 80px); /* Subtract the banner height */
   /*   height: 0; /* To make flex-grow work in IE */
   }
   
@@ -172,7 +173,7 @@
   .app-bar {
     z-index: 1000;
     position: fixed;
-    top: 80px;
+    top: 80px; /* This should be the height of your banner */
     /*top: %anvil-banner-height%; */
     right: 0;
     left: 0;
@@ -228,7 +229,7 @@
   
   .nav-holder .left-nav {
     position: fixed;
-    top: calc(80px + 56px);
+    top: calc(80px + 56px); /* Banner height (80px) + App-bar height (56px) */
     left: 0;
     flex-shrink: 0;
     min-width: 240px;
@@ -287,7 +288,7 @@
     overflow-y: auto;
     position: fixed;
     top: calc(80px + 56px); /* Account for the app-bar height */
-  height: calc(100% - 80px - 56px); /* Adjust the height to account for both the top offset and app-bar */
+    height: calc(100vh - 80px - 56px); /* Viewport height - Banner height - App-bar height */
   }
   
   
@@ -396,6 +397,7 @@
   .content {
     flex: 1;
     overflow-x: hidden;
+    margin-top: calc(80px + 56px); /* Banner height + App-bar height */
   }
   
   /* Components: App Bar */
@@ -413,7 +415,6 @@
     -webkit-transition: background-color 250ms;
     -moz-transition: background-color 250ms;
     -o-transition: background-color 250ms;
-    
     z-index: 1;
   }
   
@@ -1048,5 +1049,6 @@
   .anvil-spinner {
       --anvil-spinner-bg: %color:Surface Variant%;
   }
+  
   
   
