@@ -33,7 +33,7 @@ class Main_Copy(Main_CopyTemplate):
   def get_data(self):
     rows = app_tables.reports.search()
     self.repeating_panel_1.items = rows
-    print(rows)# Bind rows to the Repeating Panel
+    #print(rows)# Bind rows to the Repeating Panel
    
 
   def set_logged_in_user(self):
@@ -42,6 +42,7 @@ class Main_Copy(Main_CopyTemplate):
 
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
+    self.get_data()
     self.content_panel_home.visible = False
     self.card_database.visible = True
 
