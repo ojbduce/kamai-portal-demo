@@ -1,4 +1,4 @@
-from ._anvil_designer import MainTemplate
+from ._anvil_designer import Main_backupTemplate
 from anvil import *
 import anvil.facebook.auth
 import anvil.google.auth, anvil.google.drive
@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 import anvil.users
 
 
-class Main(MainTemplate):
+class Main_backup(Main_backupTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)

@@ -1,4 +1,4 @@
-from ._anvil_designer import Main_copyTemplate
+from ._anvil_designer import MainTemplate
 from anvil import *
 import anvil.facebook.auth
 import anvil.google.auth, anvil.google.drive
@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 import anvil.users
 
 
-class Main_copy(Main_copyTemplate):
+class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
@@ -19,12 +19,14 @@ class Main_copy(Main_copyTemplate):
 
     if user:
       # User is already logged in
-      self.set_logged_in_user()
+       self.set_logged_in_user()
 
     else:
       # User is not logged in; prompt login
       self.label_login.text = "Logged-out"
       anvil.users.login_with_form()
+
+   
 
   def set_logged_in_user(self):
     user = anvil.users.get_user(allow_remembered=True)
