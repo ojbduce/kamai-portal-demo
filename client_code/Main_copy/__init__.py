@@ -30,5 +30,4 @@ class Main_copy(Main_copyTemplate):
 
   def set_logged_in_user(self):
     user = anvil.users.get_user(allow_remembered=True)
-    alert("Welcome!")
     self.label_login.text = f"Logged in as {user['email']}"
