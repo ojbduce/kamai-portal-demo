@@ -1,0 +1,15 @@
+components:
+- data_bindings:
+  - {code: 'self.item[''email'']', property: text, writeback: false}
+  layout_properties: {column: JKSDUP}
+  name: label_email
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''report'']', property: text, writeback: false}
+  layout_properties: {column: VJQQOR}
+  name: label_report
+  properties: {}
+  type: Label
+container: {type: DataRowPanel}
+is_package: true

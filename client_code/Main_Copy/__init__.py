@@ -25,9 +25,15 @@ class Main_Copy(Main_CopyTemplate):
       self.label_login.text = "Logged-out"
       anvil.users.login_with_form()
 
-    rows = app_tables.reports.search()
-    self.repeating_panel_1.items = rows
-    print(rows)# Bind rows to the Repeating Panel
+    self.content_panel_home.visible = True
+    self.card_database.visible = False
+
+    self.get_data()
+
+    def get_data(self):
+      rows = app_tables.reports.search()
+      self.repeating_panel_1.items = rows
+      print(rows)# Bind rows to the Repeating Panel
    
 
 
