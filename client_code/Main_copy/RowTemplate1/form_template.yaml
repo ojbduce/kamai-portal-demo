@@ -1,0 +1,12 @@
+components:
+- data_bindings: []
+  layout_properties: {column: JKSDUP}
+  name: label_email
+  properties: {align: left, background: '', bold: false, border: '', font: '', font_size: null, foreground: '', icon: '', icon_align: left, italic: false, margin: null, role: null, spacing_above: small, spacing_below: small, text: email, tooltip: '', underline: false, visible: true}
+  type: Label
+- layout_properties: {column: VJQQOR}
+  name: label_report
+  properties: {}
+  type: Label
+container: {type: DataRowPanel}
+is_package: true

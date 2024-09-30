@@ -69,7 +69,7 @@ components:
     properties: {role: tonal-card}
     type: ColumnPanel
   layout_properties: {slot: default}
-  name: content_panel
+  name: content_panel_journals
   properties: {background: 'theme:Background', col_widths: '{}'}
   type: ColumnPanel
 - components:
@@ -106,7 +106,28 @@ components:
   name: column_panel_1
   properties: {}
   type: ColumnPanel
-- components: []
+- components:
+  - components:
+    - layout_properties: {grid_position: 'NASHLO,LJXDVG'}
+      name: label_data_table
+      properties: {bold: true, text: 'Journal 1: Users , Reports'}
+      type: Label
+    - components:
+      - name: repeating_panel_1
+        properties: {item_template: Main_copy.RowTemplate1}
+        type: RepeatingPanel
+      layout_properties: {grid_position: 'WJAFQK,CVONSK'}
+      name: data_grid_1
+      properties:
+        columns:
+        - {data_key: email, id: JKSDUP, title: User}
+        - {data_key: report, id: VJQQOR, title: Report}
+        - {data_key: column_3, id: OJLQEN, title: Ads}
+      type: DataGrid
+    layout_properties: {grid_position: 'LKPWXB,VTHWLF'}
+    name: outlined_card_5
+    properties: {role: outlined-card}
+    type: ColumnPanel
   layout_properties: {slot: default}
   name: content_panel_copy
   properties: {col_widths: '{}'}
