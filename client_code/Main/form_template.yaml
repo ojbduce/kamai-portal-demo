@@ -10,9 +10,10 @@ components:
     type: Spacer
   - components:
     - components:
-      - layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
+      - event_bindings: {click: link_2_click}
+        layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
         name: link_2
-        properties: {align: center, bold: true, foreground: 'theme:On Primary', text: Web-Journal 1}
+        properties: {align: center, bold: true, foreground: 'theme:On Primary', text: Web-Journal 1, url: 'https://adept-right-category.anvil.app'}
         type: Link
       layout_properties: {grid_position: 'MQTRSL,WXWSAI MFXAEG,KFFVUJ'}
       name: outlined_card_2

@@ -32,4 +32,8 @@ class Main(MainTemplate):
     user = anvil.users.get_user(allow_remembered=True)
     self.label_login.text = f"Logged in as {user['email']}"
 
+  def link_2_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    pass
+
   
