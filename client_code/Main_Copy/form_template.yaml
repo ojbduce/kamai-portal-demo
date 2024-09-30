@@ -10,9 +10,10 @@ components:
     type: Spacer
   - components:
     - components:
-      - layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
+      - data_bindings: []
+        layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
         name: link_2
-        properties: {align: center, bold: true, foreground: 'theme:On Primary', text: Web-Journal 1}
+        properties: {align: center, bold: true, foreground: 'theme:On Primary', text: Web-Journal 1, url: 'https://adept-right-category.anvil.app'}
         type: Link
       layout_properties: {grid_position: 'MQTRSL,WXWSAI MFXAEG,KFFVUJ'}
       name: outlined_card_2
@@ -109,6 +110,10 @@ components:
   properties: {}
   type: ColumnPanel
 - components:
+  - layout_properties: {grid_position: 'DKJVZX,NBSHTT'}
+    name: spacer_2
+    properties: {height: 40}
+    type: Spacer
   - components:
     - layout_properties: {grid_position: 'NSGLDF,YAZGLF'}
       name: label_2
