@@ -9,7 +9,7 @@ from anvil.tables import app_tables
 import anvil.users
 
 
-class Main(MainTemplate):
+class Main(Main.Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
