@@ -11,27 +11,52 @@ import anvil.users
 
 class Main_Copy(Main_CopyTemplate):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
+    # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    
     # Check if a user is already logged in
     user = anvil.users.get_user(allow_remembered=True)
-    
+
     if user:
       # User is already logged in
-      alert(f"Welcome back, {user['email']}")
-     
+       self.set_logged_in_user()
+
     else:
       # User is not logged in; prompt login
       self.label_login.text = "Logged-out"
       anvil.users.login_with_form()
-    
-    self.set_logged_in_user()
-    
 
-  def set_logged_in_user(self):
-    user = anvil.users.get_user(allow_remembered=True)
-    alert("Welcome!")
-    self.label_login.text = f"Logged in as {user['email']}"
+    rows = app_tables.reports.search()
+    self.repeating_panel_1.items = rows
+    print(rows)# Bind rows to the Repeating Panel
+   
+
 
   
+  def set_logged_in_user(self):
+    user = anvil.users.get_user(allow_remembered=True)
+    self.label_login.text = f"Logged in as {user['email']}"
+  def __init__(self, **properties):
+    # Set Form properties and Data Bindings.
+    self.init_components(**properties)
+    # Check if a user is already logged in
+    user = anvil.users.get_user(allow_remembered=True)
+
+    if user:
+      # User is already logged in
+       self.set_logged_in_user()
+
+    else:
+      # User is not logged in; prompt login
+      self.label_login.text = "Logged-out"
+      anvil.users.login_with_form()
+
+    rows = app_tables.reports.search()
+    self.repeating_panel_1.items = rows
+    print(rows)# Bind rows to the Repeating Panel
+   
+
+
+  
+  def set_logged_in_user(self):
+    user = anvil.users.get_user(allow_remembered=True)
+    self.label_login.text = f"Logged in as {user['email']}"

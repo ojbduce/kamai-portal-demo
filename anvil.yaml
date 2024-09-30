@@ -1,7 +1,18 @@
 allow_embedding: false
 db_schema:
-  users:
+  reports:
     client: none
+    columns:
+    - admin_ui: {width: 200}
+      name: email
+      type: string
+    - admin_ui: {width: 200}
+      name: report
+      type: string
+    server: full
+    title: Reports
+  users:
+    client: full
     columns:
     - admin_ui: {order: 0, width: 200}
       name: email
