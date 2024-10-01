@@ -5,7 +5,7 @@ components:
       - {code: 'self.item['''']', property: icon, writeback: false}
       layout_properties: {}
       name: label_3
-      properties: {background: 'theme:Surface', bold: true, font_size: 16, foreground: 'theme:On Surface Variant', icon: '', role: headline, text: Kaimai Member's Journals}
+      properties: {background: 'theme:Surface', bold: true, font_size: 17, foreground: 'theme:On Surface Variant', icon: '', role: headline, text: Kaimai Member's Journals}
       type: Label
     - layout_properties: {width: 65.28125}
       name: image_1
