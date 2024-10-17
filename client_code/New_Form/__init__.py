@@ -1,5 +1,6 @@
 from ._anvil_designer import New_FormTemplate
 from anvil import *
+import anvil.server
 import anvil.facebook.auth
 import anvil.google.auth, anvil.google.drive
 from anvil.google.drive import app_files

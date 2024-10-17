@@ -47,7 +47,7 @@ package_name: Kamai_Portal_Demo
 renamed: true
 runtime_options:
   client_version: '3'
-  server_spec: {base: python310-standard}
+  server_spec: {base: python310-datascience}
   server_version: python3-sandbox
   version: 2
 services:
