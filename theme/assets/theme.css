@@ -526,13 +526,17 @@
   
   /* Component: Dialog (alert), Notification */
   .modal-content, body>div[data-notify="container"] {
-    display: flex;
-    justify-content: center;  /* Horizontally center */
     border-radius: 50px;
     background: linear-gradient(0deg, %color:Primary Overlay 3%, %color:Primary Overlay 3%), %color:Background%;
     box-shadow: none;
+    min-width: 200px;  /* Optional: Set a minimum width */
+    max-width: 90%;  /* Optional: Prevent it from being too wide */
+    padding: 20px;  /* Add padding for better readability */
+    text-align: center;  /* Center the text if desired */
     border: none;
+    z-index: 9999 !important;  
   }
+
   
   .modal-header {
     padding: 24px 24px 0px;

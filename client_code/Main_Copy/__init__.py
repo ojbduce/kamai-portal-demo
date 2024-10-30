@@ -14,6 +14,7 @@ class Main_Copy(Main_CopyTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
+    self.label_return_message.visible = False
     # Check if a user is already logged in
     user = anvil.users.get_user(allow_remembered=True)
 
@@ -54,7 +55,8 @@ class Main_Copy(Main_CopyTemplate):
   def url_test_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     share_url = anvil.server.call('generate_yoti_qr_code')
-    alert(share_url)
+    self.label_return_message.visible = True
+    self.label_return_message.text = share_url
 
 
   

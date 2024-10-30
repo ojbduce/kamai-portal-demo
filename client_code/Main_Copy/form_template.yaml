@@ -20,6 +20,10 @@ components:
     name: url_test_button
     properties: {text: Test Yoti Response URL}
     type: Button
+  - layout_properties: {grid_position: 'YKCKJV,WCAEAT'}
+    name: label_return_message
+    properties: {align: center}
+    type: Label
   - layout_properties: {grid_position: 'DTXZAA,XIPERJ'}
     name: spacer_1
     properties: {height: 11}
