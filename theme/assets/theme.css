@@ -1,6 +1,8 @@
 /**
  This CSS implements the Material Design 3 look and feel for Anvil apps.
+525 alert
  **/
+
 
 /* Stop panel-cols cutting off drop shadows */
 .anvil-panel-col {
@@ -524,7 +526,9 @@
   
   /* Component: Dialog (alert), Notification */
   .modal-content, body>div[data-notify="container"] {
-    border-radius: 28px;
+    display: flex;
+    justify-content: center;  /* Horizontally center */
+    border-radius: 50px;
     background: linear-gradient(0deg, %color:Primary Overlay 3%, %color:Primary Overlay 3%), %color:Background%;
     box-shadow: none;
     border: none;

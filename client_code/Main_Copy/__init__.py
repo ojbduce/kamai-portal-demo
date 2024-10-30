@@ -51,9 +51,10 @@ class Main_Copy(Main_CopyTemplate):
     """This method is called when the button is clicked"""
     open_form('header')
 
-  def button_1_click(self, **event_args):
+  def url_test_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    alert("Coming soon!")
+    share_url = anvil.server.call('generate_yoti_qr_code')
+    alert(share_url)
 
 
   
