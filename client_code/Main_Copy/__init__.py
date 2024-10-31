@@ -17,6 +17,7 @@ class Main_Copy(Main_CopyTemplate):
     self.label_return_message.visible = False
     # Check if a user is already logged in
     user = anvil.users.get_user(allow_remembered=True)
+   
 
     if user:
       # User is already logged in
@@ -57,6 +58,17 @@ class Main_Copy(Main_CopyTemplate):
     share_url = anvil.server.call('generate_yoti_qr_code')
     self.label_return_message.visible = True
     self.label_return_message.text = share_url
+
+  def button_test_bd_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.name = 'test_444'
+    app_tables.files.add_row(name = self.name)
+    print("Added file to files table")
+    for row in app_tables.files.search():
+      print(row['name'])
+
+
+
 
 
   

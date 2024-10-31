@@ -1,7 +1,7 @@
 allow_embedding: false
 db_schema:
-  files_2:
-    client: none
+  files:
+    client: full
     columns:
     - admin_ui: {order: 0, width: 200}
       name: name

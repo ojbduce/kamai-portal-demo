@@ -15,6 +15,11 @@ components:
     name: flow_panel_1
     properties: {background: ''}
     type: FlowPanel
+  - event_bindings: {click: button_test_bd_click}
+    layout_properties: {grid_position: 'YEYCNW,XNPIUK'}
+    name: button_test_bd
+    properties: {text: Test DB}
+    type: Button
   - event_bindings: {click: url_test_button_click}
     layout_properties: {grid_position: 'XBRKKZ,MBYHPT'}
     name: url_test_button
