@@ -57,6 +57,8 @@ class Main_Copy(Main_CopyTemplate):
     share_url = anvil.server.call('generate_yoti_qr_code')
     self.label_return_message.visible = True
     self.label_return_message.text = share_url
+    if share_url == "Error with keys":
+        alert("There was an error with the keys. Please check and try again.")
 
 
   
