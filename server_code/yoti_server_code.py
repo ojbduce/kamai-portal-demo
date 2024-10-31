@@ -140,8 +140,9 @@ def generate_yoti_qr_code():
             .build())
 
         share_url = create_share_url(yoti_client,scenario)
-        print("Generated share URL:", share_url)
-        return share_url
+        print (share_url.share_url)
+        return share_url.share_url
+        
 
     except Exception as e:
         print(f"Error creating share session: {e}")
