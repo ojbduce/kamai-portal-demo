@@ -41,7 +41,7 @@ def yoti_logged_in(**p):
 #         policy = (DynamicPolicyBuilder()
 #             .with_full_name()
 #             .with_email()
-#             .with_remember_me_id()
+#           
 #             .build())
         
 #         scenario = (DynamicScenarioBuilder()
@@ -83,7 +83,7 @@ def yoti_logged_in(**p):
 #         policy = (DynamicPolicyBuilder()
 #             .with_full_name()
 #             .with_email()
-#             .with_remember_me_id()
+#            
 #             .build())
         
 #         scenario = (DynamicScenarioBuilder()
@@ -132,16 +132,14 @@ def generate_yoti_qr_code():
         policy = (DynamicPolicyBuilder()
             .with_full_name()
             .with_email()
-            .with_remember_me_id()
             .build())
         
         scenario = (DynamicScenarioBuilder()
             .with_policy(policy)
             .with_callback_endpoint("/yoti-callback")
-            .for_application(YOTI_CLIENT_SDK_ID)
             .build())
 
-        share_url = yoti_client.create_share_url(scenario)
+        share_url = create_share_url(yoti_client,scenario)
         print("Generated share URL:", share_url)
         return share_url
 
