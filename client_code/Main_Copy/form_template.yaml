@@ -15,16 +15,6 @@ components:
     name: flow_panel_title
     properties: {background: 'theme:Light Overlay 2'}
     type: FlowPanel
-  - event_bindings: {click: button_1_click}
-    layout_properties: {grid_position: 'HLHCTA,WOTWPV'}
-    name: button_1
-    properties: {text: Check Origin}
-    type: Button
-  - event_bindings: {click: button_test_bd_click}
-    layout_properties: {grid_position: 'YEYCNW,XNPIUK'}
-    name: button_test_bd
-    properties: {text: Test DB}
-    type: Button
   - event_bindings: {click: url_test_button_click}
     layout_properties: {grid_position: 'XBRKKZ,MBYHPT'}
     name: url_test_button

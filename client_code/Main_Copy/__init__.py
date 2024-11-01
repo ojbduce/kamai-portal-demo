@@ -16,15 +16,16 @@ class Main_Copy(Main_CopyTemplate):
     self.init_components(**properties)
     self.label_return_message.visible = False
     # Check if a user is already logged in
-    user = anvil.users.get_user(allow_remembered=True)
-    if user:
-      # User is already logged in
-       self.set_logged_in_user()
+    #user = anvil.users.get_user(allow_remembered=True)
+   
+    # if user:
+    #   # User is already logged in
+    #    self.set_logged_in_user()
 
-    else:
-      # User is not logged in; prompt login
-      self.label_login.text = "Logged-out"
-      anvil.users.login_with_form()
+    # else:
+    #   # User is not logged in; prompt login
+    #   self.label_login.text = "Logged-out"
+    #   anvil.users.login_with_form()
 
     self.content_panel_home.visible = True
     self.card_database.visible = False
