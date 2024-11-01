@@ -22,6 +22,7 @@ yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 @anvil.server.http_endpoint("/sessions", methods=["POST", "OPTIONS"])
 def create_session():
     print("Hit create session")
+    response_headers = {}
     response_data = yoti_session()  # Directly call yoti_session to get the Yoti-generated sessionId and share URL
     allowed_origins = ["https://reliable-equatorial-heron.anvil.app"]
     response_headers = {}
@@ -53,24 +54,37 @@ def yoti_session():
     yoti_session_id = share_url.share_url.split('/')[-1]
     time = datetime.now()
     app_tables.sessions.add_row(time_date=time,yoti_session_id=yoti_session_id)
-    return share_url.share_url
+    return anvil.server.HttpResponse(
+      200,
+      headers={"Content-Type": "application/json"},
+      body={"sessionId": session_id, "shareUrl": share_url}
+        )
   except Exception as e:
     print(f"Error creating share session: {e}")#remove
     return "Error creating share session."
 
 @anvil.server.route("/yoti-callback", methods=["POST"])
-def yoti_callback(token):
+def yoti_callback():
     print("Hit callback")
-    yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH)
-    activity_details = yoti_client.get_activity_details(token)
-    profile = activity_details.user_profile
-    full_name = profile.get("full_name")
-    email = profile.get("email_address")
+    try:
+        token = anvil.server.request.body_json.get("token")
+        yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH)
+        activity_details = yoti_client.get_activity_details(token)
+        
+        profile = activity_details.user_profile
+        full_name = profile.get("full_name", None)
+        email = profile.get("email_address", None)
+        print(f"User Full Name: {full_name}, Email: {email}")
+        
+        # Store or process the profile data as needed
+        app_tables.users.add_row(full_name=full_name, email=email, timestamp=datetime.now())
+        print("profile received")
+        return anvil.server.HttpResponse(200, body="Profile received")
+    except Exception as e:
+        print(f"Error retrieving profile: {e}")
+        return anvil.server.HttpResponse(500, body="Error processing callback")
+    
 
-    # Process the profile data (e.g., store in the database)
-    print("User Full Name:", full_name)
-    print("User Email:", email)
-    return "Profile received"
 
 
 

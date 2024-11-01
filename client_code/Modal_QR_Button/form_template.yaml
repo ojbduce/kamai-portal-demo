@@ -1,7 +1,7 @@
 components: []
 container:
   properties:
-    html: |-
+    html: |
       <head>
         <script src="https://www.yoti.com/share/client/v2"></script>
       </head>
@@ -10,51 +10,83 @@ container:
         <!-- Yoti element will be rendered inside this DOM node -->
         <div id="yoti_qr"></div>
 
-        <!-- This script snippet will also be required in your HTML body -->
+        <!-- Yoti WebShare Script -->
         <script>
           const loadYoti = async () => {
-            const { Yoti } = window;
-            if (Yoti) {
-              console.info('Waiting for Yoti...');
-              await Yoti.ready()
-              console.info('Yoti is now ready');
-            } else {
-              console.error('Yoti client was not found!');
+            try {
+              const { Yoti } = window;
+              if (Yoti) {
+                console.info('Waiting for Yoti...');
+                await Yoti.ready();
+                console.info('Yoti is now ready');
+              } else {
+                console.error('Yoti client was not found!');
+              }
+            } catch (error) {
+              console.error('Error during Yoti load:', error);
             }
-          }
+          };
 
           const createYotiWebShare = async () => {
-            const { Yoti } = window;
-            if (Yoti) {
-              await Yoti.createWebShare({
-                name: 'test-share',
-                domId: 'yoti_qr',
-                sdkId: '754182a1-fbf6-4a20-8615-cf4666f964cc',
-                hooks: {
-                  sessionIdResolver: onSessionIdResolver,
-                  errorListener: onErrorListener
-                }
-              })
+            try {
+              const { Yoti } = window;
+              if (Yoti) {
+                await Yoti.createWebShare({
+                  name: 'test-share',
+                  domId: 'yoti_qr',
+                  sdkId: '754182a1-fbf6-4a20-8615-cf4666f964cc',
+                  hooks: {
+                    sessionIdResolver: onSessionIdResolver,
+                    errorListener: onErrorListener
+                  }
+                });
+                console.info("Yoti WebShare successfully created");
+              } else {
+                console.error("Yoti object is not available in the window");
+              }
+            } catch (error) {
+              console.error("Error creating Yoti WebShare:", error);
             }
-          }
+          };
 
           async function onSessionIdResolver() {
-            // Make a call to your backend, and return a 'sessionId'
-            const response = await fetch("https://reliable-equatorial-heron.anvil.app/_/api/sessions", { method: 'POST' });
-            const data = await response.json();
+        try {
+          console.info("Requesting session ID from backend...");
+          const response = await fetch("https://reliable-equatorial-heron.anvil.app/_/api/sessions", { method: 'POST' });
+          console.log(response.status)
+          // Log the response to see the exact content
+          const text = await response.text();
+          console.log("Response text from backend:", text);
+
+          // Parse only if the response was OK and in JSON format
+          if (response.ok) {
+            const data = JSON.parse(text);
+            console.info("Received session ID:", data.sessionId);
             return data.sessionId;
+          } else {
+            throw new Error(`Backend error: ${response.status} ${response.statusText}`);
           }
+        } catch (error) {
+          console.error("Error in sessionIdResolver:", error);
+          return null;  // Return null to prevent further issues
+        }
+      }
+
 
           function onErrorListener(...data) {
-            console.warn('onErrorListener:', ...data);
+            console.warn('Yoti encountered an error:', ...data);
           }
 
           const start = async () => {
-            await loadYoti();
-            await createYotiWebShare();
-          }
+            try {
+              await loadYoti();
+              await createYotiWebShare();
+            } catch (e) {
+              console.error(`Could not create Yoti WebShare: `, e);
+            }
+          };
 
-          start().catch((e) => console.error(`Could not create Yoti WebShare: `, e));
+          start().catch((e) => console.error("Fatal error in Yoti setup:", e));
         </script>
       </body>
   type: HtmlTemplate
