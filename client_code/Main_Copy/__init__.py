@@ -15,6 +15,7 @@ class Main_Copy(Main_CopyTemplate):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
     self.label_return_message.visible = False
+    
     # Check if a user is already logged in
     #user = anvil.users.get_user(allow_remembered=True)
    

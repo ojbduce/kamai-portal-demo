@@ -1,5 +1,6 @@
 components: []
 container:
+  event_bindings: {show: form_show}
   properties:
     html: |
       <head>
@@ -91,4 +92,7 @@ container:
       </body>
   type: HtmlTemplate
 custom_component: true
+events:
+- {default_event: true, description: clicked, name: event}
 is_package: true
+properties: []
