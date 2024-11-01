@@ -1,5 +1,6 @@
 import anvil.server
 import anvil.users
+from anvil.files import data_files
 import os
 import anvil.tables as tables
 from anvil.tables import app_tables
@@ -12,28 +13,9 @@ from yoti_python_sdk.dynamic_sharing_service import DynamicScenarioBuilder
 from yoti_python_sdk.dynamic_sharing_service import create_share_url
 
 YOTI_CLIENT_SDK_ID = '754182a1-fbf6-4a20-8615-cf4666f964cc'
-#The following should work with files in Data Files services available at the tmp path. 
-#A bug in Data Files revert back as cleaner and use get keys as a backup i.e. if not keys row get keys
-
-YOTI_PRIVATE_KEY_PATH = '/tmp/anvil-data-files/table-864896/Yoti-For-Kaimai-access-security.pem'
-#yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
-# In assets also!
-#YOTI_PRIVATE_KEY_PATH='_/theme/Yoti-For-Kaimai-access-security.pem'
-
-@anvil.server.callable
-def list_files_in_directory():
-    # Get the path of my Data Files directory
-    my_directory_path = data_files['my_directory']
-
-    with os.scandir(my_directory_path) as directory:
-        for file in directory:
-            if not file.name.startswith('.') and file.is_file():
-                print(file.name)
-
-@anvil.server.callable
-def get_data_file_path():
-  path = data_files['Yoti-For-Kaimai-access-security.pem']
-  print(path)
+YOTI_PRIVATE_KEY_PATH = data_files['Yoti-For-Kaimai-access-security.pem']
+#/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
+yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
 @anvil.server.route("/yoti-callback")
 def yoti_logged_in(**p):
@@ -58,8 +40,8 @@ def yoti_get_keys():
     #raise RuntimeError("PEM file not found in Data Table.")
 
 @anvil.server.callable
-def yoti_session(tmp_keys_path):
-  yoti_client = Client(YOTI_CLIENT_SDK_ID, tmp_keys_path)
+def yoti_session():
+  yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH )
   try:
     policy = (DynamicPolicyBuilder()
       .with_full_name()

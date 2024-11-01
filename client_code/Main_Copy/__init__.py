@@ -17,7 +17,7 @@ class Main_Copy(Main_CopyTemplate):
     self.label_return_message.visible = False
     # Check if a user is already logged in
     user = anvil.users.get_user(allow_remembered=True)
-    anvil.server.call('get_data_file_path')
+    
   
    
 
@@ -57,7 +57,7 @@ class Main_Copy(Main_CopyTemplate):
 
   def url_test_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    share_url = anvil.server.call('yoti_get_keys')
+    share_url = anvil.server.call('yoti_session')
     self.label_return_message.visible = True
     self.label_return_message.text = share_url
     if share_url == "Keys not found":
