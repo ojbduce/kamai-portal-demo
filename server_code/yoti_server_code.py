@@ -2,6 +2,7 @@ import anvil.server
 import anvil.users
 from anvil.files import data_files
 import os
+import uuid
 import anvil.tables as tables
 from anvil.tables import app_tables
 from yoti_python_sdk import Client
@@ -21,26 +22,17 @@ yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 def yoti_logged_in(**p):
     print('logged-in')
     return anvil.server.FormResponse("Main_Copy")
-  
-@anvil.server.callable
-def yoti_get_keys():
-  print("Function yoti_get_keys called")
-  keys_row = app_tables.files.get(name='yoti_keys')
-  print(keys_row)#remove
-  if keys_row:
-    keys_file = keys_row['file'].get_bytes().decode('utf-8')
-    print(keys_file[:100])  
-    tmp_keys_path = '/tmp/yoti_keys.pem' #just use path from data files service why not working?
-    with open (tmp_keys_path, 'wb') as keys:
-      keys.write(keys_file)
-      print('keys')
-      yoti_session(tmp_keys_path)
-  else:
-    return "Keys not found"
-    #raise RuntimeError("PEM file not found in Data Table.")
+
+@anvil.server.http_endpoint("/sessions", methods=["POST"])
+def create_session():
+    print("Create session hit.")
+    session_id = str(uuid.uuid4())
+    anvil.server.session[session_id] = session_id
+    share_url = yoti_session(session_id)  
+    return {"sessionId": session_id, "shareUrl": share_url}
 
 @anvil.server.callable
-def yoti_session():
+def yoti_session(session_id):
   yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH )
   try:
     policy = (DynamicPolicyBuilder()
@@ -58,17 +50,46 @@ def yoti_session():
     print(f"Error creating share session: {e}")#remove
     return "Error creating share session."
 
+@anvil.server.route("/yoti-callback", methods=["POST"])
+def yoti_callback(token):
+    yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH)
+    activity_details = yoti_client.get_activity_details(token)
+    profile = activity_details.user_profile
+    full_name = profile.get("full_name")
+    email = profile.get("email_address")
+
+    # Process the profile data (e.g., store in the database)
+    print("User Full Name:", full_name)
+    print("User Email:", email)
+    return "Profile received"
 
 
-#   except Exception as e:
-#       print(f"Error creating share session: {e}")
-#       return "Error creating share session."
 
-#   finally:
-#       # Clean up the temporary file (optional but recommended for security)
-#       os.remove(temp_pem_path)
 
-  
+
+
+
+
+
+
+
+
+@anvil.server.callable
+def yoti_get_keys():
+  print("Function yoti_get_keys called")
+  keys_row = app_tables.files.get(name='yoti_keys')
+  print(keys_row)#remove
+  if keys_row:
+    keys_file = keys_row['file'].get_bytes().decode('utf-8')
+    print(keys_file[:100])  
+    tmp_keys_path = '/tmp/yoti_keys.pem' #just use path from data files service why not working?
+    with open (tmp_keys_path, 'wb') as keys:
+      keys.write(keys_file)
+      print('keys')
+      yoti_session(tmp_keys_path)
+  else:
+    return "Keys not found"
+   
 
 # # Debugging Missing pem file Version
 # @anvil.server.callable
