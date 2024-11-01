@@ -25,6 +25,17 @@ db_schema:
       type: string
     server: full
     title: Reports
+  sessions:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: yoti_session_id
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: time_date
+      type: datetime
+    server: full
+    title: Sessions
   users:
     client: full
     columns:
@@ -80,5 +91,5 @@ services:
 - client_config: {}
   server_config: {file_table: files}
   source: /runtime/services/anvil/files.yml
-startup: {module: Main_Copy, type: form}
+startup: {module: header, type: form}
 startup_form: null

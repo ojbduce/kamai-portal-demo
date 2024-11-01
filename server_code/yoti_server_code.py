@@ -2,6 +2,7 @@ import anvil.server
 import anvil.users
 from anvil.files import data_files
 import os
+from datetime import datetime 
 import uuid
 import anvil.tables as tables
 from anvil.tables import app_tables
@@ -20,54 +21,23 @@ yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
 @anvil.server.http_endpoint("/sessions", methods=["POST", "OPTIONS"])
 def create_session():
-    # Print method and origin for debugging purposes
-    print(f"xxx method: {anvil.server.request.method} origin: {anvil.server.request.origin}")
-    
-    # List of allowed origins
-    allowed_origins = [
-        "https://reliable-equatorial-heron.anvil.app"  # Add your Anvil app's origin
-    ]
-
-    # Handle OPTIONS (preflight) request
-    if anvil.server.request.method == "OPTIONS":
-        response = anvil.server.HttpResponse(200)
-        if anvil.server.request.origin in allowed_origins:
-            response.headers["Access-Control-Allow-Origin"] = anvil.server.request.origin
-            response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
-            response.headers["Access-Control-Allow-Headers"] = "Content-Type"
-        return response
-
-    # Handle POST request
+    print("Hit create session")
+    response_data = yoti_session()  # Directly call yoti_session to get the Yoti-generated sessionId and share URL
+    allowed_origins = ["https://reliable-equatorial-heron.anvil.app"]
+    response_headers = {}
     if anvil.server.request.origin in allowed_origins:
-        response_headers = {
-            "Access-Control-Allow-Origin": anvil.server.request.origin
-        }
-    else:
-        response_headers = {}
-
-    # Actual logic for creating a session
-    print("Create session hit.")
-    session_id = str(uuid.uuid4())
-    anvil.server.session[session_id] = session_id
-    share_url = yoti_session(session_id)
-
-    response_data = {
-        "sessionId": session_id,
-        "shareUrl": share_url
-    }
-
-    return anvil.server.HttpResponse(
+      response_headers["Access-Control-Allow-Origin"] = anvil.server.request.origin
+      response_headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+      response_headers["Access-Control-Allow-Headers"] = "Content-Type"
+      return anvil.server.HttpResponse(
         200,
         headers=response_headers,
         body=response_data
-    )
-
-
-
-
+      )
 
 @anvil.server.callable
-def yoti_session(session_id):
+def yoti_session():
+  print('Hit yoti session')
   yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH )
   try:
     policy = (DynamicPolicyBuilder()
@@ -76,10 +46,13 @@ def yoti_session(session_id):
       .build())
     scenario = (DynamicScenarioBuilder()
       .with_policy(policy)
-      .with_callback_endpoint("_/api/yoti-callback")
+      .with_callback_endpoint("/yoti-callback")
       .build())
     share_url = create_share_url(yoti_client,scenario)
     print("Generated share URL:", share_url.share_url)
+    yoti_session_id = share_url.share_url.split('/')[-1]
+    time = datetime.now()
+    app_tables.sessions.add_row(time_date=time,yoti_session_id=yoti_session_id)
     return share_url.share_url
   except Exception as e:
     print(f"Error creating share session: {e}")#remove
@@ -87,6 +60,7 @@ def yoti_session(session_id):
 
 @anvil.server.route("/yoti-callback", methods=["POST"])
 def yoti_callback(token):
+    print("Hit callback")
     yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH)
     activity_details = yoti_client.get_activity_details(token)
     profile = activity_details.user_profile
