@@ -5,15 +5,15 @@ components:
       - {code: 'self.item['''']', property: icon, writeback: false}
       layout_properties: {}
       name: label_3
-      properties: {background: 'theme:Surface', bold: true, font_size: 17, foreground: 'theme:On Surface Variant', icon: '', role: headline, text: 'Kaimai Member''s Journals '}
+      properties: {background: 'theme:Light Overlay 1', bold: true, font_size: 19, foreground: 'theme:On Surface Variant', icon: '', role: headline, text: 'Kaimai Member''s Journals  '}
       type: Label
     - layout_properties: {width: 65.28125}
       name: image_1
       properties: {display_mode: shrink_to_fit, height: 40, horizontal_align: right, source: _/theme/yoti-logo.png, vertical_align: bottom}
       type: Image
-    layout_properties: {full_width_row: true, grid_position: 'YDHHDC,BKEXWB'}
+    layout_properties: {full_width_row: false, grid_position: 'YDHHDC,BKEXWB', row_background: 'theme:Light Overlay 1'}
     name: flow_panel_1
-    properties: {background: ''}
+    properties: {background: 'theme:Light Overlay 2'}
     type: FlowPanel
   - event_bindings: {click: button_test_bd_click}
     layout_properties: {grid_position: 'YEYCNW,XNPIUK'}
@@ -38,102 +38,27 @@ components:
       - data_bindings: []
         layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
         name: link_2
-        properties: {align: center, bold: true, foreground: 'theme:On Primary', text: Web-Journal 1, url: 'https://adept-right-category.anvil.app'}
+        properties: {align: center, bold: true, foreground: 'theme:On Secondary Container', text: Web-Journal 1, url: 'https://adept-right-category.anvil.app'}
         type: Link
-      layout_properties: {full_width_row: true, grid_position: 'MQTRSL,WXWSAI MFXAEG,KFFVUJ'}
+      layout_properties: {grid_position: 'QQMAWM,GBQGGH'}
       name: outlined_card_2
-      properties: {background: 'theme:Primary', role: tonal-card}
+      properties: {background: 'theme:Dark Overlay 2', foreground: 'theme:On Secondary Container', role: tonal-card}
       type: ColumnPanel
     - components:
-      - layout_properties: {grid_position: 'MWBMJX,EGNQGF'}
-        name: label_2_copy_3
-        properties: {align: center, background: 'theme:Tertiary Container', bold: true, foreground: 'theme:On Tertiary Container', text: Web-Journal 4}
-        type: Label
-      layout_properties: {full_width_row: true, grid_position: 'MQTRSL,WXWSAI CDWDKC,GUAWXR'}
+      - components: []
+        data_bindings: []
+        layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
+        name: link_2_copy
+        properties: {align: center, bold: true, foreground: 'theme:On Tertiary Container', text: Web-Journal 2 Etc., url: 'https://adept-right-category.anvil.app'}
+        type: Link
+      layout_properties: {grid_position: 'QQMAWM,YPZDIG'}
       name: outlined_card_2_copy
-      properties: {background: 'theme:Tertiary Container', role: outlined-card}
-      type: ColumnPanel
-    - components:
-      - layout_properties: {grid_position: 'SQIJNS,KPKHRG'}
-        name: label_2_copy
-        properties: {align: center, background: 'theme:Secondary Container', bold: true, foreground: 'theme:On Secondary Container', text: Web-Journal 2}
-        type: Label
-      layout_properties: {grid_position: 'MQTRSL,XSBJHI YRRFXM,IVENXC'}
-      name: outlined_card_3
-      properties: {background: 'theme:Secondary Container', role: elevated-card}
-      type: ColumnPanel
-    - components:
-      - layout_properties: {grid_position: 'HQKXAB,CWYYUN'}
-        name: label_2_copy_4
-        properties: {align: center, background: 'theme:Tertiary', bold: true, foreground: 'theme:On Tertiary', text: Web-Journal 5}
-        type: Label
-      layout_properties: {grid_position: 'MQTRSL,XSBJHI ZHIZKN,YSJDPI'}
-      name: outlined_card_3_copy
-      properties: {background: 'theme:Tertiary', role: outlined-card}
-      type: ColumnPanel
-    - components:
-      - layout_properties: {grid_position: 'VOSNZC,MYZDUM'}
-        name: label_2_copy_2
-        properties: {align: center, background: 'theme:Primary Container', bold: true, foreground: 'theme:On Primary Container', text: Web-Journal 3}
-        type: Label
-      layout_properties: {grid_position: 'MQTRSL,USHVSH ZXONGZ,KWKSRK'}
-      name: outlined_card_4
-      properties: {background: 'theme:Primary Container', role: tonal-card}
-      type: ColumnPanel
-    - components:
-      - layout_properties: {grid_position: 'PSLGMT,KOSLJL'}
-        name: label_2_copy_5
-        properties: {align: center, background: 'theme:Primary Overlay 3', bold: true, foreground: 'theme:Surface Variant', text: Web-Journal 6}
-        type: Label
-      layout_properties: {grid_position: 'MQTRSL,USHVSH OCBTLH,WHDHPX'}
-      name: outlined_card_4_copy
-      properties: {background: 'theme:On Surface Variant', role: outlined-card}
+      properties: {background: 'theme:Surface Variant', foreground: 'theme:On Primary Container', role: tonal-card}
       type: ColumnPanel
     layout_properties: {full_width_row: true, grid_position: 'OWXGXH,EKLLBM'}
     name: outlined_card_1
-    properties: {background: 'theme:Primary Overlay 1', role: tonal-card}
+    properties: {background: 'theme:Surface', role: tonal-card}
     type: ColumnPanel
-  layout_properties: {slot: default}
-  name: content_panel_home
-  properties: {background: 'theme:Background', col_widths: '{}'}
-  type: ColumnPanel
-- components:
-  - layout_properties: {}
-    name: label_login
-    properties: {font_size: 14, text: ''}
-    type: Label
-  - event_bindings: {click: link_1_click}
-    layout_properties: {}
-    name: link_1
-    properties: {font_size: 14, icon: 'fa:database', role: null, text: admin}
-    type: Link
-  layout_properties: {slot: nav-right}
-  name: navbar_links
-  properties: {}
-  type: FlowPanel
-- layout_properties: {slot: title}
-  name: label_1
-  properties: {font_size: 14, role: title, text: Portal}
-  type: Label
-- components:
-  - event_bindings: {click: outlined_button_1_click}
-    layout_properties: {grid_position: 'BPCVNV,CNIFDH'}
-    name: outlined_button_1
-    properties: {foreground: 'theme:On Surface Variant', icon: 'fa:book', role: null, text: 'Journals      '}
-    type: Button
-  - layout_properties: {grid_position: 'QIXPSZ,VXPJKI'}
-    name: button_2
-    properties: {foreground: 'theme:On Surface', icon: 'fa:info', role: null, text: 'How To.        ', tooltip: Log in with an email click on Web Journal 1. You should stay logged-in at the destination site.}
-    type: Button
-  layout_properties: {slot: left-nav}
-  name: column_panel_1
-  properties: {}
-  type: ColumnPanel
-- components:
-  - layout_properties: {grid_position: 'DKJVZX,NBSHTT'}
-    name: spacer_2
-    properties: {height: 40}
-    type: Spacer
   - components:
     - layout_properties: {grid_position: 'NSGLDF,YAZGLF'}
       name: label_2
@@ -150,13 +75,45 @@ components:
         - {data_key: email, id: JKSDUP, title: User}
         - {data_key: report, id: VJQQOR, title: Report Request}
       type: DataGrid
-    layout_properties: {full_width_row: true, grid_position: 'OMVBXD,ZMIPVA'}
+    layout_properties: {grid_position: 'ENNIVG,ZOWQKF'}
     name: card_database
     properties: {role: outlined-card}
     type: ColumnPanel
   layout_properties: {slot: default}
-  name: content_panel_copy
-  properties: {col_widths: '{}'}
+  name: content_panel_home
+  properties: {background: 'theme:Background', col_widths: '{}', spacing_above: none}
+  type: ColumnPanel
+- components:
+  - layout_properties: {}
+    name: label_login
+    properties: {font_size: 14, text: ''}
+    type: Label
+  - event_bindings: {click: link_1_click}
+    layout_properties: {}
+    name: link_1
+    properties: {font_size: 20, icon: 'fa:database', role: null, text: ''}
+    type: Link
+  layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+- layout_properties: {slot: title}
+  name: label_1
+  properties: {bold: true, font_size: 16, role: title, text: Portal}
+  type: Label
+- components:
+  - event_bindings: {click: outlined_button_1_click}
+    layout_properties: {grid_position: 'NPBXRD,FEROWE'}
+    name: outlined_button_1
+    properties: {bold: true, font_size: 20, foreground: 'theme:On Primary Container', icon: 'fa:book', icon_align: top, role: null, text: ''}
+    type: Button
+  - layout_properties: {grid_position: 'QIXPSZ,VXPJKI'}
+    name: button_2
+    properties: {background: '', bold: true, font_size: 20, foreground: 'theme:On Primary Container', icon: 'fa:info', icon_align: top, role: null, text: '', tooltip: Log in with an email click on Web Journal 1. You should stay logged-in at the destination site.}
+    type: Button
+  layout_properties: {slot: left-nav}
+  name: column_panel_1
+  properties: {}
   type: ColumnPanel
 container:
   properties: {html: '@theme:standard-page.html'}

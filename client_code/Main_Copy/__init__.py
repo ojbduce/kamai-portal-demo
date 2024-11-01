@@ -17,10 +17,6 @@ class Main_Copy(Main_CopyTemplate):
     self.label_return_message.visible = False
     # Check if a user is already logged in
     user = anvil.users.get_user(allow_remembered=True)
-    
-  
-   
-
     if user:
       # User is already logged in
        self.set_logged_in_user()
