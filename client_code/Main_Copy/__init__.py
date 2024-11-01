@@ -17,6 +17,7 @@ class Main_Copy(Main_CopyTemplate):
     self.label_return_message.visible = False
     # Check if a user is already logged in
     user = anvil.users.get_user(allow_remembered=True)
+  
    
 
     if user:
@@ -55,9 +56,16 @@ class Main_Copy(Main_CopyTemplate):
 
   def url_test_button_click(self, **event_args):
     """This method is called when the button is clicked"""
-    share_url = anvil.server.call('generate_yoti_qr_code')
+    share_url = anvil.server.call('yoti_g')
     self.label_return_message.visible = True
     self.label_return_message.text = share_url
+    if share_url == "Keys not found":
+      Notification("Keys not found")
+    elif share_url == "Error creating share session.":
+      Notification("Error creating share session.")
+    else:
+      Notification("Share_Url test passed")
+    
 
   def button_test_bd_click(self, **event_args):
     """This method is called when the button is clicked"""
