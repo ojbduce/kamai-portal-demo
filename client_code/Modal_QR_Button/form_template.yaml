@@ -40,7 +40,7 @@ container:
 
           async function onSessionIdResolver() {
             // Make a call to your backend, and return a 'sessionId'
-            const response = await fetch('https://reliable-equatorial-heron.anvil.app/sessions', { method: 'POST' });
+            const response = await fetch("https://your-app.anvil.app/_/api/sessions", { method: 'POST' });
             const data = await response.json();
             return data.sessionId;
           }

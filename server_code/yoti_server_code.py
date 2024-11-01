@@ -18,13 +18,16 @@ YOTI_PRIVATE_KEY_PATH = data_files['Yoti-For-Kaimai-access-security.pem']
 #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
-@anvil.server.route("/yoti-callback")
+@anvil.server.route("/yoti-callback", methods=["POST"])
 def yoti_logged_in(**p):
     print('logged-in')
     return anvil.server.FormResponse("Main_Copy")
 
 @anvil.server.http_endpoint("/sessions", methods=["POST"])
 def create_session():
+    anvil.server.response.headers["Access-Control-Allow-Origin"] = "*"  # Allow all origins
+    anvil.server.response.headers["Access-Control-Allow-Methods"] = "POST"
+    anvil.server.response.headers["Access-Control-Allow-Headers"] = "Content-Type"
     print("Create session hit.")
     session_id = str(uuid.uuid4())
     anvil.server.session[session_id] = session_id
@@ -41,7 +44,7 @@ def yoti_session(session_id):
       .build())
     scenario = (DynamicScenarioBuilder()
       .with_policy(policy)
-      .with_callback_endpoint("/yoti-callback")
+      .with_callback_endpoint("_/api/yoti-callback")
       .build())
     share_url = create_share_url(yoti_client,scenario)
     print("Generated share URL:", share_url.share_url)
@@ -126,7 +129,7 @@ def yoti_get_keys():
         
 #         scenario = (DynamicScenarioBuilder()
 #             .with_policy(policy)
-#             .with_callback_endpoint("/yoti-callback")
+#             .with_callback_endpoint("_/api/yoti-callback")
 #             .build())
 
 #         share_url = create_share_url(yoti_client,scenario)
