@@ -60,7 +60,7 @@ def yoti_session():
       .with_callback_endpoint("/yoti-callback")
       .build())
     share_url = create_share_url(yoti_client,scenario)
-    print("Generated share URL:", share_url)
+    #print("Generated share URL:", share_url)
     session_id = share_url.share_url.split('/')[-1]
     time = datetime.now()
     app_tables.sessions.add_row(time_date=time,yoti_session_id=session_id)
