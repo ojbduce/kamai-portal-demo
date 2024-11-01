@@ -80,5 +80,5 @@ services:
 - client_config: {}
   server_config: {file_table: files}
   source: /runtime/services/anvil/files.yml
-startup: {module: Modal_QR_Button, type: form}
+startup: {module: Main_Copy, type: form}
 startup_form: null

@@ -28,13 +28,8 @@ class Main_Copy(Main_CopyTemplate):
 
     self.content_panel_home.visible = True
     self.card_database.visible = False
-
-    self.get_data()
-
-  def get_data(self):
-    rows = app_tables.reports.search()
-    self.repeating_panel_1.items = rows
-    #print(rows)# Bind rows to the Repeating Panel
+    self.flow_panel_title.visible = False
+    
    
 
   def set_logged_in_user(self):
@@ -71,6 +66,10 @@ class Main_Copy(Main_CopyTemplate):
     print("Added file to files table")
     for row in app_tables.files.search():
       print(row['name'])
+
+  def button_1_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    anvil.server.call('check_origin')
 
 
 

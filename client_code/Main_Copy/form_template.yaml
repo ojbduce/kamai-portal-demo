@@ -12,13 +12,14 @@ components:
       properties: {display_mode: shrink_to_fit, height: 40, horizontal_align: right, source: _/theme/yoti-logo.png, vertical_align: bottom}
       type: Image
     layout_properties: {full_width_row: false, grid_position: 'YDHHDC,BKEXWB', row_background: 'theme:Light Overlay 1'}
-    name: flow_panel_1
+    name: flow_panel_title
     properties: {background: 'theme:Light Overlay 2'}
     type: FlowPanel
-  - layout_properties: {grid_position: 'LRPBZY,MFUNLV'}
-    name: modal_qr_button_1
-    properties: {}
-    type: form:Modal_QR_Button
+  - event_bindings: {click: button_1_click}
+    layout_properties: {grid_position: 'HLHCTA,WOTWPV'}
+    name: button_1
+    properties: {text: Check Origin}
+    type: Button
   - event_bindings: {click: button_test_bd_click}
     layout_properties: {grid_position: 'YEYCNW,XNPIUK'}
     name: button_test_bd
@@ -33,20 +34,24 @@ components:
     name: label_return_message
     properties: {align: center}
     type: Label
-  - layout_properties: {grid_position: 'DTXZAA,XIPERJ'}
+  - layout_properties: {grid_position: 'YHAYIX,ROHWXQ'}
     name: spacer_1
     properties: {height: 11}
     type: Spacer
+  - layout_properties: {grid_position: 'NKUCTY,SJRERB', row_background: 'theme:Tertiary Container'}
+    name: modal_qr_button_1
+    properties: {}
+    type: form:Modal_QR_Button
   - components:
     - components:
       - data_bindings: []
         layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
         name: link_2
-        properties: {align: center, bold: true, foreground: 'theme:On Secondary Container', text: Web-Journal 1, url: 'https://adept-right-category.anvil.app'}
+        properties: {align: center, bold: true, foreground: 'theme:On Primary Container', text: Web-Journal 1, url: 'https://adept-right-category.anvil.app'}
         type: Link
       layout_properties: {grid_position: 'QQMAWM,GBQGGH'}
       name: outlined_card_2
-      properties: {background: 'theme:Dark Overlay 2', foreground: 'theme:On Secondary Container', role: tonal-card}
+      properties: {background: 'theme:Primary Container', foreground: 'theme:On Secondary Container', role: tonal-card}
       type: ColumnPanel
     - components:
       - components: []
@@ -57,7 +62,7 @@ components:
         type: Link
       layout_properties: {grid_position: 'QQMAWM,YPZDIG'}
       name: outlined_card_2_copy
-      properties: {background: 'theme:Surface Variant', foreground: 'theme:On Primary Container', role: tonal-card}
+      properties: {background: 'theme:Secondary Container', foreground: 'theme:On Secondary Container', role: tonal-card}
       type: ColumnPanel
     layout_properties: {full_width_row: true, grid_position: 'OWXGXH,EKLLBM'}
     name: outlined_card_1
@@ -109,7 +114,7 @@ components:
   - event_bindings: {click: outlined_button_1_click}
     layout_properties: {grid_position: 'NPBXRD,FEROWE'}
     name: outlined_button_1
-    properties: {bold: true, font_size: 20, foreground: 'theme:On Primary Container', icon: 'fa:book', icon_align: top, role: null, text: ''}
+    properties: {bold: true, font_size: 20, foreground: 'theme:On Tertiary Container', icon: 'fa:book', icon_align: top, role: null, text: ''}
     type: Button
   - layout_properties: {grid_position: 'QIXPSZ,VXPJKI'}
     name: button_2

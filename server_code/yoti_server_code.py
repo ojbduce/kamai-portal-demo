@@ -18,21 +18,53 @@ YOTI_PRIVATE_KEY_PATH = data_files['Yoti-For-Kaimai-access-security.pem']
 #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
-@anvil.server.route("/yoti-callback", methods=["POST"])
-def yoti_logged_in(**p):
-    print('logged-in')
-    return anvil.server.FormResponse("Main_Copy")
-
-@anvil.server.http_endpoint("/sessions", methods=["POST"])
+@anvil.server.http_endpoint("/sessions", methods=["POST", "OPTIONS"])
 def create_session():
-    anvil.server.response.headers["Access-Control-Allow-Origin"] = "*"  # Allow all origins
-    anvil.server.response.headers["Access-Control-Allow-Methods"] = "POST"
-    anvil.server.response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    # Print method and origin for debugging purposes
+    print(f"xxx method: {anvil.server.request.method} origin: {anvil.server.request.origin}")
+    
+    # List of allowed origins
+    allowed_origins = [
+        "https://reliable-equatorial-heron.anvil.app"  # Add your Anvil app's origin
+    ]
+
+    # Handle OPTIONS (preflight) request
+    if anvil.server.request.method == "OPTIONS":
+        response = anvil.server.HttpResponse(200)
+        if anvil.server.request.origin in allowed_origins:
+            response.headers["Access-Control-Allow-Origin"] = anvil.server.request.origin
+            response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+            response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+        return response
+
+    # Handle POST request
+    if anvil.server.request.origin in allowed_origins:
+        response_headers = {
+            "Access-Control-Allow-Origin": anvil.server.request.origin
+        }
+    else:
+        response_headers = {}
+
+    # Actual logic for creating a session
     print("Create session hit.")
     session_id = str(uuid.uuid4())
     anvil.server.session[session_id] = session_id
-    share_url = yoti_session(session_id)  
-    return {"sessionId": session_id, "shareUrl": share_url}
+    share_url = yoti_session(session_id)
+
+    response_data = {
+        "sessionId": session_id,
+        "shareUrl": share_url
+    }
+
+    return anvil.server.HttpResponse(
+        200,
+        headers=response_headers,
+        body=response_data
+    )
+
+
+
+
 
 @anvil.server.callable
 def yoti_session(session_id):
