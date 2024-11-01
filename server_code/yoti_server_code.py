@@ -51,9 +51,9 @@ def yoti_session():
       .build())
     share_url = create_share_url(yoti_client,scenario)
     print("Generated share URL:", share_url.share_url)
-    yoti_session_id = share_url.share_url.split('/')[-1]
+    session_id = share_url.share_url.split('/')[-1]
     time = datetime.now()
-    app_tables.sessions.add_row(time_date=time,yoti_session_id=yoti_session_id)
+    app_tables.sessions.add_row(time_date=time,yoti_session_id=session_id)
     return anvil.server.HttpResponse(
       200,
       headers={"Content-Type": "application/json"},
