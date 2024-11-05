@@ -1,4 +1,4 @@
-from ._anvil_designer import headerTemplate
+from ._anvil_designer import Mock_With_BannerTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -10,7 +10,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class header(headerTemplate):
+class Mock_With_Banner(Mock_With_BannerTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
