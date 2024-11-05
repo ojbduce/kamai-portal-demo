@@ -60,10 +60,10 @@ def yoti_session():
       .with_callback_endpoint("/yoti-callback")
       .build())
     share_url = create_share_url(yoti_client,scenario)
-    print("Generated share URL:", share_url)
-    session_id = share_url.share_url.split('/')[-1]
+    print("Generated share URL:", share_url.share_url)
+    db_session_id = share_url.share_url.split('/')[-1]
     time = datetime.now()
-    app_tables.sessions.add_row(time_date=time,yoti_session_id=session_id)
+    app_tables.sessions.add_row(time_date=time,yoti_session_id=db_session_id)
     return {
             "clientSdkId": YOTI_CLIENT_SDK_ID,
             "shareUrl": share_url.share_url
@@ -78,7 +78,7 @@ def yoti_session():
 def yoti_callback():
     print("Hit callback")
     try:
-        yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
+        #yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
         token = anvil.server.request.body_json.get("token")
         print(f"Token:{token}")
     
