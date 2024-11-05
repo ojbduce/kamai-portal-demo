@@ -19,16 +19,6 @@ YOTI_PRIVATE_KEY_PATH = data_files['Yoti-For-Kaimai-access-security.pem']
 #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
-# @anvil.server.callable
-# def create_yoti_share_session():
-#     yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH)
-#     policy = DynamicPolicyBuilder().with_full_name().with_email().build()
-#     scenario = DynamicScenarioBuilder().with_policy(policy).with_callback_endpoint("https://your-app.anvil.app/yoti-callback").build()
-#     share_url = create_share_url(yoti_client, scenario)
-#     yoti_session_id = share_url.share_url.split('/')[-1]
-#     # Return the session data as a dictionary
-#     return {"clientSdkId": YOTI_CLIENT_SDK_ID, "shareUrl": share_url.share_url}
-
 @anvil.server.http_endpoint("/sessions", methods=["POST", "OPTIONS"])
 def create_session():
     print("Hit create session")

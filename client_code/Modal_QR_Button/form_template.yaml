@@ -50,28 +50,12 @@ container:
             }
           };
 
-          async function onSessionIdResolver() {
-        try {
-          console.info("Requesting session ID from backend...");
-          const response = await fetch("https://reliable-equatorial-heron.anvil.app/_/api/sessions", { method: 'POST' });
-          console.log(response.status)
-          // Log the response to see the exact content
-          const text = await response.text();
-          console.log("Response text from backend:", text);
-
-          // Parse only if the response was OK and in JSON format
-          if (response.ok) {
-            const data = JSON.parse(text);
-            console.info("Received session ID:", data.sessionId);
+           async function onSessionIdResolver() {
+            // Make a call to your backend, and return a 'sessionId'
+            const response = await fetch('https://localhost:3000/sessions', { method: 'POST' });
+            const data = await response.json();
             return data.sessionId;
-          } else {
-            throw new Error(`Backend error: ${response.status} ${response.statusText}`);
           }
-        } catch (error) {
-          console.error("Error in sessionIdResolver:", error);
-          return null;  // Return null to prevent further issues
-        }
-      }
 
 
           function onErrorListener(...data) {
