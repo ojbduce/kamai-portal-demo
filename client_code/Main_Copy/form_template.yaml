@@ -32,6 +32,10 @@ components:
     name: modal_qr_button
     properties: {}
     type: form:Modal_QR_Button
+  - layout_properties: {grid_position: 'TOAGJX,WHTXVP'}
+    name: spacer_2
+    properties: {height: 349.640625}
+    type: Spacer
   - components:
     - components:
       - data_bindings: []
@@ -110,6 +114,10 @@ components:
     name: button_2
     properties: {background: '', bold: true, font_size: 20, foreground: 'theme:On Primary Container', icon: 'fa:info', icon_align: top, role: null, text: '', tooltip: Log in with an email click on Web Journal 1. You should stay logged-in at the destination site.}
     type: Button
+  - layout_properties: {grid_position: 'IPSJTS,OLWAZI'}
+    name: spacer_3
+    properties: {height: 223.25390625}
+    type: Spacer
   layout_properties: {slot: left-nav}
   name: column_panel_1
   properties: {}

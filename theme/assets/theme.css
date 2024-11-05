@@ -231,7 +231,7 @@
   
   .nav-holder .left-nav {
     position: fixed;
-    top: calc(80px + 56px); /* Banner height (80px) + App-bar height (56px) */
+    top: calc(200px + 56px); /* Banner height (80px) + App-bar height (56px) */
     left: 0;
     flex-shrink: 0;
     min-width: 240px;
@@ -290,7 +290,7 @@
     overflow-y: auto;
     position: fixed;
     top: calc(80px + 56px); /* Account for the app-bar height */
-    height: calc(100vh - 80px - 56px); /* Viewport height - Banner height - App-bar height */
+    height: calc(100vh -56px); /*  - 80px - 56px Viewport height - Banner height - App-bar height */
   }
   
   
