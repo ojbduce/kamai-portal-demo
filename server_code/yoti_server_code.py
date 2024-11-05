@@ -46,28 +46,28 @@ def create_session():
         body=response_data
       )
 
-# Add this function to validate your setup
-def validate_yoti_setup():
-    if not YOTI_CLIENT_SDK_ID:
-        raise ValueError("YOTI_CLIENT_SDK_ID is not set")
+# # Add this function to validate your setup
+# def validate_yoti_setup():
+#     if not YOTI_CLIENT_SDK_ID:
+#         raise ValueError("YOTI_CLIENT_SDK_ID is not set")
     
-    if not os.path.exists(YOTI_PRIVATE_KEY_PATH):
-        raise ValueError(f"Private key file not found at: {YOTI_PRIVATE_KEY_PATH}")
+#     if not os.path.exists(YOTI_PRIVATE_KEY_PATH):
+#         raise ValueError(f"Private key file not found at: {YOTI_PRIVATE_KEY_PATH}")
     
-    try:
-        with open(YOTI_PRIVATE_KEY_PATH, 'r') as f:
-            key_content = f.read()
-            if not key_content.startswith('-----BEGIN RSA PRIVATE KEY-----'):
-                raise ValueError("Invalid private key format")
-    except Exception as e:
-        raise ValueError(f"Error reading private key: {str(e)}")
+#     try:
+#         with open(YOTI_PRIVATE_KEY_PATH, 'r') as f:
+#             key_content = f.read()
+#             if not key_content.startswith('-----BEGIN RSA PRIVATE KEY-----'):
+#                 raise ValueError("Invalid private key format")
+#     except Exception as e:
+#         raise ValueError(f"Error reading private key: {str(e)}")
 
 @anvil.server.callable
 def yoti_session():
     print('Hit yoti session')
     try:
         # Validate setup first
-        validate_yoti_setup()
+        # validate_yoti_setup()
         
         yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH)
         policy = (DynamicPolicyBuilder()
@@ -80,24 +80,22 @@ def yoti_session():
           .build())
         
         share_url = create_share_url(yoti_client, scenario)
-        # Access the actual URL string using .url attribute
-        actual_url = share_url.url
+        actual_url = share_url.share_url
         print("Generated share URL:", actual_url)
-        session_id = actual_url.split('/')[-1]
+        # add row...
+        #session_id = actual_url.split('/')[-1]
+        #time = datetime.now()
+        #app_tables.sessions.add_row(time_date=time, yoti_session_id=session_id)
+
+        return {"clientSdkId": YOTI_CLIENT_SDK_ID, "shareUrl": share_url.share_url}
         
-        time = datetime.now()
-        app_tables.sessions.add_row(time_date=time, yoti_session_id=session_id)
-        
-        return {
-          "sessionId": session_id
-        }
+
     except Exception as e:
         print(f"Error creating share session: {str(e)}")
         # Add more detailed error logging
         import traceback
         print(traceback.format_exc())
-        raise  # Re-raise the exception to see the full error
-    
+        raise  
 
   
 

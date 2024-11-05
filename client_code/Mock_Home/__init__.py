@@ -1,4 +1,4 @@
-from ._anvil_designer import Main_CopyTemplate
+from ._anvil_designer import Mock_HomeTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -10,7 +10,7 @@ from anvil.tables import app_tables
 import anvil.users
 
 
-class Main_Copy(Main_CopyTemplate):
+class Mock_Home(Mock_HomeTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)

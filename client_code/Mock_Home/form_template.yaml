@@ -71,7 +71,7 @@ components:
       type: Label
     - components:
       - name: repeating_panel_1
-        properties: {item_template: Main_Copy.RowTemplate1}
+        properties: {item_template: Mock_Home.RowTemplate1}
         type: RepeatingPanel
       layout_properties: {grid_position: 'VZYBNS,PWZJPP'}
       name: data_grid_1
