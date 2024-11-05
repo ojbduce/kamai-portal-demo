@@ -46,56 +46,53 @@ def create_session():
         body=response_data
       )
 
-# # Add this function to validate your setup
-# def validate_yoti_setup():
-#     if not YOTI_CLIENT_SDK_ID:
-#         raise ValueError("YOTI_CLIENT_SDK_ID is not set")
+# Add this function to validate your setup
+def validate_yoti_setup():
+    if not YOTI_CLIENT_SDK_ID:
+        raise ValueError("YOTI_CLIENT_SDK_ID is not set")
     
-#     if not os.path.exists(YOTI_PRIVATE_KEY_PATH):
-#         raise ValueError(f"Private key file not found at: {YOTI_PRIVATE_KEY_PATH}")
+    if not os.path.exists(YOTI_PRIVATE_KEY_PATH):
+        raise ValueError(f"Private key file not found at: {YOTI_PRIVATE_KEY_PATH}")
     
-#     try:
-#         with open(YOTI_PRIVATE_KEY_PATH, 'r') as f:
-#             key_content = f.read()
-#             if not key_content.startswith('-----BEGIN RSA PRIVATE KEY-----'):
-#                 raise ValueError("Invalid private key format")
-#     except Exception as e:
-#         raise ValueError(f"Error reading private key: {str(e)}")
+    try:
+        with open(YOTI_PRIVATE_KEY_PATH, 'r') as f:
+            key_content = f.read()
+            if not key_content.startswith('-----BEGIN RSA PRIVATE KEY-----'):
+                raise ValueError("Invalid private key format")
+    except Exception as e:
+        raise ValueError(f"Error reading private key: {str(e)}")
 
 @anvil.server.callable
 def yoti_session():
     print('Hit yoti session')
     try:
-        # Validate setup first
-        # validate_yoti_setup()
-        
         yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH)
         policy = (DynamicPolicyBuilder()
-          .with_full_name()
-          .with_email()
-          .build())
+            .with_full_name()
+            .with_email()
+            .build())
         scenario = (DynamicScenarioBuilder()
-          .with_policy(policy)
-          .with_callback_endpoint("https://reliable-equatorial-heron.anvil.app/_/api/yoti-callback")
-          .build())
+            .with_policy(policy)
+            .with_callback_endpoint("https://reliable-equatorial-heron.anvil.app/_/api/yoti-callback")
+            .build())
         
         share_url = create_share_url(yoti_client, scenario)
-        actual_url = share_url.share_url
+        actual_url = share_url.url
         print("Generated share URL:", actual_url)
-        # add row...
-        #session_id = actual_url.split('/')[-1]
-        #time = datetime.now()
-        #app_tables.sessions.add_row(time_date=time, yoti_session_id=session_id)
-
-        return {"clientSdkId": YOTI_CLIENT_SDK_ID, "shareUrl": share_url.share_url}
         
-
+        # Store session info for our own tracking (optional)
+        session_id = actual_url.split('/')[-1]
+        app_tables.sessions.add_row(time_date=datetime.now(), yoti_session_id=session_id)
+        
+        # Return what Yoti needs
+        return {
+            "clientSdkId": YOTI_CLIENT_SDK_ID,
+            "shareUrl": actual_url
+        }
     except Exception as e:
         print(f"Error creating share session: {str(e)}")
-        # Add more detailed error logging
-        import traceback
-        print(traceback.format_exc())
-        raise  
+        raise
+    
 
   
 
