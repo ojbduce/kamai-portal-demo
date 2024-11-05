@@ -1,0 +1,44 @@
+components: []
+container:
+  properties:
+    html: |
+      <center>
+      <div anvil-name="yoti-button">
+      <button id="custom-button" class="custom-button">
+      </center>
+      </button>
+        </div>
+
+      <style>
+        .custom-button {
+          background-position: center;
+          width: 260px;
+          height:80px;
+          background-image: url('https://image-archive.developerhub.io/image/upload/23575/xefmooh8y1cplmqsh4e2/1575300153.jpg');
+          background-size: cover;
+          background-position: center;
+          border: none;
+          color: white;
+          font-size: 16px;
+          padding: 10px 20px;
+          cursor: pointer;
+      }
+
+      .custom-button:hover {
+          opacity: 0.8;
+      }
+      </style>
+
+
+      </center>
+  type: HtmlTemplate
+custom_component: true
+events:
+- default_event: true
+  description: click
+  name: click
+  parameters:
+  - {description: click, name: param}
+is_package: true
+properties:
+- {default_binding_prop: true, default_value: '', important: true, name: prop, type: string}

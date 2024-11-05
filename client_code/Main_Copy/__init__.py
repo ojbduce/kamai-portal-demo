@@ -15,6 +15,10 @@ class Main_Copy(Main_CopyTemplate):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
     self.label_return_message.visible = False
+    self.outlined_card_testing.visible = False
+    self.modal_qr_button.visible = False
+    self.journals.visible = False
+
     
     # Check if a user is already logged in
     #user = anvil.users.get_user(allow_remembered=True)
@@ -27,13 +31,13 @@ class Main_Copy(Main_CopyTemplate):
     #   # User is not logged in; prompt login
     #   self.label_login.text = "Logged-out"
     #   anvil.users.login_with_form()
-
     self.content_panel_home.visible = True
     self.card_database.visible = False
-    self.flow_panel_title.visible = False
     
    
-
+  def handle_click(self, **event_args):
+    alert("The button got clicked!")
+    
   def set_logged_in_user(self):
     user = anvil.users.get_user(allow_remembered=True)
     self.label_login.text = f"Logged in as {user['email']}"
@@ -72,6 +76,29 @@ class Main_Copy(Main_CopyTemplate):
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
     anvil.server.call('check_origin')
+
+
+  def check_box_test_card_change(self, **event_args):
+    """This method is called when this checkbox is checked or unchecked"""
+    self.check_box_test_card.checked = self.outlined_card_testing.visible
+    # self.check_box_test_card.checked = self.outlined_card_testing.visible = not self.check_box_test_card.checked
+
+  def button_test_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.outlined_card_testing.visible = True
+
+  def yoti_button_click(self, param, **event_args):
+    """This method is called click"""
+    alert('click')
+
+  def outlined_button_login_register_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.modal_qr_button.visible = True
+
+      
+
+    
+
 
 
 

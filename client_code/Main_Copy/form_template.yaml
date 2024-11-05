@@ -15,27 +15,29 @@ components:
     name: flow_panel_title
     properties: {background: 'theme:Light Overlay 2'}
     type: FlowPanel
-  - event_bindings: {click: url_test_button_click}
-    layout_properties: {grid_position: 'XBRKKZ,MBYHPT'}
-    name: url_test_button
-    properties: {text: Test Yoti Response URL}
+  - event_bindings: {click: outlined_button_login_register_click}
+    layout_properties: {grid_position: 'VJLVOE,BUSEWY'}
+    name: outlined_button_login_register
+    properties: {bold: true, font_size: 18, icon: 'fa:sign-in', role: null, text: Log In Or Register with Yoti}
     type: Button
-  - layout_properties: {grid_position: 'YKCKJV,WCAEAT'}
-    name: label_return_message
-    properties: {align: center}
-    type: Label
-  - layout_properties: {grid_position: 'YHAYIX,ROHWXQ'}
-    name: spacer_1
-    properties: {height: 11}
-    type: Spacer
+  - components:
+    - event_bindings: {click: url_test_button_click}
+      layout_properties: {grid_position: 'XADIOB,QKDYJM'}
+      name: url_test_button
+      properties: {role: elevated-button, text: Test Yoti Response URL}
+      type: Button
+    - layout_properties: {grid_position: 'TYUTCQ,NBBBGU'}
+      name: label_return_message
+      properties: {align: center}
+      type: Label
+    layout_properties: {grid_position: 'CTCEKG,MFTCVI'}
+    name: outlined_card_testing
+    properties: {role: tonal-card}
+    type: ColumnPanel
   - layout_properties: {grid_position: 'NKUCTY,SJRERB', row_background: 'theme:Tertiary Container'}
     name: modal_qr_button
     properties: {}
     type: form:Modal_QR_Button
-  - layout_properties: {grid_position: 'TOAGJX,WHTXVP'}
-    name: spacer_2
-    properties: {height: 349.640625}
-    type: Spacer
   - components:
     - components:
       - data_bindings: []
@@ -59,7 +61,7 @@ components:
       properties: {background: 'theme:Secondary Container', foreground: 'theme:On Secondary Container', role: tonal-card}
       type: ColumnPanel
     layout_properties: {full_width_row: true, grid_position: 'OWXGXH,EKLLBM'}
-    name: outlined_card_1
+    name: journals
     properties: {background: 'theme:Surface', role: tonal-card}
     type: ColumnPanel
   - components:
@@ -113,6 +115,11 @@ components:
   - layout_properties: {grid_position: 'QIXPSZ,VXPJKI'}
     name: button_2
     properties: {background: '', bold: true, font_size: 20, foreground: 'theme:On Primary Container', icon: 'fa:info', icon_align: top, role: null, text: '', tooltip: Log in with an email click on Web Journal 1. You should stay logged-in at the destination site.}
+    type: Button
+  - event_bindings: {click: button_test_click}
+    layout_properties: {grid_position: 'SPUEEK,OWUJNX'}
+    name: button_test
+    properties: {bold: true, foreground: 'theme:On Background', text: Test}
     type: Button
   - layout_properties: {grid_position: 'IPSJTS,OLWAZI'}
     name: spacer_3

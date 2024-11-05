@@ -1,7 +1,0 @@
-components:
-- layout_properties: {full_width_row: true, grid_position: 'KJEAQC,OJVXRB'}
-  name: banner_1
-  properties: {}
-  type: form:Banner
-container: {type: ColumnPanel}
-is_package: true
