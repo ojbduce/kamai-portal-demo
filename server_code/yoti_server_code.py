@@ -16,6 +16,7 @@ from yoti_python_sdk.dynamic_sharing_service import create_share_url
 
 YOTI_CLIENT_SDK_ID = '754182a1-fbf6-4a20-8615-cf4666f964cc'
 YOTI_PRIVATE_KEY_PATH = data_files['Yoti-For-Kaimai-access-security.pem']
+YOTI_SCENARIO_ID = '26373319-e4fb-47d8-9c68-d23bcb3650a1'
 #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
@@ -54,10 +55,9 @@ def yoti_session():
     db_session_id = share_url.share_url.split('/')[-1]
     time = datetime.now()
     app_tables.sessions.add_row(time_date=time,yoti_session_id=db_session_id)
-    return {
-            "clientSdkId": YOTI_CLIENT_SDK_ID,
-            "shareUrl": share_url.share_url
-        }
+    #sessionID = share_url? 
+    context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
+    return context
   except Exception as e:
     print(f"Error creating share session: {e}")
     
