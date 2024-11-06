@@ -18,28 +18,32 @@ from yoti_python_sdk.dynamic_sharing_service import create_share_url
 YOTI_CLIENT_SDK_ID = '754182a1-fbf6-4a20-8615-cf4666f964cc'
 YOTI_PRIVATE_KEY_PATH = data_files['Yoti-For-Kaimai-access-security.pem']
 YOTI_SCENARIO_ID = '26373319-e4fb-47d8-9c68-d23bcb3650a1'
+#Dumb Hardcoded sessionID 
+SESSION_ID ='00000001'
 #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
 @anvil.server.http_endpoint("/sessions", methods=["POST"])
 def create_session():
     print("Hit create session")
+    sessionId = SESSION_ID
+  #immediately return session_ID
     try:
-        share_url = yoti_session() 
-        if not share_url:
-            print("No share_url returned from yoti_session")
-            return anvil.server.HttpResponse(500, body={"error": "Failed to create session"})
+        #context = yoti_session() #currently the .share_url variety
+        # if not share_url:
+        #     print("No share_url returned from yoti_session")
+        #     return anvil.server.HttpResponse(500, body={"error": "Failed to create session"})
             
-        print(f"Printing share_url from create_session: {share_url}")
-        print(f"share_url type: {type(share_url)}")  # Debug the object type
+        print(f"Printing context from create_session: {context}")
+        print(f"share_url type: {type(context)}")  # Debug the object type
         
         # Previous approach (commented for reference)
         # sessionID = share_url.ref_id
         # print(f"Session ID (ref_id): {sessionID}")
         
         # New approach: try using QR code URL
-        sessionID = getattr(share_url, '_ShareUrl__qr_code').split('/')[-1]
-        print(f"Session ID (from QR URL): {sessionID}")
+        #sessionID = getattr(share_url, '_ShareUrl__qr_code').split('/')[-1]
+        #print(f"Session ID (from QR URL): {sessionID}")
         
         allowed_origins = ["https://reliable-equatorial-heron.anvil.app"]
         response_headers = {}
@@ -49,7 +53,7 @@ def create_session():
             response_headers["Access-Control-Allow-Headers"] = "Content-Type"
             
             formatted_response = {
-                "sessionId": sessionID
+                "sessionId": sessionId
             }          
             print("Sending to client:", formatted_response)
             
@@ -62,10 +66,13 @@ def create_session():
         print(f"Error in create_session: {str(e)}")
         return anvil.server.HttpResponse(500, body={"error": str(e)})
 
+#run this on form show
 @anvil.server.callable
 def yoti_session():
   print('Hit yoti session')
+
   yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH)
+  print("Launched Yoti Client")
   try:
     policy = (DynamicPolicyBuilder()
       .with_full_name()
@@ -78,18 +85,18 @@ def yoti_session():
     share_url = create_share_url(yoti_client,scenario)
   
     
-    # What are we getting back
+    # What are we getting back from share_url
     print("Full share_url object:", vars(share_url))
     print("Generated share URL:", share_url.share_url)
     print("Available methods:", dir(share_url))
     
-    # Not this...
-    # context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
-    # print(context)
-    # return context
+    # Flask app does this so...
+    context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
+    print(context)
+    return context
     
-    # Just return the share_url object to be handled by create_session
-    return share_url
+    # Or Just return the share_url object to be handled by create_session
+    # return share_url.share_url, sessionId
     
   except Exception as e:
     print(f"Error creating share session: {e}")
