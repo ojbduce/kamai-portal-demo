@@ -1,5 +1,6 @@
 import anvil.server
 import anvil.users
+import requests
 from anvil.files import data_files
 import os
 from datetime import datetime 
@@ -57,52 +58,83 @@ def yoti_session():
     app_tables.sessions.add_row(time_date=time,yoti_session_id=db_session_id)
     #sessionID = share_url? 
     context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
+    print(context)
     return context
   except Exception as e:
     print(f"Error creating share session: {e}")
     
 
-  
-
 @anvil.server.route("/yoti-callback", methods=["POST"])
-def yoti_callback():
+def retrieve_profile():
     print("Hit callback")
     try:
-        #yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
-        token = anvil.server.request.body_json.get("token")
-        print(f"Token:{token}")
+      yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
+      activity_details = yoti_client.get_activity_details(anvil.server.request.body_json.get("token"))
+      print(activity_details)
+    #   profile = activity_details.profile
+    #   profile_dict = vars(profile)
+
+    #   context = profile_dict.get("attributes")  
+    #   context["user_id"] = getattr(activity_details, "user_id")
+    #   context["parent_remember_me_id"] = getattr(
+    #         activity_details, "parent_remember_me_id"
+    #     )
+    #   context["receipt_id"] = getattr(activity_details, "receipt_id")
+    #   context["timestamp"] = getattr(activity_details, "timestamp")
+    #   print(f"Token:{token}")
     
-        # activity_details = yoti_client.get_activity_details(token)
-        
-        # profile = activity_details.user_profile
-        # full_name = profile.get("full_name", None)
-        # email = profile.get("email_address", None)
-        # print(f"User Full Name: {full_name}, Email: {email}")
-        
-        # # Store or process the profile data as needed
-        # app_tables.users.add_row(full_name=full_name, email=email, timestamp=datetime.now())
-        # print("profile received")
-        # return anvil.server.HttpResponse(200, body="Profile received")
-    except Exception as e:
-        print(f"Error retrieving token: {e}")
-        # print(f"Error retrieving profile: {e}")
-        # return anvil.server.HttpResponse(500, body="Error processing callback")
+    # except Exception as e:
+    #     print(f"Error retrieving token: {e}")
+    #     # print(f"Error retrieving profile: {e}")
+    #     # return anvil.server.HttpResponse(500, body="Error processing callback")
+
+
+
+
+# Ancillary / Revisit
+
+#Source Constraints
+
+# def get(self, request, *args, **kwargs):
+#         client = Client(YOTI_CLIENT_SDK_ID, YOTI_KEY_FILE_PATH)
+#         constraint = (
+#             SourceConstraintBuilder().with_driving_licence().with_passport().build()
+#         )
+#         policy = (
+#             DynamicPolicyBuilder()
+#             .with_full_name(constraints=constraint)
+#             .with_structured_postal_address(constraints=constraint)
+#             .build()
+#         )
+#         scenario = (
+#             DynamicScenarioBuilder()
+#             .with_policy(policy)
+#             .with_callback_endpoint("/yoti/auth")
+#             .build()
+#         )
+#         share = create_share_url(client, scenario)
+#         context = {
+#             "yoti_client_sdk_id": YOTI_CLIENT_SDK_ID,
+#             "yoti_share_url": share.share_url,
+#         }
+#         return self.render_to_response(context)
+
     
-@anvil.server.callable
-def yoti_get_keys():
-  print("Function yoti_get_keys called")
-  keys_row = app_tables.files.get(name='yoti_keys')
-  print(keys_row)#remove
-  if keys_row:
-    keys_file = keys_row['file'].get_bytes().decode('utf-8')
-    print(keys_file[:100])  
-    tmp_keys_path = '/tmp/yoti_keys.pem' #just use path from data files service why not working?
-    with open (tmp_keys_path, 'wb') as keys:
-      keys.write(keys_file)
-      print('keys')
-      yoti_session(tmp_keys_path)
-  else:
-    return "Keys not found"
+# @anvil.server.callable
+# def yoti_get_keys():
+#   print("Function yoti_get_keys called")
+#   keys_row = app_tables.files.get(name='yoti_keys')
+#   print(keys_row)#remove
+#   if keys_row:
+#     keys_file = keys_row['file'].get_bytes().decode('utf-8')
+#     print(keys_file[:100])  
+#     tmp_keys_path = '/tmp/yoti_keys.pem' #just use path from data files service why not working?
+#     with open (tmp_keys_path, 'wb') as keys:
+#       keys.write(keys_file)
+#       print('keys')
+#       yoti_session(tmp_keys_path)
+#   else:
+#     return "Keys not found"
    
 
 # # Debugging Missing pem file Version
