@@ -24,24 +24,31 @@ yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 @anvil.server.http_endpoint("/sessions", methods=["POST", "OPTIONS"])
 def create_session():
     print("Hit create session")
-    response_headers = {}
     response_data = yoti_session()  
     allowed_origins = ["https://reliable-equatorial-heron.anvil.app"]
     response_headers = {}
     if anvil.server.request.origin in allowed_origins:
-      response_headers["Access-Control-Allow-Origin"] = anvil.server.request.origin
-      response_headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
-      response_headers["Access-Control-Allow-Headers"] = "Content-Type"
-      return anvil.server.HttpResponse(
-        200,
-        headers=response_headers,
-        body=response_data
-      )
+        response_headers["Access-Control-Allow-Origin"] = anvil.server.request.origin
+        response_headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+        response_headers["Access-Control-Allow-Headers"] = "Content-Type"
+        
+        # Match the expected JavaScript structure
+        formatted_response = {
+            "sessionId": response_data["shareUrl"],  # We might need to modify this based on debug output
+            "raw_response": response_data  # Include full response for debugging
+        }
+        print("Sending to client:", formatted_response)
+        
+        return anvil.server.HttpResponse(
+            200,
+            headers=response_headers,
+            body=formatted_response
+        )
 
 @anvil.server.callable
 def yoti_session():
   print('Hit yoti session')
-  yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH )
+  yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH)
   try:
     policy = (DynamicPolicyBuilder()
       .with_full_name()
@@ -52,13 +59,20 @@ def yoti_session():
       .with_callback_endpoint("/yoti-callback")
       .build())
     share_url = create_share_url(yoti_client,scenario)
+    
+    # What are we
     print("Full share_url object:", vars(share_url))
     print("Generated share URL:", share_url.share_url)
     print("Available methods:", dir(share_url))
     
-    context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
-    print(context)
-    return context
+    # Not this...
+    # context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
+    # print(context)
+    # return context
+    
+    # Just return the share_url object to be handled by create_session
+    return share_url
+    
   except Exception as e:
     print(f"Error creating share session: {e}")
     
@@ -66,12 +80,12 @@ def yoti_session():
 @anvil.server.route("/yoti-callback", methods=["POST"])
 def retrieve_profile():
     print("Hit callback")
-    # try:
-    #   yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
-    #   activity_details = yoti_client.get_activity_details(anvil.server.request.body_json.get("token"))
-    #   print(activity_details)
-    # #   profile = activity_details.profile
-    # #   profile_dict = vars(profile)
+    try:
+      yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
+      activity_details = yoti_client.get_activity_details(anvil.server.request.body_json.get("token"))
+      print(activity_details)
+    #   profile = activity_details.profile
+    #   profile_dict = vars(profile)
 
     #   context = profile_dict.get("attributes")  
     #   context["user_id"] = getattr(activity_details, "user_id")
@@ -82,8 +96,8 @@ def retrieve_profile():
     #   context["timestamp"] = getattr(activity_details, "timestamp")
     #   print(f"Token:{token}")
     
-    # except Exception as e:
-    #     print(f"Error retrieving token: {e}")
+    except Exception as e:
+       print(f"Error retrieving token: {e}")
     #     # print(f"Error retrieving profile: {e}")
     #     # return anvil.server.HttpResponse(500, body="Error processing callback")
 
@@ -119,9 +133,9 @@ def retrieve_profile():
 #         return self.render_to_response(context)
 
 
-@anvil.server.route("/yoti-callback", methods=["POST"])
-def retrieve_profile():
-    print("Hit callback")
+# @anvil.server.route("/yoti-callback", methods=["POST"])
+# def retrieve_profile():
+#     print("Hit callback")
     # try:
     #   yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
     #   activity_details = yoti_client.get_activity_details(anvil.server.request.body_json.get("token"))
