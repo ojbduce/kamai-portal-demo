@@ -24,18 +24,17 @@ yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 @anvil.server.http_endpoint("/sessions", methods=["POST", "OPTIONS"])
 def create_session():
     print("Hit create session")
-    response_data = yoti_session()  
+    sessionID = yoti_session()  
     allowed_origins = ["https://reliable-equatorial-heron.anvil.app"]
     response_headers = {}
     if anvil.server.request.origin in allowed_origins:
         response_headers["Access-Control-Allow-Origin"] = anvil.server.request.origin
         response_headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
         response_headers["Access-Control-Allow-Headers"] = "Content-Type"
-        
-        # Match the expected JavaScript structure
+
         formatted_response = {
-            "sessionId": response_data["shareUrl"],  # We might need to modify this based on debug output
-            "raw_response": response_data  # Include full response for debugging
+            "sessionId": sessionId,  # We might need to modify this based on debug output
+            # "raw_response": response_data  # Include full response for debugging
         }
         print("Sending to client:", formatted_response)
         
@@ -59,19 +58,20 @@ def yoti_session():
       .with_callback_endpoint("/yoti-callback")
       .build())
     share_url = create_share_url(yoti_client,scenario)
+    sessionId = share_url.ref_id
+  
     
-    # What are we
+    # What are we looking for..?
     print("Full share_url object:", vars(share_url))
     print("Generated share URL:", share_url.share_url)
     print("Available methods:", dir(share_url))
-    
     # Not this...
     # context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
     # print(context)
     # return context
     
     # Just return the share_url object to be handled by create_session
-    return share_url
+    return sessionId
     
   except Exception as e:
     print(f"Error creating share session: {e}")
