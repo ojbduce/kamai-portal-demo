@@ -25,7 +25,7 @@ yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 def create_session():
     print("Hit create session")
     response_headers = {}
-    response_data = yoti_session()  # Directly call yoti_session to get the Yoti-generated sessionId and share URL
+    response_data = yoti_session()  
     allowed_origins = ["https://reliable-equatorial-heron.anvil.app"]
     response_headers = {}
     if anvil.server.request.origin in allowed_origins:
@@ -52,17 +52,72 @@ def yoti_session():
       .with_callback_endpoint("/yoti-callback")
       .build())
     share_url = create_share_url(yoti_client,scenario)
+    print("Full share_url object:", vars(share_url))
     print("Generated share URL:", share_url.share_url)
-    db_session_id = share_url.share_url.split('/')[-1]
-    time = datetime.now()
-    app_tables.sessions.add_row(time_date=time,yoti_session_id=db_session_id)
-    #sessionID = share_url? 
+    print("Available methods:", dir(share_url))
+    
     context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
     print(context)
     return context
   except Exception as e:
     print(f"Error creating share session: {e}")
     
+
+@anvil.server.route("/yoti-callback", methods=["POST"])
+def retrieve_profile():
+    print("Hit callback")
+    # try:
+    #   yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
+    #   activity_details = yoti_client.get_activity_details(anvil.server.request.body_json.get("token"))
+    #   print(activity_details)
+    # #   profile = activity_details.profile
+    # #   profile_dict = vars(profile)
+
+    #   context = profile_dict.get("attributes")  
+    #   context["user_id"] = getattr(activity_details, "user_id")
+    #   context["parent_remember_me_id"] = getattr(
+    #         activity_details, "parent_remember_me_id"
+    #     )
+    #   context["receipt_id"] = getattr(activity_details, "receipt_id")
+    #   context["timestamp"] = getattr(activity_details, "timestamp")
+    #   print(f"Token:{token}")
+    
+    # except Exception as e:
+    #     print(f"Error retrieving token: {e}")
+    #     # print(f"Error retrieving profile: {e}")
+    #     # return anvil.server.HttpResponse(500, body="Error processing callback")
+
+
+
+
+# Ancillary / Revisit
+
+#Source Constraints
+
+# def get(self, request, *args, **kwargs):
+#         client = Client(YOTI_CLIENT_SDK_ID, YOTI_KEY_FILE_PATH)
+#         constraint = (
+#             SourceConstraintBuilder().with_driving_licence().with_passport().build()
+#         )
+#         policy = (
+#             DynamicPolicyBuilder()
+#             .with_full_name(constraints=constraint)
+#             .with_structured_postal_address(constraints=constraint)
+#             .build()
+#         )
+#         scenario = (
+#             DynamicScenarioBuilder()
+#             .with_policy(policy)
+#             .with_callback_endpoint("/yoti/auth")
+#             .build()
+#         )
+#         share = create_share_url(client, scenario)
+#         context = {
+#             "yoti_client_sdk_id": YOTI_CLIENT_SDK_ID,
+#             "yoti_share_url": share.share_url,
+#         }
+#         return self.render_to_response(context)
+
 
 @anvil.server.route("/yoti-callback", methods=["POST"])
 def retrieve_profile():
