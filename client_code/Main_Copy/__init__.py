@@ -14,9 +14,9 @@ class Main_Copy(Main_CopyTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    self.YOTI_CLIENT_SDK_ID = '754182a1-fbf6-4a20-8615-cf4666f964cc'
-    self.YOTI_SCENARIO_ID = '26373319-e4fb-47d8-9c68-d23bcb3650a1'
-    self.label_return_message.visible = False
+    # self.YOTI_CLIENT_SDK_ID = '754182a1-fbf6-4a20-8615-cf4666f964cc'
+    # self.YOTI_SCENARIO_ID = '26373319-e4fb-47d8-9c68-d23bcb3650a1'
+    # self.label_return_message.visible = False
     
     # Check if a user is already logged in
     #user = anvil.users.get_user(allow_remembered=True)
@@ -36,9 +36,9 @@ class Main_Copy(Main_CopyTemplate):
     
    
 
-  def set_logged_in_user(self):
-    user = anvil.users.get_user(allow_remembered=True)
-    self.label_login.text = f"Logged in as {user['email']}"
+  # def set_logged_in_user(self):
+  #   user = anvil.users.get_user(allow_remembered=True)
+  #   self.label_login.text = f"Logged in as {user['email']}"
 
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""

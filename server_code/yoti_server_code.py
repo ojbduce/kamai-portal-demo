@@ -33,8 +33,13 @@ def create_session():
         print(f"Printing share_url from create_session: {share_url}")
         print(f"share_url type: {type(share_url)}")  # Debug the object type
         
-        sessionID = share_url.ref_id
-        print(f"Session ID: {sessionID}")
+        # Previous approach (commented for reference)
+        # sessionID = share_url.ref_id
+        # print(f"Session ID (ref_id): {sessionID}")
+        
+        # New approach: try using QR code URL
+        sessionID = getattr(share_url, '_ShareUrl__qr_code').split('/')[-1]
+        print(f"Session ID (from QR URL): {sessionID}")
         
         allowed_origins = ["https://reliable-equatorial-heron.anvil.app"]
         response_headers = {}
@@ -71,13 +76,14 @@ def yoti_session():
       .with_callback_endpoint("/yoti-callback")
       .build())
     share_url = create_share_url(yoti_client,scenario)
+  
     
     # What are we getting back
     print("Full share_url object:", vars(share_url))
     print("Generated share URL:", share_url.share_url)
     print("Available methods:", dir(share_url))
     
-    # Flask example renders/returns like this. But Not this QR..?
+    # Not this...
     # context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
     # print(context)
     # return context
