@@ -21,28 +21,41 @@ YOTI_SCENARIO_ID = '26373319-e4fb-47d8-9c68-d23bcb3650a1'
 #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
-@anvil.server.http_endpoint("/sessions", methods=["POST", "OPTIONS"])
+@anvil.server.http_endpoint("/sessions", methods=["POST"])
 def create_session():
     print("Hit create session")
-    sessionID = yoti_session()  
-    allowed_origins = ["https://reliable-equatorial-heron.anvil.app"]
-    response_headers = {}
-    if anvil.server.request.origin in allowed_origins:
-        response_headers["Access-Control-Allow-Origin"] = anvil.server.request.origin
-        response_headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
-        response_headers["Access-Control-Allow-Headers"] = "Content-Type"
-
-        formatted_response = {
-            "sessionId": sessionId,  # We might need to modify this based on debug output
-            # "raw_response": response_data  # Include full response for debugging
-        }
-        print("Sending to client:", formatted_response)
+    try:
+        share_url = yoti_session() 
+        if not share_url:
+            print("No share_url returned from yoti_session")
+            return anvil.server.HttpResponse(500, body={"error": "Failed to create session"})
+            
+        print(f"Printing share_url from create_session: {share_url}")
+        print(f"share_url type: {type(share_url)}")  # Debug the object type
         
-        return anvil.server.HttpResponse(
-            200,
-            headers=response_headers,
-            body=formatted_response
-        )
+        sessionID = share_url.ref_id
+        print(f"Session ID: {sessionID}")
+        
+        allowed_origins = ["https://reliable-equatorial-heron.anvil.app"]
+        response_headers = {}
+        if anvil.server.request.origin in allowed_origins:
+            response_headers["Access-Control-Allow-Origin"] = anvil.server.request.origin
+            response_headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+            response_headers["Access-Control-Allow-Headers"] = "Content-Type"
+            
+            formatted_response = {
+                "sessionId": sessionID
+            }          
+            print("Sending to client:", formatted_response)
+            
+            return anvil.server.HttpResponse(
+                200,
+                headers=response_headers,
+                body=formatted_response
+            )
+    except Exception as e:
+        print(f"Error in create_session: {str(e)}")
+        return anvil.server.HttpResponse(500, body={"error": str(e)})
 
 @anvil.server.callable
 def yoti_session():
@@ -58,20 +71,19 @@ def yoti_session():
       .with_callback_endpoint("/yoti-callback")
       .build())
     share_url = create_share_url(yoti_client,scenario)
-    sessionId = share_url.ref_id
-  
     
-    # What are we looking for..?
+    # What are we getting back
     print("Full share_url object:", vars(share_url))
     print("Generated share URL:", share_url.share_url)
     print("Available methods:", dir(share_url))
-    # Not this...
+    
+    # Flask example renders/returns like this. But Not this QR..?
     # context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
     # print(context)
     # return context
     
     # Just return the share_url object to be handled by create_session
-    return sessionId
+    return share_url
     
   except Exception as e:
     print(f"Error creating share session: {e}")
@@ -131,332 +143,3 @@ def retrieve_profile():
 #             "yoti_share_url": share.share_url,
 #         }
 #         return self.render_to_response(context)
-
-
-# @anvil.server.route("/yoti-callback", methods=["POST"])
-# def retrieve_profile():
-#     print("Hit callback")
-    # try:
-    #   yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
-    #   activity_details = yoti_client.get_activity_details(anvil.server.request.body_json.get("token"))
-    #   print(activity_details)
-    # #   profile = activity_details.profile
-    # #   profile_dict = vars(profile)
-
-    #   context = profile_dict.get("attributes")  
-    #   context["user_id"] = getattr(activity_details, "user_id")
-    #   context["parent_remember_me_id"] = getattr(
-    #         activity_details, "parent_remember_me_id"
-    #     )
-    #   context["receipt_id"] = getattr(activity_details, "receipt_id")
-    #   context["timestamp"] = getattr(activity_details, "timestamp")
-    #   print(f"Token:{token}")
-    
-    # except Exception as e:
-    #     print(f"Error retrieving token: {e}")
-    #     # print(f"Error retrieving profile: {e}")
-    #     # return anvil.server.HttpResponse(500, body="Error processing callback")
-
-
-
-
-# Ancillary / Revisit
-
-#Source Constraints
-
-# def get(self, request, *args, **kwargs):
-#         client = Client(YOTI_CLIENT_SDK_ID, YOTI_KEY_FILE_PATH)
-#         constraint = (
-#             SourceConstraintBuilder().with_driving_licence().with_passport().build()
-#         )
-#         policy = (
-#             DynamicPolicyBuilder()
-#             .with_full_name(constraints=constraint)
-#             .with_structured_postal_address(constraints=constraint)
-#             .build()
-#         )
-#         scenario = (
-#             DynamicScenarioBuilder()
-#             .with_policy(policy)
-#             .with_callback_endpoint("/yoti/auth")
-#             .build()
-#         )
-#         share = create_share_url(client, scenario)
-#         context = {
-#             "yoti_client_sdk_id": YOTI_CLIENT_SDK_ID,
-#             "yoti_share_url": share.share_url,
-#         }
-#         return self.render_to_response(context)
-
-    
-# @anvil.server.callable
-# def yoti_get_keys():
-#   print("Function yoti_get_keys called")
-#   keys_row = app_tables.files.get(name='yoti_keys')
-#   print(keys_row)#remove
-#   if keys_row:
-#     keys_file = keys_row['file'].get_bytes().decode('utf-8')
-#     print(keys_file[:100])  
-#     tmp_keys_path = '/tmp/yoti_keys.pem' #just use path from data files service why not working?
-#     with open (tmp_keys_path, 'wb') as keys:
-#       keys.write(keys_file)
-#       print('keys')
-#       yoti_session(tmp_keys_path)
-#   else:
-#     return "Keys not found"
-   
-
-# # Debugging Missing pem file Version
-# @anvil.server.callable
-# def generate_yoti_qr_code():
-#   pem_row = app_tables.files.get(name='yoti_keys')
-#   print(pem_row)
-#   if pem_row:
-#     print("PEM row found:", pem_row)
-#     print("Name column:", pem_row['name'])
-#     print("File column:", pem_row['file'])
-#     if pem_row['file']:
-#       print("PEM file is present in the row.")
-#       return pem_row['file'].get_bytes().decode('utf-8')  # Decode for testing
-#     else:
-#       print("PEM file column is empty or missing.")
-#       return "PEM file column is empty or missing."
-#   else:
-#     print("PEM row not found.")
-#     return "PEM row not found."
-#     pem_content = pem_row['file'].get_bytes()
-#     temp_pem_path = '/tmp/yoti_private_key.pem'
-
-#     #New function
-
-#     # Write the PEM content to the temporary file
-#     with open(temp_pem_path, 'wb') as pem_file:
-#         pem_file.write(pem_content)
-#     yoti_client = Client(YOTI_CLIENT_SDK_ID, temp_pem_path)
-#     try:
-#         policy = (DynamicPolicyBuilder()
-#             .with_full_name()
-#             .with_email()
-#             .build())
-        
-#         scenario = (DynamicScenarioBuilder()
-#             .with_policy(policy)
-#             .with_callback_endpoint("_/api/yoti-callback")
-#             .build())
-
-#         share_url = create_share_url(yoti_client,scenario)
-#         print (share_url.share_url)
-#         return share_url.share_url
-        
-
-#     except Exception as e:
-#         print(f"Error creating share session: {e}")
-#         return "Error creating share session."
-#     if not pem_row or 'file' not in pem_row:
-#         print("PEM file not found in Data Table.")
-
-
-#     pem_content = pem_row['file'].get_bytes()
-
-#     temp_pem_path = '/tmp/yoti_private_key.pem'
-
-#     # Write the PEM content to the temporary file
-#     with open(temp_pem_path, 'wb') as pem_file:
-#         pem_file.write(pem_content)
-
-#     yoti_client = Client(YOTI_CLIENT_SDK_ID, temp_pem_path)
-#     try:
-#         policy = (DynamicPolicyBuilder()
-#             .with_full_name()
-#             .with_email()
-#             .build())
-        
-#         scenario = (DynamicScenarioBuilder()
-#             .with_policy(policy)
-#             .with_callback_endpoint("/yoti/auth")
-#             .build())
-
-#         share_url = yoti_client.create_share_url(scenario)
-#         print("Generated share URL:", share_url)
-#         return share_url
-
-#     except Exception as e:
-#         print(f"Error creating share session: {e}")
-#         return "Error creating share session."
-
-#     finally:
-#         # Clean up the temporary file (optional but recommended for security)
-#         os.remove(temp_pem_path)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @anvil.server.callable
-# def generate_yoti_qr_code():
-#     try:
-#         pem_row = app_tables.files.get(name='yoti_keys')
-#         if not pem_row or 'file' not in pem_row:
-#             raise RuntimeError("PEM file not found in Data Table.")
-        
-#         # Define the temporary path and write the file content once
-#         temp_pem_path = '/tmp/yoti_private_key.pem'
-#         with open(temp_pem_path, 'wb') as pem_file:
-#             pem_file.write(pem_row['file'].get_bytes())
-
-#         yoti_client = Client(YOTI_CLIENT_SDK_ID, temp_pem_path)
-
-#         # Define policy and scenario as before
-#         policy = (DynamicPolicyBuilder()
-#             .with_full_name()
-#             .with_email()
-#           
-#             .build())
-        
-#         scenario = (DynamicScenarioBuilder()
-#             .with_policy(policy)
-#             .for_application(YOTI_CLIENT_SDK_ID)
-#             .build())
-
-#         share_url = yoti_client.create_share_url(scenario)
-#         return share_url
-
-#     except Exception as e:
-#         print(f"Error creating share session: {e}")
-#         return "Error creating share session."
-
-#     finally:
-#         # Clean up the temporary file
-#         if os.path.exists(temp_pem_path):
-#             os.remove(temp_pem_path)
-
-
-
-
-
-# @anvil.server.callable
-# def generate_yoti_qr_code():
-#     try:
-#         # Retrieve the PEM file from the Data Table
-#         pem_row = app_tables.files.get(name='yoti_keys')
-#         if not pem_row or 'file' not in pem_row:
-#             raise RuntimeError("PEM file not found in Data Table.")
-        
-#         # Get the binary content of the PEM file
-#         private_key = pem_row['file'].get_bytes()  # Keeps the PEM file as binary bytes
-        
-#         # Initialize the Yoti Client with the private key bytes if Yoti SDK supports it
-#         yoti_client = Client(YOTI_CLIENT_SDK_ID, private_key)
-
-#         # Define the policy and scenario
-#         policy = (DynamicPolicyBuilder()
-#             .with_full_name()
-#             .with_email()
-#            
-#             .build())
-        
-#         scenario = (DynamicScenarioBuilder()
-#             .with_policy(policy)
-#             .for_application(YOTI_CLIENT_SDK_ID)
-#             .build())
-
-#         # Generate and return the share URL
-#         share_url = yoti_client.create_share_url(scenario)
-#         return share_url
-
-#     except Exception as e:
-#         print(f"Error creating share session: {e}")
-#         return "Error creating share session."
-
-
-# #@anvil.server.callable
-# #def generate_yoti_qr_code():
-#     # Retrieve the PEM file from the Data Table
-#   pem_row = app_tables.files.get(name='yoti_keys')
-#   print(pem_row)
-#   if pem_row:
-#     print("PEM row found:", pem_row)
-#     #print("Name column:", pem_row['name'])
-#   #   print("File column:", pem_row['file'])
-#   #   # Check specifically for the 'file' column
-#   #   if pem_row['file']:
-#   #     print("PEM file is present in the row.")
-#   #     return pem_row['file'].get_bytes().decode('utf-8')  # Decode for testing
-#   #   else:
-#   #     print("PEM file column is empty or missing.")
-#   #     return "PEM file column is empty or missing."
-#   # else:
-#   #   print("PEM row not found.")
-#   #   return "PEM row not found."
-#     pem_content = pem_row['file'].get_bytes()
-
-#     # Define a temporary file path in the /tmp directory
-#     temp_pem_path = '/tmp/yoti_private_key.pem'
-
-#     # Write the PEM content to the temporary file
-#     with open(temp_pem_path, 'wb') as pem_file:
-#         pem_file.write(pem_content)
-#     yoti_client = Client(YOTI_CLIENT_SDK_ID, temp_pem_path)
-#     try:
-#         policy = (DynamicPolicyBuilder()
-#             .with_full_name()
-#             .with_email()
-#             .build())
-        
-#         scenario = (DynamicScenarioBuilder()
-#             .with_policy(policy)
-#             .with_callback_endpoint("/yoti-callback")
-#             .build())
-
-#         share_url = create_share_url(yoti_client,scenario)
-#         print (share_url.share_url)
-#         return share_url.share_url
-        
-
-#     except Exception as e:
-#         print(f"Error creating share session: {e}")
-#         return "Error creating share session."
-#     if not pem_row or 'file' not in pem_row:
-#         print("PEM file not found in Data Table.")
-  
-#     pem_content = pem_row['file'].get_bytes()
-
-#     temp_pem_path = '/tmp/yoti_private_key.pem'
-
-#     # Write the PEM content to the temporary file
-#     with open(temp_pem_path, 'wb') as pem_file:
-#         pem_file.write(pem_content)
-
-#     yoti_client = Client(YOTI_CLIENT_SDK_ID, temp_pem_path)
-#     try:
-#         policy = (DynamicPolicyBuilder()
-#             .with_full_name()
-#             .with_email()
-#             .build())
-        
-#         scenario = (DynamicScenarioBuilder()
-#             .with_policy(policy)
-#             .with_callback_endpoint("/yoti/auth")
-#             .build())
-
-#         share_url = yoti_client.create_share_url(scenario)
-#         print("Generated share URL:", share_url)
-#         return share_url
-
-#     except Exception as e:
-#         print(f"Error creating share session: {e}")
-#         return "Error creating share session."
-
-#     finally:
-#         # Clean up the temporary file (optional but recommended for security)
-#         os.remove(temp_pem_path)
