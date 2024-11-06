@@ -67,12 +67,12 @@ def yoti_session():
 @anvil.server.route("/yoti-callback", methods=["POST"])
 def retrieve_profile():
     print("Hit callback")
-    try:
-      yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
-      activity_details = yoti_client.get_activity_details(anvil.server.request.body_json.get("token"))
-      print(activity_details)
-    #   profile = activity_details.profile
-    #   profile_dict = vars(profile)
+    # try:
+    #   yoti_client = Client(YOTI_CLIENT_SDK_ID, YOTI_PRIVATE_KEY_PATH) #?
+    #   activity_details = yoti_client.get_activity_details(anvil.server.request.body_json.get("token"))
+    #   print(activity_details)
+    # #   profile = activity_details.profile
+    # #   profile_dict = vars(profile)
 
     #   context = profile_dict.get("attributes")  
     #   context["user_id"] = getattr(activity_details, "user_id")
@@ -391,5 +391,3 @@ def retrieve_profile():
 #     finally:
 #         # Clean up the temporary file (optional but recommended for security)
 #         os.remove(temp_pem_path)
-
-
