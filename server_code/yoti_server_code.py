@@ -29,7 +29,7 @@ def create_session():
     sessionId = SESSION_ID
   #immediately return session_ID
     try:
-        #context = yoti_session() #currently the .share_url variety
+        context = yoti_session() #currently the .share_url variety
         # if not share_url:
         #     print("No share_url returned from yoti_session")
         #     return anvil.server.HttpResponse(500, body={"error": "Failed to create session"})
