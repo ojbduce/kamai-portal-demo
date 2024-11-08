@@ -94,6 +94,8 @@ def yoti_session():
     context = {"clientSdkId": YOTI_CLIENT_SDK_ID,"shareUrl": share_url.share_url}
     print(context)
     return context
+
+  #Other SDKs use 
     
     # Or Just return the share_url object to be handled by create_session
     # return share_url.share_url, sessionId
