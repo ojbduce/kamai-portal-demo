@@ -129,6 +129,9 @@ def retrieve_profile():
     #     # return anvil.server.HttpResponse(500, body="Error processing callback")
 
 
+    anvil.server.session[]
+
+
 
 
 # Ancillary / Revisit
