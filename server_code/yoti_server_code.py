@@ -24,8 +24,9 @@ SESSION_ID ='00000001'
 #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
-@anvil.server.http_endpoint("/yka", methods=["POST"], cors=True)
+@anvil.server.http_endpoint("/yka", methods=["POST"], enable_cors=True)
 def receive_user_details(userData):
+  print("Hit users endpoint!")
   userData = anvil.server.request.body_json
   try:
     if all(key in userData for key in ['email', 'rememberMeId', 'verificationDate']):
@@ -148,7 +149,7 @@ def retrieve_profile():
     #     # return anvil.server.HttpResponse(500, body="Error processing callback")
 
 
-    anvil.server.session[]
+
 
 
 
