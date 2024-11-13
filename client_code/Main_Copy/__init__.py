@@ -75,9 +75,7 @@ class Main_Copy(Main_CopyTemplate):
     """This method is called when the button is clicked"""
     anvil.server.call('check_origin')
 
-  def form_show(self, **event_args):
-    """This method is called when the form is shown on the page"""
-    anvil.server.call()
+  
 
 
 
