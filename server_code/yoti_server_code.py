@@ -14,6 +14,7 @@ from yoti_python_sdk.dynamic_sharing_service.policy import (
 )
 from yoti_python_sdk.dynamic_sharing_service import DynamicScenarioBuilder
 from yoti_python_sdk.dynamic_sharing_service import create_share_url
+import random
 
 YOTI_CLIENT_SDK_ID = '754182a1-fbf6-4a20-8615-cf4666f964cc'
 YOTI_PRIVATE_KEY_PATH = data_files['Yoti-For-Kaimai-access-security.pem']
@@ -22,6 +23,24 @@ YOTI_SCENARIO_ID = '26373319-e4fb-47d8-9c68-d23bcb3650a1'
 SESSION_ID ='00000001'
 #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
+
+@anvil.server.http_endpoint("/yka", methods=["POST"], cors=True)
+def receive_user_details(userData):
+  userData = anvil.server.request.body_json
+  try:
+    if all(key in userData for key in ['email', 'rememberMeId', 'verificationDate']):
+      email = userData[email]
+      remember_me_id = userData[rememberMeId]
+      verification_date = userData[verificationDate]
+      app_tables.users.add_row(date_registered=verification_date,verified=True,remember_me_id=remember_me_id)
+      print("User data received and added.")
+      return {"status": "success", "message": "User added successfully"}
+    else:
+      return {"status": "error", "message": "Missing required fields"}, 400
+  except Exception as e:
+    return {"status": "error", "message": str(e)}, 500
+ 
+  
 
 @anvil.server.http_endpoint("/sessions", methods=["POST"])
 def create_session():
