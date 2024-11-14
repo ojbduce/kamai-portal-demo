@@ -39,7 +39,7 @@ def receive_user_details():
     email = userData['email']
     print(f"Test printing email address: {email}")
     remember_me_id = userData['rememberMeId']
-    verification_date = userData['verificationDate']
+    verification_date = datetime.now
     try:
         app_tables.users.add_row(
             remember_me_id=remember_me_id, 

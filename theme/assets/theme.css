@@ -1,6 +1,7 @@
 /**
  This CSS implements the Material Design 3 look and feel for Anvil apps.
 525 alert
+292 leftnav
  **/
 
 
@@ -163,7 +164,7 @@
     flex-direction: column; 
     min-height: 100vh;
     min-height: calc(100vh - %anvil-banner-height%);*/
-    min-height: calc(100vh - 80px); /* Subtract the banner height */
+    min-height: calc(100vh - 80px ); /* Subtract the banner height */
   /*   height: 0; /* To make flex-grow work in IE */
   }
   
@@ -175,7 +176,7 @@
   .app-bar {
     z-index: 1000;
     position: fixed;
-    top: 80px; /* This should be the height of your banner */
+    top: 25px; /* This should be the height of your banner */
     /*top: %anvil-banner-height%; */
     right: 0;
     left: 0;
@@ -231,7 +232,7 @@
   
   .nav-holder .left-nav {
     position: fixed;
-    top: calc(80px + 56px); /* Banner height (80px) + App-bar height (56px) */
+    top: calc(100px); /* Banner height (80px) + App-bar height (56px) */
     left: 0;
     flex-shrink: 0;
     min-width: 240px;
@@ -289,7 +290,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     position: fixed;
-    top: calc(80px + 56px); /* Account for the app-bar height */
+    /*top: calc(80px + 56px); /* Account for the app-bar height */
     height: calc(100vh - 80px - 56px); /* Viewport height - Banner height - App-bar height */
   }
   

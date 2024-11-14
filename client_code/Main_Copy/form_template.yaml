@@ -110,6 +110,10 @@ components:
     name: button_2
     properties: {background: '', bold: true, font_size: 20, foreground: 'theme:On Primary Container', icon: 'fa:info', icon_align: top, role: null, text: '', tooltip: Log in with an email click on Web Journal 1. You should stay logged-in at the destination site.}
     type: Button
+  - layout_properties: {grid_position: 'JDVWJT,MRNJOL'}
+    name: spacer_2
+    properties: {height: 94.19140625}
+    type: Spacer
   layout_properties: {slot: left-nav}
   name: column_panel_1
   properties: {}
