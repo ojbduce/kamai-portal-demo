@@ -39,7 +39,7 @@ def receive_user_details():
     email = userData['email']
     print(f"Test printing email address: {email}")
     remember_me_id = userData['rememberMeId']
-    verification_date = datetime.now
+    verification_date = datetime.now()
     try:
         app_tables.users.add_row(
             remember_me_id=remember_me_id, 
@@ -47,19 +47,23 @@ def receive_user_details():
             email=email
         )
         print("User data received and added to the Users Table.")
-        #log_in login_in(remember_me_id)
+        login_in_with_id(remember_me_id)
         return {"status": "success", "message": "User added successfully"}
     except Exception as e:
         print(f"Error adding to Data Table: {e}") 
         return {"status": "error", "message": str(e)}, 500
 
 def login_with_id(remember_me_id):
+    print("Hit login with ID")
     user = app_tables.users.get(remember_me_id=remember_me_id)
     if (user is not None):
       anvil.users.force_login(user)
       print(f"user: {remember_me_id} is logged-in")
+      return user['remember_me_id']
     else:
       return None
+
+
     
  
 
