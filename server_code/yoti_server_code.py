@@ -26,33 +26,32 @@ yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
 @anvil.server.http_endpoint("/yka", methods=["POST"], enable_cors=True)
 def receive_user_details():
-  print("Hit users endpoint!")
-  userData = anvil.server.request.body_json
-  print(f"Have received userData? {bool(userData)}")
-  print(f"Got data: {bool(userData)}")  
-  print(f"Keys received: {userData.keys()}")  
-  print(f"Data dump: {userData}")  
-  valid = all(key in userData for key in ['email', 'rememberMeId', 'verificationDate'])
-  print(f"Valid data: {valid}")  # Which validation failed?
-  try:
-    if all(key in userData for key in ['email', 'rememberMeId', 'verificationDate']):
-      print("All data available. Adding to the Data Table")
-      email = userData['email']
-      print(f"Test printing email address:{email}")
-      remember_me_id = userData['rememberMeId']
-      verification_date = userData['verificationDate']
-      app_tables.users.add_row(
-          remember_me_id=remember_me_id, 
-          verification_date=verification_date, 
-          email=email
-      )
-      print("User data received and added to the Users Table.")
-      #log_in login_in(remember_me_id)
-      return {"status": "success", "message": "User added successfully"}
-    else:
-      return {"status": "error", "message": "Missing required fields"}, 400
-  except Exception as e:
-    return {"status": "error", "message": str(e)}, 500
+    print("Hit users endpoint!")
+    userData = anvil.server.request.body_json
+    print(f"Have received userData? {bool(userData)}")
+    print(f"Got data: {bool(userData)}")  
+    print(f"Keys received: {userData.keys()}")  
+    print(f"Data dump: {userData}")  
+    if not all(key in userData for key in ['email', 'rememberMeId', 'verificationDate']):
+        return {"status": "error", "message": "Missing required fields"}, 400
+    
+    print("All data available. Adding to the Data Table")
+    email = userData['email']
+    print(f"Test printing email address: {email}")
+    remember_me_id = userData['rememberMeId']
+    verification_date = userData['verificationDate']
+    try:
+        app_tables.users.add_row(
+            remember_me_id=remember_me_id, 
+            verification_date=verification_date, 
+            email=email
+        )
+        print("User data received and added to the Users Table.")
+        #log_in login_in(remember_me_id)
+        return {"status": "success", "message": "User added successfully"}
+    except Exception as e:
+        print(f"Error adding to Data Table: {e}") 
+        return {"status": "error", "message": str(e)}, 500
 
 def login_with_id(remember_me_id):
     user = app_tables.users.get(remember_me_id=remember_me_id)
