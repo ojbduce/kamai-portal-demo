@@ -37,20 +37,6 @@ db_schema:
     server: full
     title: Sessions
   users:
-    client: none
-    columns:
-    - admin_ui: {order: 4, width: 200}
-      name: email
-      type: string
-    - admin_ui: {order: -1, width: 200}
-      name: remember_me_id
-      type: string
-    - admin_ui: {order: 3, width: 200}
-      name: verification_date
-      type: datetime
-    server: full
-    title: Users
-  users_orig:
     client: full
     columns:
     - admin_ui: {width: 200}
@@ -77,8 +63,14 @@ db_schema:
     - admin_ui: {width: 200}
       name: signed_up
       type: datetime
+    - admin_ui: {width: 200}
+      name: remember_me_id
+      type: string
+    - admin_ui: {width: 200}
+      name: verification_date
+      type: datetime
     server: full
-    title: Users_Orig
+    title: Users
 dependencies: []
 name: Kamai Portal Demo
 native_deps: {head_html: ''}

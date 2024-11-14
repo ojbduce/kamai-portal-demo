@@ -33,7 +33,8 @@ class Main_Copy(Main_CopyTemplate):
     self.content_panel_home.visible = True
     self.card_database.visible = False
     self.flow_panel_title.visible = False
-    
+
+  
    
 
   # def set_logged_in_user(self):
