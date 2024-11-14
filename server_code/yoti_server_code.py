@@ -30,10 +30,10 @@ def receive_user_details(userData):
   userData = anvil.server.request.body_json
   try:
     if all(key in userData for key in ['email', 'rememberMeId', 'verificationDate']):
-      email = userData[email]
-      remember_me_id = userData[rememberMeId]
-      verification_date = userData[verificationDate]
-      app_tables.users.add_row(date_registered=verification_date,verified=True,remember_me_id=remember_me_id)
+      email = userData['email']
+      remember_me_id = userData['rememberMeId']
+      verification_date = userData['verificationDate']
+      app_tables.users.add_row(remember_me_id=remember_me_id,verification_date=verification_date,email=email)
       print("User data received and added.")
       return {"status": "success", "message": "User added successfully"}
     else:
