@@ -25,9 +25,10 @@ SESSION_ID ='00000001'
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
 @anvil.server.http_endpoint("/yka", methods=["POST"], enable_cors=True)
-def receive_user_details(userData):
+def receive_user_details():
   print("Hit users endpoint!")
   userData = anvil.server.request.body_json
+  print(userData is not None)
   try:
     if all(key in userData for key in ['email', 'rememberMeId', 'verificationDate']):
       email = userData['email']
