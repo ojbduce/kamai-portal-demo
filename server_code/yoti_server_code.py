@@ -24,6 +24,18 @@ SESSION_ID ='00000001'
 #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
+@anvil.server.callable
+def login_with_id(remember_me_id):
+    print("Hit login with ID")
+    user = app_tables.users.get(remember_me_id=remember_me_id)
+    if (user is not None):
+      anvil.users.force_login(user)
+      print(f"user: {remember_me_id} is logged-in")
+      return user['remember_me_id']
+    else:
+      return None
+
+
 @anvil.server.http_endpoint("/yka", methods=["POST"], enable_cors=True)
 def receive_user_details():
     print("Hit users endpoint!")
@@ -47,21 +59,12 @@ def receive_user_details():
             email=email
         )
         print("User data received and added to the Users Table.")
-        login_in_with_id(remember_me_id)
+        login_with_id(remember_me_id)
         return {"status": "success", "message": "User added successfully"}
     except Exception as e:
         print(f"Error adding to Data Table: {e}") 
         return {"status": "error", "message": str(e)}, 500
 
-def login_with_id(remember_me_id):
-    print("Hit login with ID")
-    user = app_tables.users.get(remember_me_id=remember_me_id)
-    if (user is not None):
-      anvil.users.force_login(user)
-      print(f"user: {remember_me_id} is logged-in")
-      return user['remember_me_id']
-    else:
-      return None
 
 
     
