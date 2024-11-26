@@ -20,4 +20,5 @@ unique_ids:
   modules: {}
   scripts: {}
   server_modules:
+    server_code: '1732629733647359984243351.5657'
     yoti_server_code: '1729162939092762729856490.3058'

@@ -15,6 +15,16 @@ components:
     name: flow_panel_title
     properties: {background: 'theme:Light Overlay 2'}
     type: FlowPanel
+  - event_bindings: {click: button_server_session_test_click}
+    layout_properties: {grid_position: 'UTVUBG,VFCFHJ'}
+    name: button_server_session_test
+    properties: {text: Test server session}
+    type: Button
+  - event_bindings: {click: button_cookies_click}
+    layout_properties: {grid_position: 'FKBWCL,PZPAQP'}
+    name: button_cookies
+    properties: {text: button_1}
+    type: Button
   - event_bindings: {click: url_test_button_click}
     layout_properties: {grid_position: 'XBRKKZ,MBYHPT'}
     name: url_test_button
@@ -84,7 +94,7 @@ components:
   type: ColumnPanel
 - components:
   - layout_properties: {}
-    name: label_login
+    name: label_logged_in
     properties: {font_size: 14, text: ''}
     type: Label
   - event_bindings: {click: link_1_click}
@@ -100,24 +110,6 @@ components:
   name: label_1
   properties: {bold: true, font_size: 16, role: title, text: Portal}
   type: Label
-- components:
-  - event_bindings: {click: outlined_button_1_click}
-    layout_properties: {grid_position: 'NPBXRD,FEROWE'}
-    name: outlined_button_1
-    properties: {bold: true, font_size: 20, foreground: 'theme:On Tertiary Container', icon: 'fa:book', icon_align: top, role: null, text: ''}
-    type: Button
-  - layout_properties: {grid_position: 'QIXPSZ,VXPJKI'}
-    name: button_2
-    properties: {background: '', bold: true, font_size: 20, foreground: 'theme:On Primary Container', icon: 'fa:info', icon_align: top, role: null, text: '', tooltip: Log in with an email click on Web Journal 1. You should stay logged-in at the destination site.}
-    type: Button
-  - layout_properties: {grid_position: 'JDVWJT,MRNJOL'}
-    name: spacer_2
-    properties: {height: 94.19140625}
-    type: Spacer
-  layout_properties: {slot: left-nav}
-  name: column_panel_1
-  properties: {}
-  type: ColumnPanel
 container:
   event_bindings: {show: form_show}
   properties: {html: '@theme:standard-page.html'}

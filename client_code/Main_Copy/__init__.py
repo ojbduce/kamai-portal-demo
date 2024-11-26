@@ -38,7 +38,7 @@ class Main_Copy(Main_CopyTemplate):
     self.flow_panel_title.visible = False
 
   def get_user(self):
-    return anvil.server.call('login_with_id')
+    return anvil.server.call('login_with_id','123456789')
   #   user = anvil.users.get_user(allow_remembered=True)
   #   self.label_login.text = f"Logged in as {user['email']}"
 
@@ -86,6 +86,15 @@ class Main_Copy(Main_CopyTemplate):
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
     anvil.server.call('check_origin')
+
+  def button_server_session_test_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    anvil.server.call('server_session_data')
+
+  def button_cookies_click(self, **event_args):
+    anvil.server.call('cookies')
+    """This method is called when the button is clicked"""
+    
 
   
 

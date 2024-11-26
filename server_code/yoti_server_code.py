@@ -24,6 +24,8 @@ SESSION_ID ='00000001'
 #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
 yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
+
+
 @anvil.server.callable
 def login_with_id(remember_me_id):
     print("Hit login with ID")
