@@ -54,18 +54,22 @@ def receive_user_details():
     print(f"Test printing email address: {email}")
     remember_me_id = userData['rememberMeId']
     verification_date = datetime.now()
-    try:
-        app_tables.users.add_row(
-            remember_me_id=remember_me_id, 
-            verification_date=verification_date, 
-            email=email
-        )
-        print("User data received and added to the Users Table.")
-        login_with_id(remember_me_id)
-        return {"status": "success", "message": "User added successfully"}
-    except Exception as e:
-        print(f"Error adding to Data Table: {e}") 
-        return {"status": "error", "message": str(e)}, 500
+    existing_user = app_tables.users.search(remember_me_id=remember_me_id)
+    if existing_user:
+      login_with_id(remember_me_id)
+    else:
+    
+      try:
+          app_tables.users.add_row(
+              remember_me_id=remember_me_id, 
+              verification_date= verification_date,
+              email=email)
+          print("User data received and added to the Users Table.")
+          login_with_id(remember_me_id) #this
+          return {"status": "success", "message": "User added successfully"}
+      except Exception as e:
+          print(f"Error adding to Data Table: {e}") 
+          return {"status": "error", "message": str(e)}, 500
 
 
 
