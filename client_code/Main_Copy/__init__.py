@@ -93,6 +93,7 @@ class Main_Copy(Main_CopyTemplate):
 
   def button_cookies_click(self, **event_args):
     anvil.server.call('cookies')
+    anvil.server.call('server_session_data')
     """This method is called when the button is clicked"""
     
 

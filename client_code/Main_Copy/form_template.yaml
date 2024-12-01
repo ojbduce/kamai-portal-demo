@@ -23,7 +23,7 @@ components:
   - event_bindings: {click: button_cookies_click}
     layout_properties: {grid_position: 'FKBWCL,PZPAQP'}
     name: button_cookies
-    properties: {text: button_1}
+    properties: {text: Server Session Data}
     type: Button
   - event_bindings: {click: url_test_button_click}
     layout_properties: {grid_position: 'XBRKKZ,MBYHPT'}

@@ -25,16 +25,21 @@ import anvil.server
 def server_session_data():
   print (type(anvil.server.session))
   #<class 'anvil._threaded_server.LocalCallInfo'>
-  for key, value in anvil.server.session.items():
-        print(f"{key}: {value}")
+  print(anvil.server.session)  # Print all session data
+  print(dir(anvil.server.session))  # Check available methods and attributes
+ 
 
 @anvil.server.callable
 def cookies():
   print (type(anvil.server.cookies.local))
+  print("Printing Cookies")
+  print(anvil.server.cookies.local)
+  print(anvil.server.cookies.shared)
   #<class 'anvil._server.AnvilCookie'>
-  for key, value in anvil.server.session.cookies.local.items():
-    print(f"Local Cookies: {key}: {value}")
-  for key, value in anvil.server.session.cookies.shared.items():
-    print(f"Shared Cookies: [key]:{value}")
+  #for key, value in anvil.server.session.cookies.local.items():
+    #print(f"Local Cookies: {key}: {value}")
+  #for key, value in anvil.server.session.cookies.shared.items():
+  #print(f"Shared Cookies: [key]:{value}")
+  anvil.server.cookies.local.
  
 
