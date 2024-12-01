@@ -30,7 +30,7 @@ yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 def login_with_id(remember_me_id):
     print("Hit login with ID")
     user = app_tables.users.get(remember_me_id=remember_me_id)
-    if (user is not None):
+    if user is not None:
       anvil.users.force_login(user)
       print(f"user: {remember_me_id} is logged-in")
       return user['remember_me_id']
