@@ -54,6 +54,7 @@ def receive_user_details():
     print(f"Test printing email address: {email}")
     remember_me_id = userData['rememberMeId']
     verification_date = datetime.now()
+  #split here. Split for testing version but log-in can be a separate function.
     existing_user = app_tables.users.search(remember_me_id=remember_me_id)
     if existing_user:
       login_with_id(remember_me_id)

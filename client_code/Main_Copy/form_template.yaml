@@ -1,5 +1,13 @@
 components:
 - components:
+  - layout_properties: {grid_position: 'RSEATX,SGZXUI'}
+    name: image_1
+    properties: {display_mode: shrink_to_fit, height: 30.22265625, horizontal_align: left, source: _/theme/yoti-logo.png, vertical_align: bottom}
+    type: Image
+  - layout_properties: {grid_position: 'RSEATX,ERWKEJ'}
+    name: label_logged_in
+    properties: {font_size: 14, text: ''}
+    type: Label
   - components:
     - data_bindings:
       - {code: 'self.item['''']', property: icon, writeback: false}
@@ -7,41 +15,18 @@ components:
       name: label_3
       properties: {background: 'theme:Light Overlay 1', bold: true, font_size: 19, foreground: 'theme:On Surface Variant', icon: '', role: headline, text: 'Kaimai Member''s Journals  '}
       type: Label
-    - layout_properties: {width: 65.28125}
-      name: image_1
-      properties: {display_mode: shrink_to_fit, height: 40, horizontal_align: right, source: _/theme/yoti-logo.png, vertical_align: bottom}
-      type: Image
     layout_properties: {full_width_row: false, grid_position: 'YDHHDC,BKEXWB', row_background: 'theme:Light Overlay 1'}
     name: flow_panel_title
     properties: {background: 'theme:Light Overlay 2'}
     type: FlowPanel
-  - event_bindings: {click: button_server_session_test_click}
-    layout_properties: {grid_position: 'UTVUBG,VFCFHJ'}
-    name: button_server_session_test
-    properties: {text: Test server session}
-    type: Button
-  - event_bindings: {click: button_cookies_click}
-    layout_properties: {grid_position: 'FKBWCL,PZPAQP'}
-    name: button_cookies
-    properties: {text: Server Session Data}
-    type: Button
-  - event_bindings: {click: url_test_button_click}
-    layout_properties: {grid_position: 'XBRKKZ,MBYHPT'}
-    name: url_test_button
-    properties: {text: Test Yoti Response URL}
-    type: Button
-  - layout_properties: {grid_position: 'YKCKJV,WCAEAT'}
-    name: label_return_message
-    properties: {align: center}
+  - layout_properties: {grid_position: 'BBRSGT,ZNHKBY'}
+    name: label_4
+    properties: {text: 'Welcome! Please select a publication below:'}
     type: Label
   - layout_properties: {grid_position: 'YHAYIX,ROHWXQ'}
     name: spacer_1
-    properties: {height: 11}
+    properties: {height: 4.33203125}
     type: Spacer
-  - layout_properties: {grid_position: 'JCEMYY,VQKLCL'}
-    name: modal_qr_button_1
-    properties: {}
-    type: form:Modal_QR_Button
   - components:
     - components:
       - data_bindings: []
@@ -93,10 +78,6 @@ components:
   properties: {background: 'theme:Background', col_widths: '{}', spacing_above: none}
   type: ColumnPanel
 - components:
-  - layout_properties: {}
-    name: label_logged_in
-    properties: {font_size: 14, text: ''}
-    type: Label
   - event_bindings: {click: link_1_click}
     layout_properties: {}
     name: link_1
@@ -108,7 +89,7 @@ components:
   type: FlowPanel
 - layout_properties: {slot: title}
   name: label_1
-  properties: {bold: true, font_size: 16, role: title, text: Portal}
+  properties: {bold: true, font_size: 18, icon: 'fa:i', icon_align: right_edge, role: title, text: Portal}
   type: Label
 container:
   event_bindings: {show: form_show}
