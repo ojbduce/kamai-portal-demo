@@ -7,22 +7,22 @@ from datetime import datetime
 import uuid
 import anvil.tables as tables
 from anvil.tables import app_tables
-from yoti_python_sdk import Client
-from yoti_python_sdk.dynamic_sharing_service.policy import (
-    DynamicPolicyBuilder,
-    SourceConstraintBuilder,
-)
-from yoti_python_sdk.dynamic_sharing_service import DynamicScenarioBuilder
-from yoti_python_sdk.dynamic_sharing_service import create_share_url
-import random
+# from yoti_python_sdk import Client
+# from yoti_python_sdk.dynamic_sharing_service.policy import (
+#     DynamicPolicyBuilder,
+#     SourceConstraintBuilder,
+# )
+# from yoti_python_sdk.dynamic_sharing_service import DynamicScenarioBuilder
+# from yoti_python_sdk.dynamic_sharing_service import create_share_url
+# import random
 
-YOTI_CLIENT_SDK_ID = '754182a1-fbf6-4a20-8615-cf4666f964cc'
-YOTI_PRIVATE_KEY_PATH = data_files['Yoti-For-Kaimai-access-security.pem']
-YOTI_SCENARIO_ID = '26373319-e4fb-47d8-9c68-d23bcb3650a1'
-#Dumb Hardcoded sessionID 
-SESSION_ID ='00000001'
-#/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
-yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
+# YOTI_CLIENT_SDK_ID = '754182a1-fbf6-4a20-8615-cf4666f964cc'
+# YOTI_PRIVATE_KEY_PATH = data_files['Yoti-For-Kaimai-access-security.pem']
+# YOTI_SCENARIO_ID = '26373319-e4fb-47d8-9c68-d23bcb3650a1'
+# #Dumb Hardcoded sessionID 
+# SESSION_ID ='00000001'
+# #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
+# yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
 
 
 

@@ -11,5 +11,4 @@ import anvil.server
 
 @anvil.server.route("/home")
 def serve_my_page(**p):
-  # This assumes there is a form called MyPageForm in your app:
-  return anvil.server.FormResponse('Main_Copy')
+  return anvil.server.FormResponse('Home')
