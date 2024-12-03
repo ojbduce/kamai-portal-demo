@@ -21,6 +21,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     iframe.appendTo(get_dom_node(self.column_panel_iframe))
     self.button_synth_test.visible = False
     self.button_home.visible = False
+    
 
     # Any code you write here will run before the form opens.
 

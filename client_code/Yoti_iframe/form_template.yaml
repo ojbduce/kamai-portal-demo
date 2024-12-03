@@ -1,10 +1,6 @@
 components: []
 container:
   properties:
-    html: |-
-      <center style="font-style:italic; color:#888; margin: 3em;">
-        (Insert your custom HTML here)
-      </center>
-      <div anvil-slot="default"></div>
+    html: "<style>\n  #yoti-iframe {\n    border: none;\n    width: 100%;\n    height: 440px;\n    background: transparent;\n  }\n</style>\n<iframe \n  id=\"yoti-iframe\"\n  src='https://kaimaiyoti.azurewebsites.net'\n  frameborder=\"0\"\n  scrolling=\"no\"\n  seamless>\n</iframe>\n<div anvil-slot=\"default\"></div>"
   type: HtmlTemplate
 is_package: true
