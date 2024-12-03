@@ -1,4 +1,4 @@
-from ._anvil_designer import Modal_QR_ButtonTemplate
+from ._anvil_designer import Yoti_IndexTemplate
 from anvil import *
 import anvil.server
 import anvil.facebook.auth
@@ -11,7 +11,7 @@ from anvil.tables import app_tables
 import anvil.js
 
 
-class Modal_QR_Button(Modal_QR_ButtonTemplate):
+class Yoti_Index(Yoti_IndexTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)

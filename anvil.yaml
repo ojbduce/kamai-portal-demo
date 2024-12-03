@@ -78,7 +78,7 @@ package_name: Kamai_Portal_Demo
 renamed: true
 runtime_options:
   client_version: '3'
-  server_spec: {base: python310-datascience}
+  server_spec: {base: python310-minimal}
   server_version: python3-sandbox
   version: 2
 services:
@@ -97,5 +97,5 @@ services:
 - client_config: {}
   server_config: {file_table: files}
   source: /runtime/services/anvil/files.yml
-startup: {module: header, type: form}
+startup: {module: Yoti_QR_Login, type: form}
 startup_form: null

@@ -17,17 +17,5 @@ def server_session_data():
   print(dir(anvil.server.session))  # Check available methods and attributes
  
 
-@anvil.server.callable
-def cookies():
-  print (type(anvil.server.cookies.local))
-  print("Printing Cookies")
-  print(anvil.server.cookies.local)
-  print(anvil.server.cookies.shared)
-  #<class 'anvil._server.AnvilCookie'>
-  #for key, value in anvil.server.session.cookies.local.items():
-    #print(f"Local Cookies: {key}: {value}")
-  #for key, value in anvil.server.session.cookies.shared.items():
-  #print(f"Shared Cookies: [key]:{value}")
-  anvil.server.cookies.local.
- 
+
 
