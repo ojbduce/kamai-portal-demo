@@ -39,3 +39,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
   def button_home_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form('Home')
+
+  def button_synth_test_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    #
