@@ -14,23 +14,15 @@ class Main_Copy(Main_CopyTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    user = anvil.users.get_user() #does force_login work?
+    user = anvil.users.get_user() #does force_login work? add allow remembered
     print(f"init: User = {user}")
-    print(f"get_user: This user has logged in: {anvil.users.get_user()['remember_me_id']}")
+    self.label_logged_in.text = f"Logged in as {user}"
+    print(f"get_user: This user has logged in: {anvil.users.get_user()['remember_me_id']}") #make this a variable
     self.label_logged_in.text = "Awaiting Auto-log-in..."
-    self.set_logged_in_user()
     self.content_panel_home.visible = True
     self.card_database.visible = False
     self.flow_panel_title.visible = False
 
-  def set_logged_in_user(self):
-    #user = anvil.users.get_user(allow_remembered=True) COME BACK TO THIS
-    #self.label_logged_in.text = f"Logged in as {user['remember_me_id']}"
-    self.user = self.user
-    if self.user:
-      self.label_logged_in.text = f"Logged in as {self.user}"
-    else:
-      print("Set Logged in user label has failed")
 
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
