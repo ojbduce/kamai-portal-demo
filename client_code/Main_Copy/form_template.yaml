@@ -11,10 +11,6 @@ components:
     name: flow_panel_title
     properties: {background: 'theme:Light Overlay 2'}
     type: FlowPanel
-  - layout_properties: {grid_position: 'BBRSGT,ZNHKBY'}
-    name: label_4
-    properties: {text: 'Welcome! Please select a publication below:'}
-    type: Label
   - layout_properties: {grid_position: 'YHAYIX,ROHWXQ'}
     name: spacer_1
     properties: {height: 4.33203125}
@@ -22,17 +18,19 @@ components:
   - components:
     - components:
       - data_bindings: []
+        event_bindings: {click: link_2_click}
         layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
         name: link_2
         properties: {align: center, bold: true, foreground: 'theme:On Primary Container', text: Web-Journal 1, url: 'https://adept-right-category.anvil.app'}
         type: Link
       layout_properties: {grid_position: 'QQMAWM,GBQGGH'}
       name: outlined_card_2
-      properties: {background: 'theme:Primary Container', foreground: 'theme:On Secondary Container', role: tonal-card}
+      properties: {background: 'theme:Primary Container', foreground: 'theme:On Secondary Container', role: tonal-card, tooltip: One of many online resources...}
       type: ColumnPanel
     - components:
       - components: []
         data_bindings: []
+        event_bindings: {click: link_2_copy_click}
         layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
         name: link_2_copy
         properties: {align: center, bold: true, foreground: 'theme:On Tertiary Container', text: Web-Journal 2 Etc., url: 'https://adept-right-category.anvil.app'}
@@ -75,10 +73,11 @@ components:
       name: image_1
       properties: {display_mode: shrink_to_fit, height: 33.47265625, horizontal_align: left, source: _/theme/yoti-logo.png, vertical_align: bottom}
       type: Image
-    - name: label_logged_in
-      properties: {font_size: 14, text: ''}
+    - layout_properties: {}
+      name: label_logged_in
+      properties: {font_size: 6, text: ''}
       type: Label
-    layout_properties: {width: 227.64490625}
+    layout_properties: {width: 250.44921875}
     name: flow_panel_1
     properties: {}
     type: FlowPanel

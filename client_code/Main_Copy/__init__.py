@@ -16,8 +16,8 @@ class Main_Copy(Main_CopyTemplate):
     self.init_components(**properties)
     user = anvil.users.get_user() #add allow remembered
     print(f"init: User = {user}")
-    self.label_logged_in.text = anvil.users.get_user()['remember_me_id'] 
-    self.label_logged_in.text = "Awaiting Auto-log-in..."
+    self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
+    #self.label_logged_in.text = "Awaiting Auto-log-in..."
     self.content_panel_home.visible = True
     self.card_database.visible = False
     self.flow_panel_title.visible = False
@@ -66,6 +66,14 @@ class Main_Copy(Main_CopyTemplate):
     anvil.server.call('cookies')
     anvil.server.call('server_session_data')
     """This method is called when the button is clicked"""
+
+  def link_2_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    alert("Next...")
+
+  def link_2_copy_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    pass
     
 
   
