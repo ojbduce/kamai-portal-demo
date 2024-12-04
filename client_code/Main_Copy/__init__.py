@@ -14,8 +14,8 @@ class Main_Copy(Main_CopyTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    self.user = self.get_user() #does force_login work?
-    print(f"get_user gives: {self.user}")
+    user = anvil.users.get_user() #does force_login work?
+    print(f"init: User = {user}")
     print(f"get_user: This user has logged in: {anvil.users.get_user()['remember_me_id']}")
     self.label_logged_in.text = "Awaiting Auto-log-in..."
     self.set_logged_in_user()

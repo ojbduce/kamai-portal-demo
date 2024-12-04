@@ -24,26 +24,24 @@ def test_user():
     login_test_user(remember_me_id)
   else:
     try:
-        app_tables.users.add_row(
+        new_user = app_tables.users.add_row(
             remember_me_id=remember_me_id, 
             verification_date= verification_date,
             email=email)
         print("User data received and added to the Users Table.")
-        login_test_user(remember_me_id) #this
+        login_test_user(new_user) #this
         return {"status": "success", "message": "User added successfully"}
     except Exception as e:
         print(f"Error adding to Data Table: {e}") 
         return {"status": "error", "message": str(e)}, 500
 
 @anvil.server.callable
-def login_test_user(remember_me_id):
-    print(f"Hit login with ID {remember_me_id}")
-    user = app_tables.users.get(remember_me_id=remember_me_id)
-    print(f"func login_test_user: user = {user}")
-    if user is not None:
-      anvil.users.force_login(user)
-      print(f"user: {remember_me_id} is logged-in")
-      return user['remember_me_id']
+def login_test_user(user_row):
+    print(f"Hit login with user row {user_row}")
+    if user_row is not None:
+      anvil.users.force_login(user_row)
+      print(f"user: {user_row} is logged-in?")
+      return user_row['remember_me_id']
     else:
       print("test_user_login has returned None")
       return None
