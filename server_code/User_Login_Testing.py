@@ -9,7 +9,12 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 
+
+# Select User
+
+# Add User To Database - this calls Select User
 def login_synthetic_test(remember_me_id,verification_date,email):
+  select_user = select_user(existing_weight = 0.3)
   existing_user = app_tables.users.search(remember_me_id=remember_me_id)
   if existing_user:
     login_with_synth_id(remember_me_id)
