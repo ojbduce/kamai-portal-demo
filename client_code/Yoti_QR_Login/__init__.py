@@ -40,6 +40,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     """This method is called when the button is clicked"""
     open_form('Home')
 
-  def button_synth_test_click(self, **event_args):
+  def button_login_test_user_click(self, **event_args):
     """This method is called when the button is clicked"""
-    #
+    user = anvil.server.call('test_user')
+    return user , open_form('Home')

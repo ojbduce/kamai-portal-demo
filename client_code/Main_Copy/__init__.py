@@ -15,24 +15,9 @@ class Main_Copy(Main_CopyTemplate):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
     self.user = self.get_user()
+    print(f"get_user gives: {self.user}")
     self.label_logged_in.text = "Awaiting Auto-log-in..."
     self.set_logged_in_user()
-    # self.YOTI_CLIENT_SDK_ID = '754182a1-fbf6-4a20-8615-cf4666f964cc'
-    # self.YOTI_SCENARIO_ID = '26373319-e4fb-47d8-9c68-d23bcb3650a1'
-    # self.label_return_message.visible = False
-    
-    # Check if a user is already logged in
-    #user = anvil.users.get_user(allow_remembered=True)
-   
-    # if user:
-    #   # User is already logged in
-    #    self.set_logged_in_user()
-
-    # else:
-    #   # User is not logged in; prompt login
-    #   self.label_login.text = "Logged-out"
-    #   anvil.users.login_with_form()
-
     self.content_panel_home.visible = True
     self.card_database.visible = False
     self.flow_panel_title.visible = False

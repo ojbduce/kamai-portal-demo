@@ -7,28 +7,10 @@ from datetime import datetime
 import uuid
 import anvil.tables as tables
 from anvil.tables import app_tables
-# from yoti_python_sdk import Client
-# from yoti_python_sdk.dynamic_sharing_service.policy import (
-#     DynamicPolicyBuilder,
-#     SourceConstraintBuilder,
-# )
-# from yoti_python_sdk.dynamic_sharing_service import DynamicScenarioBuilder
-# from yoti_python_sdk.dynamic_sharing_service import create_share_url
-# import random
-
-# YOTI_CLIENT_SDK_ID = '754182a1-fbf6-4a20-8615-cf4666f964cc'
-# YOTI_PRIVATE_KEY_PATH = data_files['Yoti-For-Kaimai-access-security.pem']
-# YOTI_SCENARIO_ID = '26373319-e4fb-47d8-9c68-d23bcb3650a1'
-# #Dumb Hardcoded sessionID 
-# SESSION_ID ='00000001'
-# #/tmp/anvil-data-files/table-866054/Yoti-For-Kaimai-access-security.pem
-# yoti_client = Client(YOTI_CLIENT_SDK_ID,YOTI_PRIVATE_KEY_PATH)
-
-
 
 @anvil.server.callable
-def login_with_id(remember_me_id):
-    print("Hit login with ID")
+def login_yoti(remember_me_id):
+    print(f"Hit login with ID{remember_me_id}")
     user = app_tables.users.get(remember_me_id=remember_me_id)
     if user is not None:
       anvil.users.force_login(user)
@@ -57,16 +39,15 @@ def receive_user_details():
   #split here. Split for testing version but log-in can be a separate function.
     existing_user = app_tables.users.search(remember_me_id=remember_me_id)
     if existing_user:
-      login_with_id(remember_me_id)
+      login_yoti(remember_me_id)
     else:
-    
       try:
           app_tables.users.add_row(
               remember_me_id=remember_me_id, 
               verification_date= verification_date,
               email=email)
           print("User data received and added to the Users Table.")
-          login_with_id(remember_me_id) #this
+          login_yoti(remember_me_id) #this
           return {"status": "success", "message": "User added successfully"}
       except Exception as e:
           print(f"Error adding to Data Table: {e}") 

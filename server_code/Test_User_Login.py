@@ -8,16 +8,17 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+from .Test_Users import existing_users
+from .Test_Users import select_user
 
+# 1. CREATE OR A NEW USER OR RECOGNISE AN EXISTING USER 2. LOG-IN THE USER
 
-# Select User
-
-# Add User To Database - this calls Select User
-def login_synthetic_test(remember_me_id,verification_date,email):
-  select_user = select_user(existing_weight = 0.3)
+@anvil.server.callable
+def test_user():
+  remember_me_id, verification_date,email = select_user(existing_weight = 0.3)
   existing_user = app_tables.users.search(remember_me_id=remember_me_id)
   if existing_user:
-    login_with_synth_id(remember_me_id)
+    login_test_user(remember_me_id)
   else:
     try:
         app_tables.users.add_row(
@@ -25,20 +26,21 @@ def login_synthetic_test(remember_me_id,verification_date,email):
             verification_date= verification_date,
             email=email)
         print("User data received and added to the Users Table.")
-        login_with_synth_id() #this
+        login_test_user(remember_me_id) #this
         return {"status": "success", "message": "User added successfully"}
     except Exception as e:
         print(f"Error adding to Data Table: {e}") 
         return {"status": "error", "message": str(e)}, 500
 
 @anvil.server.callable
-def login_with_synth_id(remember_me_id):
-    print("Hit login with ID")
+def login_test_user(remember_me_id):
+    print(f"Hit login with ID {remember_me_id}")
     user = app_tables.users.get(remember_me_id=remember_me_id)
     if user is not None:
       anvil.users.force_login(user)
       print(f"user: {remember_me_id} is logged-in")
       return user['remember_me_id']
     else:
+      print("test_user_login has returned None")
       return None
 
