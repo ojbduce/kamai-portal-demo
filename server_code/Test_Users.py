@@ -92,13 +92,19 @@ def generate_new_user():
     return {
         "email": fake.email(),
         "rememberMeId": secrets.token_urlsafe(32),
-        "verificationDate": datetime.now().isoformat()
+        "verificationDate": datetime.now()
 }
 
-def select_user(existing_weight=0.3):
-    if random.random() < existing_weight:
-        return random.choice(existing_users)
-    else:
-        new_user = generate_new_user()
-        existing_users.append(new_user)
-        return new_user
+# def select_user(existing_weight=0):
+#     if random.random() < existing_weight:
+#         return random.choice(existing_users)
+#     else:
+#         new_user = generate_new_user()
+#         existing_users.append(new_user)
+#         return new_user
+
+def select_user():
+  new_user = generate_new_user()
+  print(f"remember_me_id from generate_new_user: {new_user['rememberMeId']}")
+  return new_user
+

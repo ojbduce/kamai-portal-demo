@@ -17,7 +17,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    iframe = jQuery("<iframe width='100%' height='800px'>").attr("src",'https://kaimaiyoti.azurewebsites.net')
+    iframe = jQuery("<iframe width='100%' height='600px'>").attr("src",'https://kaimaiyoti.azurewebsites.net')
     iframe.appendTo(get_dom_node(self.column_panel_iframe))
     self.button_login_test_user.visible = False
     self.button_home.visible = False

@@ -44,17 +44,17 @@ components:
     - event_bindings: {click: button_show_tests_click}
       layout_properties: {grid_position: 'FYRJTJ,IFIUFH'}
       name: button_show_tests
-      properties: {font_size: 9, text: Unhide tests}
+      properties: {bold: true, font_size: 10, foreground: 'theme:On Surface Variant', text: Unhide tests}
       type: Button
     - event_bindings: {click: button_login_test_user_click}
       layout_properties: {grid_position: 'ANUVSY,MIHQEY'}
       name: button_login_test_user
-      properties: {bold: true, enabled: true, role: null, text: Synthetic Login, visible: true}
+      properties: {bold: true, enabled: true, foreground: 'theme:On Surface Variant', role: null, text: Synthetic Login, visible: true}
       type: Button
     - event_bindings: {click: button_home_click}
       layout_properties: {grid_position: 'MYASBH,SHHJGF'}
       name: button_home
-      properties: {bold: true, role: null, text: Home Test}
+      properties: {bold: true, foreground: 'theme:On Surface Variant', role: null, text: Home Test}
       type: Button
     layout_properties: {grid_position: 'DSKFEB,RRTEAD'}
     name: column_panel_2
@@ -66,7 +66,7 @@ components:
   type: ColumnPanel
 container:
   properties:
-    background: theme:Light Overlay 1
+    background: theme:Surface Variant
     html: "<!-- Custom banner HTML starts here -->\n<style>\n    body {\n        background-color: rgba(255, 255, 255, 0.8);\n        /* or alternatively */\n        /* background: rgba(255, 255, 255, 0.8); */\n        \n        /* Make sure the background covers the full page */\n        min-height: 100vh;\n        margin: 0;\n        padding: 0;\n    }\n</style>\n<div anvil-slot=\"default\"></div>"
   type: HtmlTemplate
 custom_component: true

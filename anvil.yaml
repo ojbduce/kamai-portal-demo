@@ -85,7 +85,7 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
-- client_config: {allow_remember_me: true, allow_signup: true, confirm_email: false, enable_automatically: true, remember_me_days: 30, share_login_status: true, use_email: true, use_facebook: true, use_google: true}
+- client_config: {allow_remember_me: true, allow_signup: true, confirm_email: false, enable_automatically: true, remember_me_days: 30, share_login_status: true, use_email: false, use_facebook: false, use_google: false}
   server_config: {user_table: users}
   source: /runtime/services/anvil/users.yml
 - client_config: {}

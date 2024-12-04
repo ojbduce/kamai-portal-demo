@@ -15,21 +15,26 @@ from .Test_Users import select_user
 
 @anvil.server.callable
 def test_user():
-  user_data = select_user(existing_weight = 0.3)
+  user_data = select_user()
   remember_me_id = user_data.get('rememberMeId')
+  print(f"remember_me_id from select_user {remember_me_id}")
   verification_date = user_data.get('verificationDate')
   email = user_data.get('email')
-  existing_user = app_tables.users.search(remember_me_id=remember_me_id)
+  existing_user = app_tables.users.get(remember_me_id=remember_me_id) #get row here?
   if existing_user:
-    login_test_user(remember_me_id)
+    print(f"Existing user {existing_user}")
+    print(type(existing_user))
+    #Now we need to find the row to use force_login!!
+    login_test_user(existing_user)
   else:
     try:
         new_user = app_tables.users.add_row(
             remember_me_id=remember_me_id, 
             verification_date= verification_date,
             email=email)
+        print(f"new_user is users table row? {new_user}")
         print("User data received and added to the Users Table.")
-        login_test_user(new_user) #this
+        login_test_user(new_user) #this should be the row 
         return {"status": "success", "message": "User added successfully"}
     except Exception as e:
         print(f"Error adding to Data Table: {e}") 
