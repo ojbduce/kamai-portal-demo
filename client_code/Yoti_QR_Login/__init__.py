@@ -19,14 +19,14 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     self.init_components(**properties)
     iframe = jQuery("<iframe width='100%' height='800px'>").attr("src",'https://kaimaiyoti.azurewebsites.net')
     iframe.appendTo(get_dom_node(self.column_panel_iframe))
-    self.button_synth_test.visible = False
+    self.button_login_test_user.visible = False
     self.button_home.visible = False
     
 
     # Any code you write here will run before the form opens.
 
   def button_show_tests_click(self, **event_args):
-    self.button_synth_test.visible = True
+    self.button_login_test_user.visible = True
     self.button_home.visible = True
     self.button_show_tests.visible = False
 

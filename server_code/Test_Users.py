@@ -11,6 +11,7 @@ import anvil.server
 from datetime import datetime, timedelta
 import random
 from faker import Faker
+import secrets
 
 fake = Faker()
 
@@ -90,11 +91,9 @@ existing_users = [
 def generate_new_user():
     return {
         "email": fake.email(),
-        "rememberMeId": f"remember-me-id-{random.randint(100000, 999999)}",
-        "firstName": fake.first_name(),
-        "lastName": fake.last_name(),
+        "rememberMeId": secrets.token_urlsafe(32),
         "verificationDate": datetime.now().isoformat()
-    }
+}
 
 def select_user(existing_weight=0.3):
     if random.random() < existing_weight:

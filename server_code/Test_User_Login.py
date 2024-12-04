@@ -15,7 +15,10 @@ from .Test_Users import select_user
 
 @anvil.server.callable
 def test_user():
-  remember_me_id, verification_date,email = select_user(existing_weight = 0.3)
+  user_data = select_user(existing_weight = 0.3)
+  remember_me_id = user_data.get('rememberMeId')
+  verification_date = user_data.get('verificationDate')
+  email = user_data.get('email')
   existing_user = app_tables.users.search(remember_me_id=remember_me_id)
   if existing_user:
     login_test_user(remember_me_id)
@@ -36,6 +39,7 @@ def test_user():
 def login_test_user(remember_me_id):
     print(f"Hit login with ID {remember_me_id}")
     user = app_tables.users.get(remember_me_id=remember_me_id)
+    print(f"func login_test_user: user = {user}")
     if user is not None:
       anvil.users.force_login(user)
       print(f"user: {remember_me_id} is logged-in")
