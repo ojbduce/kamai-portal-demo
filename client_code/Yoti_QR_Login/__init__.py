@@ -21,6 +21,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     iframe.appendTo(get_dom_node(self.column_panel_iframe))
     self.button_login_test_user.visible = False
     self.button_home.visible = False
+    self.label_loading.visible = True
     
 
     # Any code you write here will run before the form opens.
@@ -32,8 +33,8 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
 
   def label_loading_show(self, **event_args):
     """This method is called when the Label is shown on the screen"""
-    self.label_loading.text = "Yoti is Loading..."
-    time.sleep(3)
+    self.label_loading.text = "Your Yoti QR Code is loading..."
+    time.sleep(5)
     self.label_loading.visible = False
 
   def button_home_click(self, **event_args):
