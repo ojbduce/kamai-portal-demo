@@ -1,63 +1,60 @@
 components:
+- layout_properties: {slot: default}
+  name: spacer_2
+  properties: {height: 128}
+  type: Spacer
 - components:
-  - components:
-    - layout_properties: {grid_position: 'NIEEPI,MEZNPZ'}
-      name: image_kaimai_logo
-      properties:
-        alt_text: Kaimai
-        height: 60
-        horizontal_align: left
-        margin: [null, '', null, '']
-        role: null
-        source: _/theme/kaimai_image.webp
-      type: Image
-    - layout_properties: {grid_position: 'USTKRZ,ZLXTXP'}
-      name: spacer_1
-      properties: {height: 7}
-      type: Spacer
-    - layout_properties: {grid_position: 'DVKBJT,ZYMKWX'}
-      name: image_yoti_logo
-      properties: {display_mode: shrink_to_fit, height: 33, horizontal_align: center, source: _/theme/yoti-logo.png, spacing_above: medium, spacing_below: medium, vertical_align: center}
-      type: Image
-    - layout_properties: {grid_position: 'YDRLJS,IHUONS'}
-      name: label_1
-      properties:
-        align: center
-        bold: true
-        font_size: 21
-        spacing:
-          padding: [0, 9, 0, null]
-        spacing_above: medium
-        spacing_below: small
-        text: Sign in
-        underline: false
-      type: Label
-    - layout_properties: {grid_position: 'HTCAXG,ZPPABH'}
-      name: label_2
-      properties:
-        align: center
-        spacing:
-          padding: [0, null, 0, null]
-        text: To access Kaimai Directory
-        visible: true
-      type: Label
-    - event_bindings: {show: label_loading_show}
-      layout_properties: {grid_position: 'LOXVNE,OZVDOW'}
-      name: label_loading
-      properties: {align: center, background: '', bold: false, font_size: 12, foreground: '#397dea', italic: false, role: null, spacing_above: medium}
-      type: Label
-    - components: []
-      layout_properties: {grid_position: 'OUMRWA,FQSGJA'}
-      name: iframe_container
-      properties: {background: 'theme:On Secondary', role: elevated-card}
-      type: ColumnPanel
-    layout_properties: {grid_position: 'POLGNS,CZFOMP'}
-    name: outlined_card_2
-    properties: {background: 'theme:On Secondary', role: outlined-card}
-    type: ColumnPanel
+  - layout_properties: {grid_position: 'NIEEPI,MEZNPZ'}
+    name: image_kaimai_logo
+    properties:
+      alt_text: Kaimai
+      height: 49
+      horizontal_align: left
+      margin: [null, 20, null, '12']
+      role: null
+      source: _/theme/kaimai_image.webp
+    type: Image
+  - layout_properties: {grid_position: 'USTKRZ,ZLXTXP'}
+    name: spacer_1
+    properties: {height: -2}
+    type: Spacer
+  - layout_properties: {grid_position: 'RGQRYI,LIDTUL'}
+    name: spacer_5
+    properties: {height: 0}
+    type: Spacer
+  - layout_properties: {grid_position: 'DVKBJT,ZYMKWX'}
+    name: image_yoti_logo
+    properties:
+      display_mode: shrink_to_fit
+      height: 36
+      horizontal_align: center
+      margin: [null, null, '6', null]
+      source: _/theme/yoti-logo.png
+      spacing_above: medium
+      spacing_below: large
+      vertical_align: center
+    type: Image
+  - layout_properties: {grid_position: 'YDRLJS,IHUONS'}
+    name: label_1
+    properties:
+      align: center
+      bold: true
+      font_size: 21
+      spacing:
+        margin: [0, null, 0, null]
+        padding: [0, 15, 0, 13]
+      spacing_above: none
+      spacing_below: none
+      text: Sign in
+      underline: false
+    type: Label
+  - layout_properties: {grid_position: 'GOLTWE,GLGXYF'}
+    name: yoti_iframe_1
+    properties: {}
+    type: form:Yoti_iframe
   layout_properties: {slot: default}
-  name: outlined_card_1
-  properties: {background: 'theme:On Secondary', role: elevated-card}
+  name: outlined_card
+  properties: {background: 'theme:On Secondary', role: mid-card}
   type: ColumnPanel
 - event_bindings: {click: button_show_tests_click}
   layout_properties: {slot: default}
@@ -74,14 +71,41 @@ components:
   name: button_home
   properties: {bold: true, foreground: 'theme:On Surface Variant', role: null, text: Home Test}
   type: Button
-- components: []
-  layout_properties: {slot: default}
-  name: column_panel_1
-  properties: {border: ''}
-  type: ColumnPanel
+- layout_properties: {slot: default}
+  name: spacer_4
+  properties: {height: 254}
+  type: Spacer
+- layout_properties: {slot: default}
+  name: button_5
+  properties: {text: button_5, visible: false}
+  type: Button
+- layout_properties: {slot: default}
+  name: button_4
+  properties: {text: button_4, visible: false}
+  type: Button
+- layout_properties: {slot: default}
+  name: button_3
+  properties: {text: button_3, visible: false}
+  type: Button
+- layout_properties: {slot: default}
+  name: button_6
+  properties: {text: button_6, visible: false}
+  type: Button
+- layout_properties: {slot: default}
+  name: button_2
+  properties: {text: button_2, visible: false}
+  type: Button
+- layout_properties: {slot: default}
+  name: button_1
+  properties: {text: button_1, visible: false}
+  type: Button
+- layout_properties: {slot: default}
+  name: spacer_3
+  properties: {height: -14}
+  type: Spacer
 container:
   properties:
-    background: theme:On Secondary
+    background: '#ebebeb'
     html: "<!-- Custom banner HTML starts here -->\n<style>\n    body {\n        background-color: rgba(255, 255, 255, 0.8);\n        /* or alternatively */\n        /* background: rgba(255, 255, 255, 0.8); */\n        \n        /* Make sure the background covers the full page */\n        min-height: 100vh;\n        margin: 0;\n        padding: 0;\n    }\n</style>\n<div anvil-slot=\"default\"></div>"
   type: HtmlTemplate
 custom_component: true

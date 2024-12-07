@@ -333,3 +333,4 @@ roles:
 - components: [TextBox, TextArea, DatePicker, DropDown]
   name: input-error
 - {name: iframe-container}
+- {name: mid-card}

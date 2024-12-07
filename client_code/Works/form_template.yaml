@@ -1,5 +1,10 @@
 components:
-- layout_properties: {slot: default}
+- components:
+  - layout_properties: {grid_position: 'YVGGBV,XSYMPW'}
+    name: yoti_iframe_1
+    properties: {}
+    type: form:Yoti_iframe
+  layout_properties: {slot: default}
   name: content_panel
   properties: {}
   type: ColumnPanel

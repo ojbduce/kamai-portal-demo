@@ -1086,10 +1086,23 @@
   }
 
   .anvil-role-no-border-iframe iframe {
+    border-width: 0;
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
 }
+
+.anvil-role-mid-card {
+  max-width: 750px;    
+  margin: 0 auto;  
+  border-radius: 14px;            /
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  padding: 15px;    
+  height: 375px;
+  min-height: 375px:
+
+}
+
 
 
   
