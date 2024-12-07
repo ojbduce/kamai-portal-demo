@@ -1,17 +1,4 @@
 components:
-- components: []
-  layout_properties: {slot: default}
-  name: column_panel_3
-  properties: {}
-  type: ColumnPanel
-- layout_properties: {slot: default}
-  name: spacer_2
-  properties: {height: 68.46484375}
-  type: Spacer
-- layout_properties: {slot: default}
-  name: outlined_card_iframe
-  properties: {background: 'theme:On Primary', role: elevated-card, spacing_above: large, spacing_below: large}
-  type: ColumnPanel
 - layout_properties: {slot: default}
   name: spacer_1
   properties: {height: 17.02734375}
@@ -25,7 +12,7 @@ components:
     - components:
       - layout_properties: {grid_position: 'IRDXHT,IDRNRZ'}
         name: spacer_3
-        properties: {height: 30.9609375}
+        properties: {height: 20.29296875}
         type: Spacer
       - layout_properties: {grid_position: 'PZPCZU,YQGTYK'}
         name: image_yoti_logo
@@ -56,7 +43,7 @@ components:
       - event_bindings: {show: label_loading_show}
         layout_properties: {grid_position: 'EIJMBX,BZIOUY'}
         name: label_loading
-        properties: {align: center, background: '', bold: false, font_size: 12, foreground: '', italic: false, role: null, spacing_above: medium}
+        properties: {align: center, background: '', bold: false, font_size: 12, foreground: '#397dea', italic: false, role: null, spacing_above: medium}
         type: Label
       layout_properties: {grid_position: 'ZQNMGT,EXYQUX'}
       name: outlined_card_1
@@ -64,8 +51,16 @@ components:
       type: ColumnPanel
     layout_properties: {grid_position: 'QNMGDP,JPCFFI'}
     name: column_panel_QR_Code
-    properties: {border: solid}
+    properties: {border: ''}
     type: ColumnPanel
+  - layout_properties: {grid_position: 'DLMZOZ,SBYGWQ'}
+    name: outlined_card_iframe
+    properties: {background: 'theme:On Primary', role: elevated-card, spacing_above: large, spacing_below: large}
+    type: ColumnPanel
+  - layout_properties: {grid_position: 'JSJWQT,ZPHALZ'}
+    name: spacer_2
+    properties: {height: 32}
+    type: Spacer
   - components:
     - event_bindings: {click: button_show_tests_click}
       layout_properties: {grid_position: 'FYRJTJ,IFIUFH'}
@@ -88,7 +83,7 @@ components:
     type: ColumnPanel
   layout_properties: {slot: default}
   name: column_panel_1
-  properties: {border: solid}
+  properties: {border: ''}
   type: ColumnPanel
 container:
   properties:
