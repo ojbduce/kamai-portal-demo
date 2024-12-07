@@ -1079,6 +1079,12 @@
   .anvil-spinner {
       --anvil-spinner-bg: %color:Surface Variant%;
   }
+
+  yoti-iframe {
+    border: none !important;
+    outline: none !important;
+  }
+
   
   
   

@@ -1,93 +1,87 @@
 components:
-- layout_properties: {slot: default}
-  name: spacer_1
-  properties: {height: 17.02734375}
-  type: Spacer
 - components:
   - components:
-    - layout_properties: {grid_position: 'WDGQUU,GOSVXA'}
-      name: image_2
-      properties: {alt_text: Kaimai, height: 55.4140625, horizontal_align: left, role: null, source: _/theme/kaimai_image.webp}
+    - layout_properties: {grid_position: 'NIEEPI,MEZNPZ'}
+      name: image_kaimai_logo
+      properties:
+        alt_text: Kaimai
+        height: 60
+        horizontal_align: left
+        margin: [null, '', null, '']
+        role: null
+        source: _/theme/kaimai_image.webp
       type: Image
-    - components:
-      - layout_properties: {grid_position: 'IRDXHT,IDRNRZ'}
-        name: spacer_3
-        properties: {height: 20.29296875}
-        type: Spacer
-      - layout_properties: {grid_position: 'PZPCZU,YQGTYK'}
-        name: image_yoti_logo
-        properties: {display_mode: shrink_to_fit, height: 34.0234375, horizontal_align: center, source: _/theme/yoti-logo.png, spacing_above: medium, spacing_below: medium, vertical_align: center}
-        type: Image
-      - layout_properties: {grid_position: 'SQKHOX,ZFQLKB'}
-        name: label_1
-        properties:
-          align: center
-          bold: true
-          font_size: 21
-          spacing:
-            padding: [0, 9, 0, null]
-          spacing_above: medium
-          spacing_below: small
-          text: Sign in
-          underline: false
-        type: Label
-      - layout_properties: {grid_position: 'KKOISM,FOBTLH'}
-        name: label_2
-        properties:
-          align: center
-          spacing:
-            padding: [0, null, 0, null]
-          text: To access Kaimai Directory
-          visible: true
-        type: Label
-      - event_bindings: {show: label_loading_show}
-        layout_properties: {grid_position: 'EIJMBX,BZIOUY'}
-        name: label_loading
-        properties: {align: center, background: '', bold: false, font_size: 12, foreground: '#397dea', italic: false, role: null, spacing_above: medium}
-        type: Label
-      layout_properties: {grid_position: 'ZQNMGT,EXYQUX'}
-      name: outlined_card_1
-      properties: {background: 'theme:On Secondary', role: elevated-card}
-      type: ColumnPanel
-    layout_properties: {grid_position: 'QNMGDP,JPCFFI'}
-    name: column_panel_QR_Code
-    properties: {border: ''}
+    - layout_properties: {grid_position: 'USTKRZ,ZLXTXP'}
+      name: spacer_1
+      properties: {height: 7}
+      type: Spacer
+    - layout_properties: {grid_position: 'DVKBJT,ZYMKWX'}
+      name: image_yoti_logo
+      properties: {display_mode: shrink_to_fit, height: 33, horizontal_align: center, source: _/theme/yoti-logo.png, spacing_above: medium, spacing_below: medium, vertical_align: center}
+      type: Image
+    - layout_properties: {grid_position: 'YDRLJS,IHUONS'}
+      name: label_1
+      properties:
+        align: center
+        bold: true
+        font_size: 21
+        spacing:
+          padding: [0, 9, 0, null]
+        spacing_above: medium
+        spacing_below: small
+        text: Sign in
+        underline: false
+      type: Label
+    - layout_properties: {grid_position: 'HTCAXG,ZPPABH'}
+      name: label_2
+      properties:
+        align: center
+        spacing:
+          padding: [0, null, 0, null]
+        text: To access Kaimai Directory
+        visible: true
+      type: Label
+    - event_bindings: {show: label_loading_show}
+      layout_properties: {grid_position: 'LOXVNE,OZVDOW'}
+      name: label_loading
+      properties: {align: center, background: '', bold: false, font_size: 12, foreground: '#397dea', italic: false, role: null, spacing_above: medium}
+      type: Label
+    layout_properties: {grid_position: 'POLGNS,CZFOMP'}
+    name: outlined_card_2
+    properties: {background: 'theme:On Secondary', role: outlined-card}
     type: ColumnPanel
-  - layout_properties: {grid_position: 'DLMZOZ,SBYGWQ'}
-    name: outlined_card_iframe
-    properties: {background: 'theme:On Primary', role: elevated-card, spacing_above: large, spacing_below: large}
+  - components: []
+    layout_properties: {grid_position: 'RERQSM,WWIYNR'}
+    name: iframe_container
+    properties: {background: 'theme:On Secondary', role: elevated-card}
     type: ColumnPanel
-  - layout_properties: {grid_position: 'JSJWQT,ZPHALZ'}
-    name: spacer_2
-    properties: {height: 32}
-    type: Spacer
-  - components:
-    - event_bindings: {click: button_show_tests_click}
-      layout_properties: {grid_position: 'FYRJTJ,IFIUFH'}
-      name: button_show_tests
-      properties: {bold: true, font_size: 10, foreground: 'theme:On Surface Variant', text: Unhide tests}
-      type: Button
-    - event_bindings: {click: button_login_test_user_click}
-      layout_properties: {grid_position: 'ANUVSY,MIHQEY'}
-      name: button_login_test_user
-      properties: {bold: true, enabled: true, foreground: 'theme:On Surface Variant', role: null, text: Synthetic Login, visible: true}
-      type: Button
-    - event_bindings: {click: button_home_click}
-      layout_properties: {grid_position: 'MYASBH,SHHJGF'}
-      name: button_home
-      properties: {bold: true, foreground: 'theme:On Surface Variant', role: null, text: Home Test}
-      type: Button
-    layout_properties: {grid_position: 'DSKFEB,RRTEAD'}
-    name: column_panel_2
-    properties: {}
-    type: ColumnPanel
+  layout_properties: {slot: default}
+  name: outlined_card_1
+  properties: {background: 'theme:On Secondary', role: elevated-card}
+  type: ColumnPanel
+- event_bindings: {click: button_show_tests_click}
+  layout_properties: {slot: default}
+  name: button_show_tests
+  properties: {bold: true, font_size: 10, foreground: 'theme:On Surface Variant', text: Unhide tests}
+  type: Button
+- event_bindings: {click: button_login_test_user_click}
+  layout_properties: {slot: default}
+  name: button_login_test_user
+  properties: {bold: true, enabled: true, foreground: 'theme:On Surface Variant', role: null, text: Synthetic Login, visible: true}
+  type: Button
+- event_bindings: {click: button_home_click}
+  layout_properties: {slot: default}
+  name: button_home
+  properties: {bold: true, foreground: 'theme:On Surface Variant', role: null, text: Home Test}
+  type: Button
+- components: []
   layout_properties: {slot: default}
   name: column_panel_1
   properties: {border: ''}
   type: ColumnPanel
 container:
   properties:
-    background: theme:Light Overlay 2
+    background: theme:On Secondary
     html: "<!-- Custom banner HTML starts here -->\n<style>\n    body {\n        background-color: rgba(255, 255, 255, 0.8);\n        /* or alternatively */\n        /* background: rgba(255, 255, 255, 0.8); */\n        \n        /* Make sure the background covers the full page */\n        min-height: 100vh;\n        margin: 0;\n        padding: 0;\n    }\n</style>\n<div anvil-slot=\"default\"></div>"
   type: HtmlTemplate
 custom_component: true

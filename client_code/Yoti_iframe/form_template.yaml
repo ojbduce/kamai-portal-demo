@@ -1,6 +1,6 @@
 components: []
 container:
   properties:
-    html: "<style>\n  #yoti-iframe {\n    border: none;\n    width: 100%;\n    height: 440px;\n    padding: 0px;\n    margin: 0px;\n    background: transparent;\n  }\n</style>\n<iframe \n  id=\"yoti-iframe\"\n  src='https://kaimaiyoti.azurewebsites.net'\n  padding: 0px;\n  margin: 0px;\n  frameborder=\"0\"\n  scrolling=\"no\"\n  seamless>\n</iframe>\n<div anvil-slot=\"default\"></div>"
+    html: "<style>\n  #yoti-iframe {\n    border-top: none;\n    border: none;\n    width: 100%;\n    height: 440px;\n    padding: 0px;\n    margin: 0px;\n    background: transparent;\n  }\n</style>\n<iframe \n  id=\"yoti-iframe\"\n  src='https://kaimaiyoti.azurewebsites.net'\n  outline: none;\n  frameborder=\"0\"\n  padding: 0px;\n  margin: 0px;\n  scrolling=\"no\"\n</iframe>\n<div anvil-slot=\"default\"></div>\n"
   type: HtmlTemplate
 is_package: true
