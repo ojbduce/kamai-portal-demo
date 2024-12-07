@@ -1085,6 +1085,13 @@
     outline: none !important;
   }
 
+  .anvil-role-no-border-iframe iframe {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
   
   
   

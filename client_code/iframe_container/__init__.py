@@ -17,6 +17,7 @@ class iframe_container(iframe_containerTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.iframe_container.set_role('no-border-iframe')
     iframe = jQuery("<iframe width='100%' height='1000 px' outline = none border = none >").attr("src",'https://kaimaiyoti.azurewebsites.net')
     iframe.appendTo(get_dom_node(self))
 
