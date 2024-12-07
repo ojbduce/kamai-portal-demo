@@ -46,14 +46,14 @@ components:
       name: label_loading
       properties: {align: center, background: '', bold: false, font_size: 12, foreground: '#397dea', italic: false, role: null, spacing_above: medium}
       type: Label
+    - components: []
+      layout_properties: {grid_position: 'OUMRWA,FQSGJA'}
+      name: iframe_container
+      properties: {background: 'theme:On Secondary', role: elevated-card}
+      type: ColumnPanel
     layout_properties: {grid_position: 'POLGNS,CZFOMP'}
     name: outlined_card_2
     properties: {background: 'theme:On Secondary', role: outlined-card}
-    type: ColumnPanel
-  - components: []
-    layout_properties: {grid_position: 'RERQSM,WWIYNR'}
-    name: iframe_container
-    properties: {background: 'theme:On Secondary', role: elevated-card}
     type: ColumnPanel
   layout_properties: {slot: default}
   name: outlined_card_1
