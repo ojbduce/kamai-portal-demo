@@ -23,10 +23,27 @@ components:
         name: link_2
         properties: {align: center, bold: true, foreground: 'theme:On Primary Container', text: Web-Journal 1, url: 'https://adept-right-category.anvil.app'}
         type: Link
-      layout_properties: {grid_position: 'QQMAWM,GBQGGH'}
+      layout_properties: {grid_position: 'QQMAWM,GBQGGH RWFNQF,VYPNMU'}
       name: outlined_card_2
       properties: {background: 'theme:Primary Container', foreground: 'theme:On Secondary Container', role: tonal-card, tooltip: One of many online resources...}
       type: ColumnPanel
+    - components:
+      - layout_properties: {slot: card-content-container-slot}
+        name: image_2
+        properties: {display_mode: zoom_to_fill, height: 148.59375, source: _/theme/digital_leaders_image copy.png}
+        type: Image
+      - layout_properties: {slot: card-content-container-slot}
+        name: text_1
+        properties: {bold: true, text: Digital Leaders}
+        type: form:dep_bo98k6a5tnruq:_Components.Text
+      - layout_properties: {slot: card-content-container-slot}
+        name: text_2
+        properties: {text: 'Digital Leaders is an independent forum that brings together leaders from the public, private, and nonprofit sectors to explore new ideas and showcase effective digital solutions. Their mission is to promote long-term digital transformation across various industries.'}
+        type: form:dep_bo98k6a5tnruq:_Components.Text
+      layout_properties: {grid_position: 'QQMAWM,GBQGGH EBLOFT,AJZPTE'}
+      name: card_content_container_1
+      properties: {}
+      type: form:dep_bo98k6a5tnruq:_Components.Card.CardContentContainer
     - components:
       - components: []
         data_bindings: []
@@ -71,11 +88,22 @@ components:
   - components:
     - layout_properties: {width: 46.05080625}
       name: image_1
-      properties: {display_mode: shrink_to_fit, height: 33.47265625, horizontal_align: left, source: _/theme/yoti-logo.png, vertical_align: bottom}
+      properties:
+        display_mode: shrink_to_fit
+        height: 32.42578125
+        horizontal_align: left
+        margin: [null, null, null, '0']
+        source: _/theme/yoti-logo.png
+        vertical_align: bottom
       type: Image
     - layout_properties: {}
       name: label_logged_in
-      properties: {font_size: 6, text: ''}
+      properties:
+        font_size: 9
+        spacing:
+          margin: [null, null, null, 0]
+          padding: [null, 3, null, null]
+        text: ''
       type: Label
     layout_properties: {width: 250.44921875}
     name: flow_panel_1
