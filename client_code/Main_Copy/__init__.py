@@ -14,7 +14,7 @@ class Main_Copy(Main_CopyTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    user = anvil.users.get_user() #add allow remembered
+    user = anvil.users.get_user(allow_remembered=True) #add allow remembered
     print(f"init: User = {user}")
     if user and 'remember_me_id' in user:
       self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
