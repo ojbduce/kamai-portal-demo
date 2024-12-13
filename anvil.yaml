@@ -1,15 +1,27 @@
 allow_embedding: false
 db_schema:
+  ads:
+    client: none
+    columns:
+    - admin_ui: {width: 200}
+      name: ads
+      type: media
+    - admin_ui: {width: 200}
+      name: remember_me_id
+      target: users
+      type: link_single
+    server: full
+    title: Ads
   files:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: path
       type: string
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: file
       type: media
-    - admin_ui: {order: 2, width: 200}
+    - admin_ui: {width: 200}
       name: file_version
       type: string
     server: full
@@ -18,20 +30,24 @@ db_schema:
     client: full
     columns:
     - admin_ui: {width: 200}
-      name: email
+      name: report_title
       type: string
     - admin_ui: {width: 200}
       name: report
       type: string
+    - admin_ui: {width: 200}
+      name: remember_me_id
+      target: users
+      type: link_single
     server: full
     title: Reports
   sessions:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: yoti_session_id
       type: string
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: time_date
       type: datetime
     server: full
@@ -39,6 +55,12 @@ db_schema:
   users:
     client: full
     columns:
+    - admin_ui: {width: 200}
+      name: remember_me_id
+      type: string
+    - admin_ui: {width: 200}
+      name: verification_date
+      type: datetime
     - admin_ui: {width: 200}
       name: email
       type: string
@@ -62,12 +84,6 @@ db_schema:
       type: simpleObject
     - admin_ui: {width: 200}
       name: signed_up
-      type: datetime
-    - admin_ui: {order: -1, width: 200}
-      name: remember_me_id
-      type: string
-    - admin_ui: {width: 200}
-      name: verification_date
       type: datetime
     server: full
     title: Users
