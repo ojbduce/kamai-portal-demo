@@ -11,21 +11,25 @@ from anvil.tables import app_tables
 @anvil.server.callable
 def login_yoti(remember_me_id):
     print(f"Hit login with ID{remember_me_id}")
+    #check existing user
     user = app_tables.users.get(remember_me_id=remember_me_id)
-    if user is not None:
+    if user:
       anvil.users.force_login(user)
       print(f"user: {remember_me_id} is logged-in")
       return user['remember_me_id']
     else:
-      return None
+      user = app_tables.users.add_row(remember_me_id=remember_me_id)
+      anvil.users.force_login(user)
+      print(f"user: {remember_me_id} is logged-in")
+      return user['remember_me_id']
+    
 
 
 @anvil.server.http_endpoint("/yka", methods=["POST"], enable_cors=True)
 def receive_user_details():
     print("Hit users endpoint!")
     userData = anvil.server.request.body_json
-    print(f"Have received userData? {bool(userData)}")
-    print(f"Got data: {bool(userData)}")  
+    print(f"Data Received: {bool(userData)}")  
     print(f"Keys received: {userData.keys()}")  
     print(f"Data dump: {userData}")  
     if not all(key in userData for key in ['email', 'rememberMeId', 'verificationDate']):
@@ -40,6 +44,7 @@ def receive_user_details():
     existing_user = app_tables.users.search(remember_me_id=remember_me_id)
     if existing_user:
       login_yoti(remember_me_id)
+      return {"status": "success", "message": "Existing user logged in"}
     else:
       try:
           app_tables.users.add_row(
@@ -47,7 +52,8 @@ def receive_user_details():
               verification_date= verification_date,
               email=email)
           print("User data received and added to the Users Table.")
-          login_yoti(remember_me_id) #this
+          login_yoti(remember_me_id) 
+          # working return here?
           return {"status": "success", "message": "User added successfully"}
       except Exception as e:
           print(f"Error adding to Data Table: {e}") 
