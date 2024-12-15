@@ -63,7 +63,7 @@ components:
     type: form:Yoti_iframe
   layout_properties: {slot: default}
   name: outlined_card
-  properties: {background: 'theme:On Secondary', role: mid-card}
+  properties: {background: 'theme:On Secondary', role: elevated-card}
   type: ColumnPanel
 - event_bindings: {click: button_show_tests_click}
   layout_properties: {slot: default}
