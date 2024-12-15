@@ -8,10 +8,38 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+from datetime import datetime, timedelta
+import secrets
 from .Test_Users import existing_users
-from .Test_Users import select_user
+from faker import Faker
+
+
+fake = Faker()
+
+
 
 # 1. CREATE OR A NEW USER OR RECOGNISE AN EXISTING USER 2. LOG-IN THE USER
+
+def generate_new_user():
+    return {
+        "email": fake.email(),
+        "rememberMeId": secrets.token_urlsafe(32),
+        "verificationDate": datetime.now()
+}
+
+# def select_user(existing_weight=0):
+#     if random.random() < existing_weight:
+#         return random.choice(existing_users)
+#     else:
+#         new_user = generate_new_user()
+#         existing_users.append(new_user)
+#         return new_user
+
+def select_user():
+  new_user = generate_new_user()
+  print(f"remember_me_id from generate_new_user: {new_user['rememberMeId']}")
+  return new_user
+
 
 @anvil.server.callable
 def test_user():

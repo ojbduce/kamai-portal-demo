@@ -88,13 +88,6 @@ existing_users = [
     },
 ]
 
-def generate_new_user():
-    return {
-        "email": fake.email(),
-        "rememberMeId": secrets.token_urlsafe(32),
-        "verificationDate": datetime.now()
-}
-
 # def select_user(existing_weight=0):
 #     if random.random() < existing_weight:
 #         return random.choice(existing_users)
