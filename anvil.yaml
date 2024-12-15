@@ -4,12 +4,14 @@ db_schema:
     client: none
     columns:
     - admin_ui: {width: 200}
-      name: ads
+      name: ad_name
+      type: string
+    - admin_ui: {width: 200}
+      name: ad
       type: media
     - admin_ui: {width: 200}
       name: remember_me_id
-      target: users
-      type: link_single
+      type: string
     server: full
     title: Ads
   files:
