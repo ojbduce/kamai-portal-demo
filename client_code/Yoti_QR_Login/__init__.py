@@ -39,8 +39,6 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
       print(len(duplicates))
       print(f"{duplicate_count}rows removed") #0 
       
-      
-    
 
   def button_show_tests_click(self, **event_args):
     self.button_login_test_user.visible = True

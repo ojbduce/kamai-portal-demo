@@ -16,12 +16,12 @@ def login_yoti(remember_me_id):
     #error more than one match
     if user:
       anvil.users.force_login(user)
-      print(f"user: {remember_me_id} is logged-in")
+      print(f"Existing Yoti User {remember_me_id} is logged-in")
       return user['remember_me_id']
     else:
       user = app_tables.users.add_row(remember_me_id=remember_me_id)
       anvil.users.force_login(user)
-      print(f"user: {remember_me_id} is logged-in")
+      print(f" New Yoti User: {remember_me_id} is logged-in")
       return user['remember_me_id']
     
 

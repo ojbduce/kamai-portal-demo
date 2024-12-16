@@ -89,10 +89,7 @@ db_schema:
       type: datetime
     server: full
     title: Users
-dependencies:
-- dep_id: dep_bo98k6a5tnruq
-  resolution_hints: {app_id: 4UK6WHQ6UX7AKELK, name: Material 3 Theme, package_name: m3}
-  version: {version_tag: v1.2.1}
+dependencies: []
 name: Kamai Portal Demo
 native_deps: {head_html: ''}
 package_name: Kamai_Portal_Demo
