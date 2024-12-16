@@ -25,16 +25,20 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     self.cleanup_duplicate_ids()
 
     
-  def cleanup_duplicate_ids(self):
-    remember_me_id_list = []
+  def cleanup_duplicate_ids(self):#why doesn't work??
+    duplicates = set()
+    duplicate_count = 0
     for row in app_tables.users.search():
-      remember_me_id_list.append(row)
-      print(remember_me_id_list)
-      deleted = 0
-      while len(remember_me_id_list) >1:
-        row.delete()
-        deleted += 1
-    print(f"{deleted} rows deleted")
+      remember_me_id = row['remember_me_id']
+      print(remember_me_id)
+    if remember_me_id in duplicates:
+      row.delete()
+      duplicate_count +=1
+    else:
+      duplicates.add(remember_me_id)
+      print(len(duplicates))
+      print(f"{duplicate_count}rows removed") #0 
+      
       
     
 
