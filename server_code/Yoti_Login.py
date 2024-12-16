@@ -13,6 +13,7 @@ def login_yoti(remember_me_id):
     print(f"Hit login with ID{remember_me_id}")
     #check existing user
     user = app_tables.users.get(remember_me_id=remember_me_id)
+    #error more than one match
     if user:
       anvil.users.force_login(user)
       print(f"user: {remember_me_id} is logged-in")
@@ -43,9 +44,13 @@ def receive_user_details():
   #split here. Split for testing version but log-in can be a separate function.
     existing_user = app_tables.users.search(remember_me_id=remember_me_id)
     if existing_user:
-      login_yoti(remember_me_id)
-      return {"status": "success", "message": "Existing user logged in"}
-    else:
+      try:
+        login_yoti(remember_me_id)
+        return {"status": "success", "message": "Existing user logged in"}
+      except Exception as e:
+        print(f"login_yoti_failed {e}")
+        return {"status": "error", "message": str(e)}, 500
+    else:#create new user
       try:
           app_tables.users.add_row(
               remember_me_id=remember_me_id, 
