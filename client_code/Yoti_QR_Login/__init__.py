@@ -22,10 +22,21 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     self.outlined_card.role = 'mid-card'
     self.button_login_test_user.visible = False
     self.button_home.visible = False
-    
-    
+    self.cleanup_duplicate_ids()
 
-    # Any code you write here will run before the form opens.
+    
+  def cleanup_duplicate_ids(self):
+    remember_me_id_list = []
+    for row in app_tables.users.search():
+      remember_me_id_list.append(row)
+      print(remember_me_id_list)
+      deleted = 0
+      while len(remember_me_id_list) >1:
+        row.delete()
+        deleted += 1
+    print(f"{deleted} rows deleted")
+      
+    
 
   def button_show_tests_click(self, **event_args):
     self.button_login_test_user.visible = True
