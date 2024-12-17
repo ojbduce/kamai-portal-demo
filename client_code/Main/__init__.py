@@ -17,6 +17,7 @@ class Main(MainTemplate):
     user = anvil.users.get_user(allow_remembered=True)
     # user = anvil.users.force_login()
     # user = anvil.users.get_user()['remember_me_id'] #is None type
+    user = self.get_remember_me_id()
     if user:
       print("Client:init: Anvil Users Service row object = {user} ")
       # self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
@@ -90,9 +91,10 @@ class Main(MainTemplate):
     """This method is called when the button is clicked"""
     pass
     
-
-  
-
+  def get_remember_me_id(self):
+    remember_me_id = anvil.server.call('return_remember_me_id')
+    return remember_me_id
+    
 
 
 

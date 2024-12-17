@@ -8,20 +8,28 @@ import uuid
 import anvil.tables as tables
 from anvil.tables import app_tables
 
+
+@anvil.server.callable
+def return_remember_me_id():
+  return anvil.server.get['remember_me_id']
+
+
 #login_yoti
 '''Part of verification pipeline. Takes an id received from the api.Don't use Client-sde'''
 @anvil.server.callable
 def login_yoti(remember_me_id):
     print(f"Hit login with ID{remember_me_id}")
     #check existing user
-    user = app_tables.users.get(remember_me_id=remember_me_id)
-    #error more than one match
+    user = app_tables.users.get(remember_me_id=remember_me_id) # change this to email??!!
+    #was error more than one match improve remove_duplicates
     if user:
       anvil.users.force_login(user)
       users_service_test = anvil.users.get_user(allow_remembered=True)
       print(f"Anvil Users Service force_login test: user row object? {users_service_test}")
       print(f"Anvil Users actual user/id check: {anvil.users.get_user()['remember_me_id']}")
       print(f"Existing Yoti User {remember_me_id} is logged-in")
+      anvil.server.session['remember_me_id'] = remember_me_id # as Users not working Client-side
+      print(f"remember_me_id from server session {anvil.server.session}")
       return user['remember_me_id']
     else:
       user = app_tables.users.add_row(remember_me_id=remember_me_id)
