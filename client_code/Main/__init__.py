@@ -14,16 +14,19 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
+    self.remember_me_id = ''
     user = anvil.users.get_user(allow_remembered=True)
     # user = anvil.users.force_login()
     # user = anvil.users.get_user()['remember_me_id'] #is None type
-    user = self.get_remember_me_id()
-    if user:
-      print("Client:init: Anvil Users Service row object = {user} ")
+    if user is not None:
+      alert("Client:init: Anvil Users Service row object = {user} ")
       # self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
       self.label_logged_in.text = f"User: {user}"
+    elif user is None:
+      self.remember_me_id = self.get_remember_me_id()
+      self.label_logged_in.text = self.remember_me_id
     else:
-      print("User not found Client-side")
+      alert("User not found Client-side")
       self.label_logged_in.text = "Waiting for Yoti log-in"
     # if user and 'remember_me_id' in user:
     #   self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
