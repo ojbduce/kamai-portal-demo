@@ -9,9 +9,7 @@ import anvil.tables as tables
 from anvil.tables import app_tables
 
 #login_yoti
-'''This is part of the receive data from Yoti flow (below) and takes an id from Yoti's api. We don't want to call this
-  from Client-Side, as is. Won't work. The aim is to login a User using Anvils native Users Service, 
-  but with an id rather than the usual email'''
+'''Part of verification pipeline. Takes an id received from the api.Don't use Client-sde'''
 @anvil.server.callable
 def login_yoti(remember_me_id):
     print(f"Hit login with ID{remember_me_id}")
@@ -21,7 +19,8 @@ def login_yoti(remember_me_id):
     if user:
       anvil.users.force_login(user)
       users_service_test = anvil.users.get_user(allow_remembered=True)
-      print(f"Users Service test {users_service_test}")
+      print(f"Anvil Users Service force_login test: user row object? {users_service_test}")
+      print(f"Anvil Users actual user/id check: {anvil.users.get_user()['remember_me_id']}")
       print(f"Existing Yoti User {remember_me_id} is logged-in")
       return user['remember_me_id']
     else:

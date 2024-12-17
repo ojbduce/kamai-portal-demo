@@ -15,15 +15,19 @@ class Main(MainTemplate):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
     user = anvil.users.get_user(allow_remembered=True)
-    print(f"Anil Users Service User?: {bool(user)}")
-    #allow_remembered=True) #add allow remembered
-    user = anvil.users.get_user()['remember_me_id'] #None type errors /\
-    print(f"Using id Users says: {bool(user)}")
-    print(f"init: User = {user}")
-    if user and 'remember_me_id' in user:
-      self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
+    # user = anvil.users.force_login()
+    # user = anvil.users.get_user()['remember_me_id'] #is None type
+    if user:
+      print("Client:init: Anvil Users Service row object = {user} ")
+      # self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
+      self.label_logged_in.text = f"User: {user}"
     else:
+      print("User not found Client-side")
       self.label_logged_in.text = "Waiting for Yoti log-in"
+    # if user and 'remember_me_id' in user:
+    #   self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
+    # else:
+    #   self.label_logged_in.text = "Waiting for Yoti log-in"
     #self.label_logged_in.text = "Awaiting Auto-log-in..."
     self.outlined_card_digi_leaders.visible = True
     self.card_database.visible = False 
