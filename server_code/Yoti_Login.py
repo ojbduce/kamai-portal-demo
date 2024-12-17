@@ -8,6 +8,10 @@ import uuid
 import anvil.tables as tables
 from anvil.tables import app_tables
 
+#login_yoti
+'''This is part of the receive data from Yoti flow (below) and takes an id from Yoti's api. We don't want to call this
+  from Client-Side, as is. Won't work. The aim is to login a User using Anvils native Users Service, 
+  but with an id rather than the usual email'''
 @anvil.server.callable
 def login_yoti(remember_me_id):
     print(f"Hit login with ID{remember_me_id}")
@@ -16,6 +20,8 @@ def login_yoti(remember_me_id):
     #error more than one match
     if user:
       anvil.users.force_login(user)
+      users_service_test = anvil.users.get_user(allow_remembered=True)
+      print(f"Users Service test {users_service_test}")
       print(f"Existing Yoti User {remember_me_id} is logged-in")
       return user['remember_me_id']
     else:
