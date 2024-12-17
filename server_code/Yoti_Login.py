@@ -13,31 +13,38 @@ from anvil.tables import app_tables
 def return_remember_me_id():
   return anvil.server.get['remember_me_id']
 
+@anvil.server.callable 
+def create_new_user(remember_me_id, verification_date,email):
+  user = app_tables.users.add_row(
+    remember_me_id=remember_me_id, 
+    verification_date= verification_date,
+    email=email)
+  print("create_new_user: User data received and added to the Users Table")
+  return user
+
 
 #login_yoti
 '''Part of verification pipeline. Takes an id received from the api.Don't use Client-sde'''
 @anvil.server.callable
-def login_yoti(remember_me_id):
+def login_yoti(remember_me_id,verification_date, email):
     print(f"Hit login with ID{remember_me_id}")
     #check existing user
-    user = app_tables.users.get(remember_me_id=remember_me_id) # change this to email??!!
+    user = app_tables.users.get(remember_me_id=remember_me_id)
     #was error more than one match improve remove_duplicates
-    if user:
+    if user is not None:
       anvil.users.force_login(user)
+      #logging
       users_service_test = anvil.users.get_user(allow_remembered=True)
-      print(f"Anvil Users Service force_login test: user row object? {users_service_test}")
-      print(f"Anvil Users actual user/id check: {anvil.users.get_user()['remember_me_id']}")
-      print(f"Existing Yoti User {remember_me_id} is logged-in")
+      print(f"Anvil Users Service force_login test: user row object? {users_service_test}")#OK
+      print(f"Anvil Users actual user/id check: {anvil.users.get_user()['remember_me_id']}")#OK
+      print(f"Existing Yoti User {remember_me_id} is logged-in")#OK
       anvil.server.session['remember_me_id'] = remember_me_id # as Users not working Client-side
       print(f"remember_me_id from server session {anvil.server.session}")
-      return user['remember_me_id']
+      return user
     else:
-      user = app_tables.users.add_row(remember_me_id=remember_me_id)
-      anvil.users.force_login(user)
-      print(f" New Yoti User: {remember_me_id} is logged-in")
-      return user['remember_me_id']
+      create_new_user(remember_me_id,verification_date,email)
+      return user
     
-
 
 @anvil.server.http_endpoint("/yka", methods=["POST"], enable_cors=True)
 def receive_user_details():
@@ -58,20 +65,21 @@ def receive_user_details():
     existing_user = app_tables.users.search(remember_me_id=remember_me_id)
     if existing_user:
       try:
-        login_yoti(remember_me_id)
+        login_yoti(remember_me_id,verification_date, email)
         return {"status": "success", "message": "Existing user logged in"}
       except Exception as e:
         print(f"login_yoti_failed {e}")
         return {"status": "error", "message": str(e)}, 500
     else:#create new user
       try:
-          app_tables.users.add_row(
-              remember_me_id=remember_me_id, 
-              verification_date= verification_date,
-              email=email)
-          print("User data received and added to the Users Table.")
-          login_yoti(remember_me_id) 
-          # working return here?
+          create_new_user(remember_me_id,verification_date,email)
+          new_user = app_tables.users.search(remember_me_id=remember_me_id)
+          if new_user is not None:
+            login_yoti(remember_me_id,verification_date, email) 
+            return {"status": "success", "message": "User added successfully"}
+          else:
+            print("receive_user_data:new user failed")
+          # no point in breaking the verification/appearence
           return {"status": "success", "message": "User added successfully"}
       except Exception as e:
           print(f"Error adding to Data Table: {e}") 
@@ -79,7 +87,7 @@ def receive_user_details():
 
 
 
-    
+     
  
 
 
