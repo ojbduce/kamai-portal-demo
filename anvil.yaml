@@ -1,4 +1,4 @@
-allow_embedding: false
+allow_embedding: true
 db_schema:
   ads:
     client: none
@@ -116,5 +116,5 @@ services:
 - client_config: {}
   server_config: {file_table: files}
   source: /runtime/services/anvil/files.yml
-startup: {module: Yoti_QR_Login, type: form}
+startup: {module: Main_Copy, type: form}
 startup_form: null

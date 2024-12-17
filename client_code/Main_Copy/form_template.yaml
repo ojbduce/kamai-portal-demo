@@ -4,8 +4,8 @@ components:
     - data_bindings:
       - {code: 'self.item['''']', property: icon, writeback: false}
       layout_properties: {}
-      name: label_3
-      properties: {background: 'theme:Light Overlay 1', bold: true, font_size: 19, foreground: 'theme:On Surface Variant', icon: '', role: headline, text: 'Kaimai Member''s Journals  '}
+      name: label_title
+      properties: {background: '#fdfcfd', bold: true, font_size: 19, foreground: 'theme:On Surface Variant', icon: '', role: headline, text: 'Kaimai Member''s Journals Spotlight: Digital Leaders Insight Report  '}
       type: Label
     layout_properties: {full_width_row: false, grid_position: 'YDHHDC,BKEXWB', row_background: 'theme:Light Overlay 1'}
     name: flow_panel_title
@@ -17,32 +17,35 @@ components:
     type: Spacer
   - components:
     - components:
-      - data_bindings: []
-        event_bindings: {click: link_2_click}
-        layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
-        name: link_2
-        properties: {align: center, bold: true, foreground: 'theme:On Primary Container', text: Web-Journal 1, url: 'https://adept-right-category.anvil.app'}
+      - components:
+        - layout_properties: {grid_position: 'QPLFCI,HKMYSI'}
+          name: image_dig_leaders
+          properties: {background: 'theme:Background', display_mode: fill_width, height: 219.50390625, source: _/theme/digital_leaders_image copy.png}
+          type: Image
+        layout_properties: {grid_position: 'TJTTXD,OUTJSR'}
+        name: link_digi_leaders_image
+        properties: {url: 'https://adept-right-category.anvil.app/'}
         type: Link
-      layout_properties: {grid_position: 'QQMAWM,GBQGGH RWFNQF,VYPNMU'}
+      - layout_properties: {grid_position: 'DYWEZX,JMSICL'}
+        name: link_3
+        properties: {background: 'theme:On Primary', bold: true, font_size: 18, foreground: 'theme:On Background', text: Digital Leaders}
+        type: Link
+      - layout_properties: {grid_position: 'MZLKUR,YMMSEG'}
+        name: label_4
+        properties: {background: 'theme:On Primary', bold: true, foreground: 'theme:On Background', text: 'Digital Leaders is an independent platform that fosters digital transformation across public, private, and nonprofit sectors in the UK. It serves as a forum for leaders to explore new ideas, network, and access digital knowledge and solutions.'}
+        type: Label
+      layout_properties: {grid_position: 'QQMAWM,GBQGGH'}
       name: outlined_card_2
-      properties: {background: 'theme:Primary Container', foreground: 'theme:On Secondary Container', role: tonal-card, tooltip: One of many online resources...}
-      type: ColumnPanel
-    - components:
-      - components: []
-        data_bindings: []
-        event_bindings: {click: link_2_copy_click}
-        layout_properties: {grid_position: 'UPZEUK,JBDJVN'}
-        name: link_2_copy
-        properties: {align: center, bold: true, foreground: 'theme:On Tertiary Container', text: Web-Journal 2 Etc., url: 'https://adept-right-category.anvil.app'}
-        type: Link
-      layout_properties: {grid_position: 'QQMAWM,YPZDIG'}
-      name: outlined_card_2_copy
-      properties: {background: 'theme:Surface Variant', foreground: 'theme:On Secondary Container', role: tonal-card}
+      properties: {background: 'theme:Background', foreground: 'theme:On Surface Variant', role: elevated-card, tooltip: One of many online resources...}
       type: ColumnPanel
     layout_properties: {full_width_row: true, grid_position: 'OWXGXH,EKLLBM'}
-    name: outlined_card_1
-    properties: {background: 'theme:Surface', role: tonal-card}
+    name: outlined_card_digi_leaders
+    properties: {background: 'theme:On Primary', role: tonal-card}
     type: ColumnPanel
+  - layout_properties: {grid_position: 'PADDDC,PIRMRC'}
+    name: spacer_2
+    properties: {height: 32}
+    type: Spacer
   - components:
     - layout_properties: {grid_position: 'NSGLDF,YAZGLF'}
       name: label_2
@@ -63,9 +66,13 @@ components:
     name: card_database
     properties: {role: outlined-card}
     type: ColumnPanel
+  - layout_properties: {grid_position: 'THXDGQ,ENDURR'}
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
   layout_properties: {slot: default}
   name: content_panel_home
-  properties: {background: 'theme:Background', col_widths: '{}', spacing_above: none}
+  properties: {background: 'theme:On Primary', col_widths: '{}', spacing_above: none}
   type: ColumnPanel
 - components:
   - components:
@@ -103,7 +110,7 @@ components:
   type: FlowPanel
 - layout_properties: {slot: title}
   name: label_1
-  properties: {bold: true, font_size: 18, icon: 'fa:i', icon_align: right_edge, role: title, text: Portal}
+  properties: {bold: true, font_size: 18, icon: 'fa:i', icon_align: right_edge, role: title, text: Kaimai Directory}
   type: Label
 container:
   event_bindings: {show: form_show}

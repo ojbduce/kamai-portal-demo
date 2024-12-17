@@ -21,16 +21,17 @@ class Main_Copy(Main_CopyTemplate):
     else:
       self.label_logged_in.text = "Waiting for Yoti log-in"
     #self.label_logged_in.text = "Awaiting Auto-log-in..."
-    self.content_panel_home.visible = True
+    self.outlined_card_digi_leaders.visible = True
     self.card_database.visible = False
-    self.flow_panel_title.visible = False
-
-
+    self.flow_panel_title.visible = False  
+    self.label_title.visible = True
+    
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
     self.get_data()
-    self.content_panel_home.visible = False
+    self.outlined_card_digi_leaders.visible = False
     self.card_database.visible = True
+    self.label_title.visible = False
 
   def outlined_button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
