@@ -7,6 +7,7 @@ from anvil.google.drive import app_files
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
+import anvil.js
 from anvil.tables import app_tables
 from anvil.js.window import jQuery
 from anvil.js import get_dom_node
@@ -17,12 +18,17 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    anvil.js.window.addEventListener('message', lambda event: self.handle_auth_message(event))
     # iframe = jQuery("<iframe width='100%' height='450px'>").attr("src",'https://kaimaiyoti.azurewebsites.net')
     # iframe.appendTo(get_dom_node(self.iframe_container))
     self.outlined_card.role = 'mid-card'
     self.button_login_test_user.visible = False
     self.button_home.visible = False
     self.cleanup_duplicate_ids()
+
+  def handle_auth_message(self, event):
+    if event.data == 'auth_success':
+      anvil.open_form('Home')
 
     
   def cleanup_duplicate_ids(self):#why doesn't work??
