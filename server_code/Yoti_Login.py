@@ -1,3 +1,4 @@
+import anvil.secrets
 import anvil.server
 import anvil.users
 import requests
@@ -7,6 +8,8 @@ from datetime import datetime
 import uuid
 import anvil.tables as tables
 from anvil.tables import app_tables
+import bcrypt
+import secrets
 
 
 @anvil.server.callable
@@ -15,25 +18,32 @@ def return_remember_me_id():
 
 @anvil.server.callable 
 def create_new_user(remember_me_id, verification_date,email):
+  print("create_new_user: Creating new User. Accessing system password.")
+  system_password = anvil.secrets.get_secret("system_password")
+  print("Hashing password.")
+  password_hash = bcrypt.hashpw(system_password.encode('utf-8'), bcrypt.gensalt())
+  print("Adding User to Users Table.")
   user = app_tables.users.add_row(
     remember_me_id=remember_me_id, 
     verification_date= verification_date,
     email=email,
-    enabled=True)
+    enabled=True,
+    password_hash=password_hash)
   print("create_new_user: User data received and added to the Users Table")
   return user
 
 #login_yoti
-'''Part of an external verification pipeline. Takes an id received from the api. Not called Client-sde, atm'''
+'''Part of the external verification pipeline. Takes an id received from the api. Not called Client-sde, atm'''
 @anvil.server.callable
 def login_yoti(remember_me_id,verification_date, email):
     print(f"Hit login with ID{remember_me_id}")
     #check for existing user
     user = app_tables.users.get(remember_me_id=remember_me_id)
-    if user is not None:
+    system_password = anvil.secrets.get_secret('system_password')
+    if user is not None and bcrypt.hashpw(system_password, user['password_hash']) == user['password_hash']:
       anvil.users.force_login(user)
       #logging remove later
-      users_service_test = anvil.users.get_user(allow_remembered=True)
+      users_service_test = anvil.users.get_user(allow_remembered=True) # test server-side, since client side None
       print(f"Anvil Users Service force_login test: user row object? {users_service_test}")#OK
       print(f"Anvil Users actual user/id check: {anvil.users.get_user()['remember_me_id']}")#OK
       print(f"Existing Yoti User {remember_me_id} is logged-in")#OK
@@ -44,7 +54,7 @@ def login_yoti(remember_me_id,verification_date, email):
       create_new_user(remember_me_id,verification_date,email)
       return user
     
-
+#Main Function
 @anvil.server.http_endpoint("/yka", methods=["POST"], enable_cors=True)
 def receive_user_details():
     print("Hit users endpoint!")
