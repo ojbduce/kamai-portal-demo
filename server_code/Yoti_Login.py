@@ -18,22 +18,21 @@ def create_new_user(remember_me_id, verification_date,email):
   user = app_tables.users.add_row(
     remember_me_id=remember_me_id, 
     verification_date= verification_date,
-    email=email)
+    email=email,
+    enabled=True)
   print("create_new_user: User data received and added to the Users Table")
   return user
 
-
 #login_yoti
-'''Part of verification pipeline. Takes an id received from the api.Don't use Client-sde'''
+'''Part of an external verification pipeline. Takes an id received from the api. Not called Client-sde, atm'''
 @anvil.server.callable
 def login_yoti(remember_me_id,verification_date, email):
     print(f"Hit login with ID{remember_me_id}")
-    #check existing user
+    #check for existing user
     user = app_tables.users.get(remember_me_id=remember_me_id)
-    #was error more than one match improve remove_duplicates
     if user is not None:
       anvil.users.force_login(user)
-      #logging
+      #logging remove later
       users_service_test = anvil.users.get_user(allow_remembered=True)
       print(f"Anvil Users Service force_login test: user row object? {users_service_test}")#OK
       print(f"Anvil Users actual user/id check: {anvil.users.get_user()['remember_me_id']}")#OK
@@ -55,7 +54,6 @@ def receive_user_details():
     print(f"Data dump: {userData}")  
     if not all(key in userData for key in ['email', 'rememberMeId', 'verificationDate']):
         return {"status": "error", "message": "Missing required fields"}, 400
-    
     print("All data available. Adding to the Data Table")
     email = userData['email']
     print(f"Test printing email address: {email}")

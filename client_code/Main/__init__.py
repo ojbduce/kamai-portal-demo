@@ -14,20 +14,26 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    self.remember_me_id = ''
-    user = anvil.users.get_user(allow_remembered=True)
-    # user = anvil.users.force_login()
-    # user = anvil.users.get_user()['remember_me_id'] #is None type
-    if user is not None:
-      alert("Client:init: Anvil Users Service row object = {user} ")
-      # self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
-      self.label_logged_in.text = f"User: {user}"
-    elif user is None:
-      self.remember_me_id = self.get_remember_me_id()
-      self.label_logged_in.text = self.remember_me_id
-    else:
-      alert("User not found Client-side")
-      self.label_logged_in.text = "Waiting for Yoti log-in"
+    anvil.js.window.console.log("Anvil launching")
+    try:
+      anvil.js.window.console.log("Trying anvil.users.get_user")
+      user = anvil.users.get_user(allow_remembered=True) #creating null type error
+      # user = anvil.users.force_login()
+      # user = anvil.users.get_user()['remember_me_id'] #is None type
+      if user is not None:
+        anvil.js.window.console.log("User found Client side")
+        alert("Client:init: Anvil Users Service row object = {user} ")
+        # self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
+        self.label_logged_in.text = f"User: {user}"
+      elif user is None:
+        self.remember_me_id = self.get_remember_me_id()
+        self.label_logged_in.text = self.remember_me_id
+      else:
+        alert("User not found Client-side")
+        self.label_logged_in.text = "Waiting for Yoti log-in"
+    except Exception as e:
+      anvil.js.window.console.log("Error pinpointed as anvil,users.get_user generating {e} null type.User not found Client side")
+      
     # if user and 'remember_me_id' in user:
     #   self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
     # else:
