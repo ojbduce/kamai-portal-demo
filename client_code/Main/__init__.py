@@ -14,20 +14,21 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    anvil.js.window.console.log("Anvil launching")
+    anvil.js.window.console.log("Anvil launching. Logging in User")
     try:
       anvil.js.window.console.log("Trying anvil.users.get_user")
-      user = anvil.users.get_user(allow_remembered=True) #creating null type error
-      # user = anvil.users.force_login()
-      # user = anvil.users.get_user()['remember_me_id'] #is None type
-      if user is not None:
+      user = anvil.users.get_user(allow_remembered=True) #None creating null type error
+      # user = anvil.users.get_user()['remember_me_id'] #is None 
+      if user and 'remember_me_id' in user:
         anvil.js.window.console.log("User found Client side")
-        alert("Client:init: Anvil Users Service row object = {user} ")
+        #self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
+      elif user is not None:
+        anvil.js.window.console.log("User found Client side")
         # self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
         self.label_logged_in.text = f"User: {user}"
       elif user is None:
-        self.remember_me_id = self.get_remember_me_id()
-        self.label_logged_in.text = self.remember_me_id
+        anvil.js.window.console.log("Trying server call force_login")
+        user = anvil.server.call('force_login_user')
       else:
         alert("User not found Client-side")
         self.label_logged_in.text = "Waiting for Yoti log-in"

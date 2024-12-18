@@ -16,40 +16,63 @@ import secrets
 def return_remember_me_id():
   return anvil.server.get['remember_me_id']
 
+@anvil.server.callable
+def force_login_user():
+  print(f"force_login: user row object from session {anvil.server.session['current_user_row']}")
+  user = anvil.server.session['current_user_row']
+  return user
+
 @anvil.server.callable 
 def create_new_user(remember_me_id, verification_date,email):
+  import base64
   print("create_new_user: Creating new User. Accessing system password.")
   system_password = anvil.secrets.get_secret("system_password")
-  print("Hashing password.")
-  password_hash = bcrypt.hashpw(system_password.encode('utf-8'), bcrypt.gensalt())
-  print("Adding User to Users Table.")
+  print("create_new_user:Hashing password.")
+  hash_password = bcrypt.hashpw(system_password.encode('utf-8'), bcrypt.gensalt())
+  print(f"create_new_user: bcrypt hash is of type: {type(hash_password)}")
+  #Ok so we convert it.
+  password_hash = base64.b64encode(hash_password).decode('utf-8')
+  print("create_new_user. Password hashed. Adding User to Users Table.")
   user = app_tables.users.add_row(
     remember_me_id=remember_me_id, 
     verification_date= verification_date,
     email=email,
     enabled=True,
     password_hash=password_hash)
-  print("create_new_user: User data received and added to the Users Table")
+  print("create_new_user: Try force_login from here...")
+  anvil.users.force_login(user) #the row object
+  current_user_row = app_tables.people.users(remember_me_id=remember_me_id)
+  anvil.server.session['current_user_row'] = current_user_row
+  print("create_new_user: User data received and added to the Users Table. Current row for rem_id in server session")
+  print("Testing Users Service login:")
+  user = app_tables.users.get(remember_me_id=remember_me_id)
   return user
 
 #login_yoti
-'''Part of the external verification pipeline. Takes an id received from the api. Not called Client-sde, atm'''
+'''Part of the external verification pipeline. 
+Takes an id received from the api. Not called Client-sde, atm'''
 @anvil.server.callable
 def login_yoti(remember_me_id,verification_date, email):
+    import base64
     print(f"Hit login with ID{remember_me_id}")
     #check for existing user
     user = app_tables.users.get(remember_me_id=remember_me_id)
     system_password = anvil.secrets.get_secret('system_password')
-    if user is not None and bcrypt.hashpw(system_password, user['password_hash']) == user['password_hash']:
-      anvil.users.force_login(user)
+    if user is not None:
+      password_hash = base64.b64decode(user['password_hash'])
+      if bcrypt.checkpw(system_password.encode('utf-8'), password_hash):
+        anvil.users.force_login(user)
       #logging remove later
-      users_service_test = anvil.users.get_user(allow_remembered=True) # test server-side, since client side None
-      print(f"Anvil Users Service force_login test: user row object? {users_service_test}")#OK
-      print(f"Anvil Users actual user/id check: {anvil.users.get_user()['remember_me_id']}")#OK
-      print(f"Existing Yoti User {remember_me_id} is logged-in")#OK
-      anvil.server.session['remember_me_id'] = remember_me_id # as Users not working Client-side
-      print(f"remember_me_id from server session {anvil.server.session}")
-      return user
+        users_service_test = anvil.users.get_user(allow_remembered=True) # test server-side, since client side None
+        print(f"Anvil Users Service force_login test: user row object? {users_service_test}")#OK
+        print(f"Anvil Users actual user/id check: {anvil.users.get_user()['remember_me_id']}")#OK
+        print(f"Existing Yoti User {remember_me_id} is logged-in")#OK
+        anvil.server.session['remember_me_id'] = remember_me_id # as Users not working Client-side
+        print(f"login_yoti. Server-side success - remember_me_id from server session {anvil.server.session}")
+        return user
+      else:
+        print("create_new_user: password verification failed")
+        return None
     else:
       create_new_user(remember_me_id,verification_date,email)
       return user
