@@ -37,8 +37,7 @@ def create_new_user(remember_me_id, verification_date,email):
     password_hash=password_hash)
   print("create_new_user: Try force_login from here...")
   anvil.users.force_login(user) #the row object
-  current_user_row = app_tables.people.users(remember_me_id=remember_me_id)
-  anvil.server.session['current_user_row'] = current_user_row
+  anvil.server.session['current_user_row'] = user
   print("create_new_user: User data received and added to the Users Table. Current row for rem_id in server session")
   print("Testing Users Service login:")
   user = app_tables.users.get(remember_me_id=remember_me_id)

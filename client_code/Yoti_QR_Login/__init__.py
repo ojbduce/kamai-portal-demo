@@ -24,7 +24,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     self.outlined_card.role = 'mid-card'
     self.button_login_test_user.visible = False
     self.button_home.visible = False
-    self.cleanup_duplicate_ids()
+    
 
   def handle_auth_message(self, event):
     if event.data == 'auth_success':
