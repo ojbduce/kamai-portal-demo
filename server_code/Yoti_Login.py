@@ -13,10 +13,6 @@ import secrets
 
 
 @anvil.server.callable
-def return_remember_me_id():
-  return anvil.server.get['remember_me_id']
-
-@anvil.server.callable
 def force_login_user():
   print(f"force_login: user row object from session {anvil.server.session['current_user_row']}")
   user = anvil.server.session['current_user_row']
@@ -69,12 +65,14 @@ def login_yoti(remember_me_id,verification_date, email):
         print(f"Existing Yoti User {remember_me_id} is logged-in")#OK
         anvil.server.session['remember_me_id'] = remember_me_id # as Users not working Client-side
         print(f"login_yoti. Server-side success - remember_me_id from server session {anvil.server.session}")
+        user = app_tables.users.get(remember_me_id=remember_me_id)
         return user
       else:
         print("create_new_user: password verification failed")
         return None
     else:
       create_new_user(remember_me_id,verification_date,email)
+      user = app_tables.users.get(remember_me_id=remember_me_id)
       return user
     
 #Main Function
@@ -104,7 +102,7 @@ def receive_user_details():
     else:#create new user
       try:
           create_new_user(remember_me_id,verification_date,email)
-          new_user = app_tables.users.search(remember_me_id=remember_me_id)
+          new_user = app_tables.users.get(remember_me_id=remember_me_id)
           if new_user is not None:
             login_yoti(remember_me_id,verification_date, email) 
             return {"status": "success", "message": "User added successfully"}
