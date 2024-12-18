@@ -14,6 +14,10 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
+    # Hack this for now. Due to having to have an external node QR Code we will need to return this
+    # from the api call and pass as an argument to new session and force login. Otherwise callback is just Open
+    #Form is same session!
+    self.get_remember_me_id = "XttxTVjEY8GebX+izgbj1oMsLZ/WFJk+uSAow9ezq2fuZ4WcJGsy8ydHCmvNUbXp"
     anvil.js.window.console.log("Anvil launching. Logging in User")
     try:
       anvil.js.window.console.log("Trying anvil.users.get_user")
@@ -43,7 +47,10 @@ class Main(MainTemplate):
     self.outlined_card_digi_leaders.visible = True
     self.card_database.visible = False 
     self.label_title.visible = True
-    
+
+    def force_login(remember_me_id):
+      user = anvil.server.call('force_login','remember_me_id')
+      
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
     self.get_data()

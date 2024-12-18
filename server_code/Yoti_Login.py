@@ -13,10 +13,13 @@ import secrets
 
 
 @anvil.server.callable
-def force_login_user():
-  print(f"force_login: user row object from session {anvil.server.session['current_user_row']}")
-  user = anvil.server.session['current_user_row']
-  return user
+def force_login(remember_me_id):
+    user = app_tables.users.get(remember_me_id=remember_me_id)
+    if user:
+        anvil.users.force_login(user)
+        return True
+    return False
+
 
 @anvil.server.callable 
 def create_new_user(remember_me_id, verification_date,email):
