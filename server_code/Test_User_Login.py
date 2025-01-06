@@ -12,17 +12,22 @@ import anvil.server
 from datetime import datetime, timedelta
 import secrets
 from .Test_Users import existing_users
-from faker import Faker
 
+import anvil.secrets
 
-fake = Faker()
+FALL_BACK_ID = anvil.secrets("fallback_id")
+FALL_BACK_USER = app_tables.users.get(remember_me_id=FALL_BACK_ID)
 
-
-
-# 1. CREATE OR A NEW USER OR RECOGNISE AN EXISTING USER 2. LOG-IN THE USER
+@anvil.server.callable
+def fall_back_user():
+  return FALL_BACK_USER
+  
+# 1. USER TESTING. CREATE OR A NEW USER OR FAKE AN EXISTING USER 2. LOG-IN THE USER
 
 def generate_new_user():
-    return {
+  from faker import Faker
+  fake = Faker()
+  return {
         "email": fake.email(),
         "rememberMeId": secrets.token_urlsafe(32),
         "verificationDate": datetime.now()
@@ -43,26 +48,19 @@ def select_user():
 
 
 @anvil.server.callable
-def test_user():
-  user_data = select_user()
+def add_test_user():
+  user_data = generate_new_user()
   remember_me_id = user_data.get('rememberMeId')
   print(f"remember_me_id from select_user {remember_me_id}")
   verification_date = user_data.get('verificationDate')
   email = user_data.get('email')
   existing_user = app_tables.users.get(remember_me_id=remember_me_id) #get row here?
-  if existing_user:
-    print(f"Existing user {existing_user}")
-    print(type(existing_user))
-    #Now we need to find the row to use force_login!!
-    login_test_user(existing_user)
-  else:
     try:
         new_user = app_tables.users.add_row(
             remember_me_id=remember_me_id, 
             verification_date= verification_date,
             email=email)
         print(f"new_user is users table row? {new_user}")
-        print("User data received and added to the Users Table.")
         login_test_user(new_user) #this should be the row 
         return {"status": "success", "message": "User added successfully"}
     except Exception as e:

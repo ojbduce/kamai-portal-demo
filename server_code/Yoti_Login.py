@@ -22,7 +22,7 @@ def force_login(remember_me_id):
 
 
 @anvil.server.callable 
-def create_new_user(remember_me_id, verification_date,email):
+def create_new_user():
   import base64
   print("create_new_user: Creating new User. Accessing system password.")
   system_password = anvil.secrets.get_secret("system_password")

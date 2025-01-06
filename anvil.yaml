@@ -101,6 +101,9 @@ runtime_options:
   server_version: python3-sandbox
   version: 3
 secrets:
+  fall_back_id:
+    type: secret
+    value: {A73QCPUVM7RLSTK5: pfa1MCDzSpez41wGXcR5ERlDg31Aa7lInCE5RdMAb27drSa+d7mRW2rvHYlIH30CQIQqbNQPdUx4J+V1RpZXK4GstfI6C+UahrgKMY0r+xZPhIOrJNSoTFxGlICscdvybL+5PqPszv+H8ik7j+6QZ0QYRBtDf7nJ3Fo8BQJNxFGw4H/d5V1ZroR2be7yNCwI/SazLdB4Bn31qDyhXxWb6g==}
   system_password:
     type: secret
     value: {A73QCPUVM7RLSTK5: deBouwg14fKG0QTCc4VWDlpDGdreFTK8mdTrJeoJm4e0asD+An1clcQ0pLHw/BAu/4WMxlYzXZNBAt9wz9XTEa4WNyX5Fj/Tl+UCbNdnM0EQ4t6RS1wJ+E1iYDhnp9lkxGVCnuo0FUejQQj2zZZN2No986RL+eMOs8LknlacWqB6}
@@ -123,5 +126,5 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/anvil/secrets.yml
-startup: {module: Yoti_QR_Login, type: form}
+startup: {module: Main, type: form}
 startup_form: null

@@ -77,7 +77,7 @@ components:
     type: ColumnPanel
   layout_properties: {slot: default}
   name: content_panel_home
-  properties: {background: 'theme:On Primary', col_widths: '{}', spacing_above: none}
+  properties: {background: 'theme:Surface', col_widths: '{}', spacing_above: none}
   type: ColumnPanel
 - components:
   - components:
@@ -91,8 +91,10 @@ components:
           padding: [null, 3, 19, null]
         text: Logged in as
       type: Label
-    - layout_properties: {width: 35.5469}
-      name: image_1
+    - data_bindings:
+      - {code: 'self.item['''']', property: tooltip, writeback: false}
+      layout_properties: {width: 35.5469}
+      name: yoti_loggin_in_box
       properties:
         display_mode: shrink_to_fit
         height: 44.81640625
@@ -111,21 +113,16 @@ components:
 - components:
   - layout_properties: {grid_position: 'XKGXJS,GQFTCY'}
     name: button_1
-    properties: {font_size: 16, foreground: 'theme:On Secondary Container', icon: 'fa:home', role: null, text: Home}
+    properties: {background: '', font_size: 14, foreground: 'theme:On Surface Variant', icon: 'fa:home', role: null, text: Home}
     type: Button
   - layout_properties: {grid_position: 'BGKMDT,HKTNKH'}
     name: button_2
-    properties: {bold: true, font_size: 18, foreground: 'theme:On Secondary Container', icon: 'fa:info', text: ''}
-    type: Button
-  - event_bindings: {click: button_3_click}
-    layout_properties: {grid_position: 'YGZQPY,QHESNT'}
-    name: button_3
-    properties: {font_size: 18, foreground: 'theme:On Secondary Container', icon: 'fa:newspaper-o', text: ''}
+    properties: {bold: true, font_size: 14, foreground: 'theme:On Surface Variant', icon: 'fa:info', text: About}
     type: Button
   - event_bindings: {click: link_1_click}
     layout_properties: {grid_position: 'KMKEXR,CCWELL'}
     name: link_1
-    properties: {align: center, font_size: 18, icon: 'fa:database', role: null, text: ''}
+    properties: {align: center, font_size: 14, icon: 'fa:database', role: null, text: Admin}
     type: Link
   - layout_properties: {grid_position: 'LLIOVL,NGOQTF'}
     name: spacer_1
@@ -137,6 +134,6 @@ components:
   type: ColumnPanel
 container:
   event_bindings: {show: form_show}
-  properties: {html: '@theme:standard-page.html'}
+  properties: {background: 'theme:Surface', html: '@theme:standard-page.html'}
   type: HtmlTemplate
 is_package: true

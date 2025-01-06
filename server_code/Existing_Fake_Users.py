@@ -97,8 +97,4 @@ existing_users = [
 #         existing_users.append(new_user)
 #         return new_user
 
-def select_user():
-  new_user = generate_new_user()
-  print(f"remember_me_id from generate_new_user: {new_user['rememberMeId']}")
-  return new_user
 

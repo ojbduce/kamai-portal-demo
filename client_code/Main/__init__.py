@@ -14,28 +14,21 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    # Hack this for now. Due to having to have an external node QR Code we will need to return this
-    # from the api call and pass as an argument to new session and force login. Otherwise callback is just Open
-    #Form is same session!
-    self.get_remember_me_id = "XttxTVjEY8GebX+izgbj1oMsLZ/WFJk+uSAow9ezq2fuZ4WcJGsy8ydHCmvNUbXp"
-    anvil.js.window.console.log("Anvil launching. Logging in User")
+    # FUNCTION: GET USER FROM HASH URL PARAMETERS 
+    anvil.js.window.console.log("Kaimai Home Page. Logging in User")
     try:
-      anvil.js.window.console.log("Trying anvil.users.get_user")
-      user = anvil.users.get_user(allow_remembered=True) #None creating null type error
-      # user = anvil.users.get_user()['remember_me_id'] #is None 
+      user = anvil.users.get_user(allow_remembered=True) #we want to be using the Usets Service expliticitly.
+      print(user) 
       if user and 'remember_me_id' in user:
-        anvil.js.window.console.log("User found Client side")
+        anvil.js.window.console.log("User Remember ID Found")
+        # YOTI IMAGE BOX TOOLTIP = REMEMBER_ME_ID. USE DATA-BINDING?? REPLACE LABEL BELOW
         #self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
-      elif user is not None:
-        anvil.js.window.console.log("User found Client side")
-        # self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
-        self.label_logged_in.text = f"User: {user}"
       elif user is None:
-        anvil.js.window.console.log("Trying server call force_login")
-        user = anvil.server.call('force_login_user')
+        anvil.js.window.console.log("New Guest User")
+        user = anvil.server.call('fall_back_user')
       else:
-        alert("User not found Client-side")
-        self.label_logged_in.text = "Waiting for Yoti log-in"
+        anvil.js.window.console.log("User Fallback Failed")
+        anvil.users.login_with_form(allow_remembered=True)
     except Exception as e:
       anvil.js.window.console.log("Error pinpointed as anvil,users.get_user generating {e} null type.User not found Client side")
       
