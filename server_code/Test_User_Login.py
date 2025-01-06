@@ -20,7 +20,14 @@ FALL_BACK_USER = app_tables.users.get(remember_me_id=FALL_BACK_ID)
 
 @anvil.server.callable
 def fall_back_user():
-  return FALL_BACK_USER
+  print("Hit fall_back_user server side")
+  user = anvil.users.force_login(FALL_BACK_USER)
+  print(f"Reverting to fall-back user {user}")
+  return anvil.users.get_user(allow_remembered=True)
+
+def force_login(user):
+  log_in = anvil.users.force_login(user)
+  return anvil.users.get_user(allow_remembered=True)
   
 # 1. USER TESTING. CREATE OR A NEW USER OR FAKE AN EXISTING USER 2. LOG-IN THE USER
 

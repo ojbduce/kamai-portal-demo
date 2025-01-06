@@ -14,35 +14,43 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    # FUNCTION: GET USER FROM HASH URL PARAMETERS 
+    self.yoti_loggin_in_box.visible = False
+    # TO DO: FUNCTION: GET USER FROM HASH URL PARAMETERS 
+    #Login with Yoti remember_me_id. Fallback to default or Login with form.
     anvil.js.window.console.log("Kaimai Home Page. Logging in User")
     try:
       user = anvil.users.get_user(allow_remembered=True) #we want to be using the Usets Service expliticitly.
-      print(user) 
-      if user and 'remember_me_id' in user:
-        anvil.js.window.console.log("User Remember ID Found")
-        # YOTI IMAGE BOX TOOLTIP = REMEMBER_ME_ID. USE DATA-BINDING?? REPLACE LABEL BELOW
-        #self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
-      elif user is None:
-        anvil.js.window.console.log("New Guest User")
-        user = anvil.server.call('fall_back_user')
+      print(f"Client has found user {user}") 
+      self.show_yoti_logged_in_box(user)
+      if user is None:
+        print("Hit if user is None") #OK
+        self.use_fallback_user()
+        #user = anvil.server.call('fall_back_user')
+        anvil.js.window.console.log("Enrolling Guest User")
+        print(f"Reverting to default user {user['remember_me_id']}")
+        if user:
+          self.show_yoti_logged_in_box()
       else:
-        anvil.js.window.console.log("User Fallback Failed")
+        anvil.js.window.console.log("Reverting to Login Form")
         anvil.users.login_with_form(allow_remembered=True)
     except Exception as e:
-      anvil.js.window.console.log("Error pinpointed as anvil,users.get_user generating {e} null type.User not found Client side")
-      
-    # if user and 'remember_me_id' in user:
-    #   self.label_logged_in.text = f"User: {anvil.users.get_user()['remember_me_id']}"
-    # else:
-    #   self.label_logged_in.text = "Waiting for Yoti log-in"
-    #self.label_logged_in.text = "Awaiting Auto-log-in..."
+      anvil.js.window.console.log("Error anvil,users.get_user generating {e} null type.User not found Client side")
     self.outlined_card_digi_leaders.visible = True
     self.card_database.visible = False 
     self.label_title.visible = True
 
-    def force_login(remember_me_id):
-      user = anvil.server.call('force_login','remember_me_id')
+  def use_fallback_user(self):
+    print("Hit fallback user func")
+    user = anvil.server.call('fall_back_user')
+    return user
+    
+  def show_yoti_logged_in_box(self,user):
+    if user and 'remember_me_id' in user:
+      anvil.js.window.console.log("Existing user recognized.")
+      self.yoti_loggin_in_box.visible = True
+      self.yoti_loggin_in_box.tooltip = "Logged in with Yoti"
+    else:
+      print("No user logged-in")
       
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
@@ -101,9 +109,7 @@ class Main(MainTemplate):
     """This method is called when the button is clicked"""
     pass
     
-  def get_remember_me_id(self):
-    remember_me_id = anvil.server.call('return_remember_me_id')
-    return remember_me_id
+ 
     
 
 

@@ -133,7 +133,7 @@ components:
   properties: {}
   type: ColumnPanel
 container:
-  event_bindings: {show: form_show}
+  event_bindings: {}
   properties: {background: 'theme:Surface', html: '@theme:standard-page.html'}
   type: HtmlTemplate
 is_package: true
