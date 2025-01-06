@@ -18,19 +18,17 @@ class Main(MainTemplate):
     self.yoti_loggin_in_box.visible = False
     # self.button_show_data.visible = False
     # anvil.server.call('hello')
-    # TO DO: FUNCTION: GET USER FROM HASH URL PARAMETERS 
-    #Login with Yoti remember_me_id. Fallback to default or Login with form.
     anvil.js.window.console.log("Kaimai Home Page. Logging in User")
     try:
       print("Logging in User")
       user = anvil.users.get_user(allow_remembered=True) #we want to be using the Usets Service expliticitly.
       print(f"Client has found user {user['email']}") 
-      self.show_yoti_logged_in_box()
+      # self.show_yoti_logged_in_box()
       if user is None:
         print("Hit if user is None") #OK
-        # anvil.server.call('hello')
-        self.use_fallback_user()#won't call
-        #user = anvil.server.call('fall_back_user') # won't call
+        # anvil.server.call('hello') #OK
+        #user = anvil.server.call('fall_back_user') # won't call so try separate func
+        self.use_fallback_user()#was fine now doesn't call
         anvil.js.window.console.log("Enrolling Guest User")
         print(f"Reverting to default user {user['remember_me_id']}")
         user = anvil.users.get_user(allow_remembered=True)
@@ -53,7 +51,7 @@ class Main(MainTemplate):
     
   def show_yoti_logged_in_box(self):
     print("Hit show_yoti_login func")
-    time.sleep = 1
+    # time.sleep = 1
     self.yoti_loggin_in_box.visible = True
     self.yoti_loggin_in_box.tooltip = "Logged in with Yoti"
     # self.button_show_data.visible = True
