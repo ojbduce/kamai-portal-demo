@@ -22,6 +22,7 @@ class Main(MainTemplate):
     #Login with Yoti remember_me_id. Fallback to default or Login with form.
     anvil.js.window.console.log("Kaimai Home Page. Logging in User")
     try:
+      print("Logging in User")
       user = anvil.users.get_user(allow_remembered=True) #we want to be using the Usets Service expliticitly.
       print(f"Client has found user {user['email']}") 
       self.show_yoti_logged_in_box()
