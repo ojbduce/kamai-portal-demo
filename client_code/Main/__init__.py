@@ -57,6 +57,11 @@ class Main(MainTemplate):
     self.yoti_loggin_in_box.visible = True
     self.yoti_loggin_in_box.tooltip = "Logged in with Yoti"
     self.button_show_data.visible = True
+
+  def get_data(self):
+    rows = app_tables.reports.search()
+    self.repeating_panel_1.items = rows
+    #print(rows)# Bind rows to the Repeating Panel
     
       
   def link_1_click(self, **event_args):
