@@ -22,11 +22,11 @@ components:
     name: spacer_5
     properties: {height: 0}
     type: Spacer
-  - layout_properties: {grid_position: 'DVKBJT,ZYMKWX'}
+  - layout_properties: {grid_position: 'DVKBJT,FIMNIS'}
     name: image_yoti_logo
     properties:
       display_mode: shrink_to_fit
-      height: 33.94921875
+      height: '26'
       horizontal_align: right
       margin: ['9', null, '6', null]
       source: _/theme/yoti-logo.png
@@ -37,7 +37,7 @@ components:
   - layout_properties: {grid_position: 'DVKBJT,LHLKGG'}
     name: image_gig_id
     properties:
-      height: 33.31640625
+      height: '26'
       horizontal_align: left
       margin: [9, null, '6', null]
       source: _/theme/digital-id.png
