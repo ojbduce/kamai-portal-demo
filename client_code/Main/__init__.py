@@ -8,6 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.users
+# import time
 
 
 class Main(MainTemplate):
@@ -15,20 +16,25 @@ class Main(MainTemplate):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
     self.yoti_loggin_in_box.visible = False
+    # self.button_show_data.visible = False
+    # anvil.server.call('hello')
     # TO DO: FUNCTION: GET USER FROM HASH URL PARAMETERS 
     #Login with Yoti remember_me_id. Fallback to default or Login with form.
     anvil.js.window.console.log("Kaimai Home Page. Logging in User")
     try:
       user = anvil.users.get_user(allow_remembered=True) #we want to be using the Usets Service expliticitly.
-      print(f"Client has found user {user}") 
-      self.show_yoti_logged_in_box(user)
+      print(f"Client has found user {user['email']}") 
+      self.show_yoti_logged_in_box()
       if user is None:
         print("Hit if user is None") #OK
-        self.use_fallback_user()
-        #user = anvil.server.call('fall_back_user')
+        # anvil.server.call('hello')
+        self.use_fallback_user()#won't call
+        #user = anvil.server.call('fall_back_user') # won't call
         anvil.js.window.console.log("Enrolling Guest User")
         print(f"Reverting to default user {user['remember_me_id']}")
+        user = anvil.users.get_user(allow_remembered=True)
         if user:
+          print(f" User logged-in: {user['email']}")
           self.show_yoti_logged_in_box()
       else:
         anvil.js.window.console.log("Reverting to Login Form")
@@ -44,13 +50,13 @@ class Main(MainTemplate):
     user = anvil.server.call('fall_back_user')
     return user
     
-  def show_yoti_logged_in_box(self,user):
-    if user and 'remember_me_id' in user:
-      anvil.js.window.console.log("Existing user recognized.")
-      self.yoti_loggin_in_box.visible = True
-      self.yoti_loggin_in_box.tooltip = "Logged in with Yoti"
-    else:
-      print("No user logged-in")
+  def show_yoti_logged_in_box(self):
+    print("Hit show_yoti_login func")
+    time.sleep = 1
+    self.yoti_loggin_in_box.visible = True
+    self.yoti_loggin_in_box.tooltip = "Logged in with Yoti"
+    # self.button_show_data.visible = True
+    
       
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
@@ -107,7 +113,19 @@ class Main(MainTemplate):
 
   def button_3_click(self, **event_args):
     """This method is called when the button is clicked"""
-    pass
+    self.get_data()
+    self.outlined_card_digi_leaders.visible = False
+    self.card_database.visible = True
+    self.label_title.visible = False
+
+  def button_show_data_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.get_data()
+    self.outlined_card_digi_leaders.visible = False
+    self.card_database.visible = True
+    self.label_title.visible = False
+
+
     
  
     
