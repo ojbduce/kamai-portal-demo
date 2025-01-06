@@ -24,7 +24,7 @@ components:
           type: Image
         layout_properties: {grid_position: 'TJTTXD,OUTJSR'}
         name: link_digi_leaders_image
-        properties: {url: 'https://adept-right-category.anvil.app/'}
+        properties: {url: 'https://super-kaleidoscopic-wader.anvil.app'}
         type: Link
       - layout_properties: {grid_position: 'DYWEZX,JMSICL'}
         name: link_3
