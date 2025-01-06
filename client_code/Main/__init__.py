@@ -8,7 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.users
-# import time
+
 
 
 class Main(MainTemplate):
@@ -16,13 +16,17 @@ class Main(MainTemplate):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
     self.yoti_loggin_in_box.visible = False
-    # self.button_show_data.visible = False
+    self.button_show_data.visible = False
     # anvil.server.call('hello')
     anvil.js.window.console.log("Kaimai Home Page. Logging in User")
     try:
       print("Logging in User")
       user = anvil.users.get_user(allow_remembered=True) #we want to be using the Usets Service expliticitly.
-      print(f"Client has found user {user['email']}") 
+      if user:
+        print(f"Client has found user {user['email']}")
+        self.show_yoti_logged_in_box()
+      else:
+        print("No Yoti User found")
       # self.show_yoti_logged_in_box()
       if user is None:
         print("Hit if user is None") #OK
@@ -30,7 +34,6 @@ class Main(MainTemplate):
         #user = anvil.server.call('fall_back_user') # won't call so try separate func
         self.use_fallback_user()#was fine now doesn't call
         anvil.js.window.console.log("Enrolling Guest User")
-        print(f"Reverting to default user {user['remember_me_id']}")
         user = anvil.users.get_user(allow_remembered=True)
         if user:
           print(f" User logged-in: {user['email']}")
@@ -51,10 +54,9 @@ class Main(MainTemplate):
     
   def show_yoti_logged_in_box(self):
     print("Hit show_yoti_login func")
-    # time.sleep = 1
     self.yoti_loggin_in_box.visible = True
     self.yoti_loggin_in_box.tooltip = "Logged in with Yoti"
-    # self.button_show_data.visible = True
+    self.button_show_data.visible = True
     
       
   def link_1_click(self, **event_args):

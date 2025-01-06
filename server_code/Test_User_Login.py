@@ -15,7 +15,7 @@ from .Existing_Fake_Users import existing_users
 
 import anvil.secrets
 
-# FALL_BACK_ID = 'XttxTVjEY8GebX+izgbj1oMsLZ/WFJk+uSAow9ezq2fuZ4WcJGsy8ydHCmvNUbXp'
+BACKUP_FALL_BACK_ID = 'XttxTVjEY8GebX+izgbj1oMsLZ/WFJk+uSAow9ezq2fuZ4WcJGsy8ydHCmvNUbXp'
 # FALL_BACK_USER = app_tables.users.get(remember_me_id=FALL_BACK_ID)
 
 # FALL_BACK_ID_REAL = anvil.secrets("fallback_id")
@@ -27,16 +27,27 @@ def hello():
   
 @anvil.server.callable
 def fall_back_user():
-  print("Hit fall_back_user server side")
-  fall_back_id = anvil.secrets('fallback_id')
-  fall_back_user = app_tables.users.get(remember_me_id=fall_back_id)
-  user = anvil.users.force_login(fall_back_user)
-  print(f"Reverting to fall-back user {user['remember_me_id']}")
-  return anvil.users.get_user(allow_remembered=True)
+  print("Hit fall_back_user server side function")
+  fall_back_id = anvil.secrets.get_secret("fall_back_id")
+  if fall_back_id:
+    print(f"Got fall back ID. {fall_back_id}")
+    fall_back_user = app_tables.users.get(remember_me_id=fall_back_id)
+    user = anvil.users.force_login(fall_back_user)
+    print(f"Reverting to fall-back user. Logging in {user['remember_me_id']}")
+    return anvil.users.get_user(allow_remembered=True)
+  elif fall_back_id is None:
+    fall_back_id = BACKUP_FALL_BACK_ID
+    print("Got fall fall back ID.")
+    fall_back_user = app_tables.users.get(remember_me_id=fall_back_id)
+    user = anvil.users.force_login(fall_back_user)
+    print(f"Reverting to fall fall-back user {user['remember_me_id']}")
+    return anvil.users.get_user(allow_remembered=True)
+  else:
+    print("No fallback!")
 
-def force_login(user):
-  log_in = anvil.users.force_login(user)
-  return anvil.users.get_user(allow_remembered=True)
+# def force_login(user):
+#   log_in = anvil.users.force_login(user)
+#   return anvil.users.get_user(allow_remembered=True)
   
 # 1. USER TESTING. CREATE OR A NEW USER OR FAKE AN EXISTING USER 2. LOG-IN THE USER
 
