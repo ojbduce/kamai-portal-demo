@@ -10,19 +10,20 @@ from anvil.tables import app_tables
 import anvil.users
 
 
-
 class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    self.yoti_loggin_in_box.visible = False
+    self.yoti_loggin_in_box.visible = False #MOVE UI SET UP TO OWN METHOD?
     self.button_show_data.visible = False
     # anvil.server.call('hello')
     anvil.js.window.console.log("Kaimai Home Page. Logging in User")
     try:
+      anvil.js.window.console.log("Logging In USER")
       print("Logging in User")
       user = anvil.users.get_user(allow_remembered=True) #we want to be using the Usets Service expliticitly.
       if user:
+        anvil.js.window.console.log("Client has found User")
         print(f"Client has found user {user['email']}")
         self.show_yoti_logged_in_box()
       else:
@@ -30,10 +31,9 @@ class Main(MainTemplate):
       # self.show_yoti_logged_in_box()
       if user is None:
         print("Hit if user is None") #OK
-        # anvil.server.call('hello') #OK
         #user = anvil.server.call('fall_back_user') # won't call so try separate func
         self.use_fallback_user()#was fine now doesn't call
-        anvil.js.window.console.log("Enrolling Guest User")
+        anvil.js.window.console.log("Fallback User")
         user = anvil.users.get_user(allow_remembered=True)
         if user:
           print(f" User logged-in: {user['email']}")

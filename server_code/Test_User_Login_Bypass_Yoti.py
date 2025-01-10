@@ -24,23 +24,24 @@ BACKUP_FALL_BACK_ID = 'XttxTVjEY8GebX+izgbj1oMsLZ/WFJk+uSAow9ezq2fuZ4WcJGsy8ydHC
 @anvil.server.callable
 def hello():
   print("Hello")
-  
+
+#!!OUTSIDE YOTI LOGIN PIPELINE. FALLBACK FOR CLIENT SIDE LOGIN / BYPASS YOTI FOR TESTING
 @anvil.server.callable
-def fall_back_user():
+def fall_back_user(): #change to test user
   print("Hit fall_back_user server side function")
   fall_back_id = anvil.secrets.get_secret("fall_back_id")
   if fall_back_id:
     print(f"Got fall back ID. {fall_back_id}")
     fall_back_user = app_tables.users.get(remember_me_id=fall_back_id)
     user = anvil.users.force_login(fall_back_user)
-    print(f"Reverting to fall-back user. Logging in {user['remember_me_id']}")
+    print(f"Reverting to SECRET fall-back user. Logging in {user['remember_me_id']}")
     return anvil.users.get_user(allow_remembered=True)
   elif fall_back_id is None:
-    fall_back_id = BACKUP_FALL_BACK_ID
+    fall_back_id = BACKUP_FALL_BACK_ID # this is nonsensisal?
     print("Got fall fall back ID.")
     fall_back_user = app_tables.users.get(remember_me_id=fall_back_id)
     user = anvil.users.force_login(fall_back_user)
-    print(f"Reverting to fall fall-back user {user['remember_me_id']}")
+    print(f"Reverting to OPEN fall-back user {user['remember_me_id']}")
     return anvil.users.get_user(allow_remembered=True)
   else:
     print("No fallback!")
@@ -51,15 +52,9 @@ def fall_back_user():
   
 # 1. USER TESTING. CREATE OR A NEW USER OR FAKE AN EXISTING USER 2. LOG-IN THE USER
 
-def generate_new_user():
-  from faker import Faker
-  fake = Faker()
-  return {
-        "email": fake.email(),
-        "rememberMeId": secrets.token_urlsafe(32),
-        "verificationDate": datetime.now()
-}
 
+  
+  
 # def select_user(existing_weight=0):
 #     if random.random() < existing_weight:
 #         return random.choice(existing_users)
@@ -68,40 +63,40 @@ def generate_new_user():
 #         existing_users.append(new_user)
 #         return new_user
 
-def select_user():
-  new_user = generate_new_user()
-  print(f"remember_me_id from generate_new_user: {new_user['rememberMeId']}")
-  return new_user
+# def select_user():
+#   new_user = generate_new_user()
+#   print(f"remember_me_id from generate_new_user: {new_user['rememberMeId']}")
+#   return new_user
 
+
+# # @anvil.server.callable
+# # def add_test_user():
+# #   user_data = generate_new_user()
+# #   remember_me_id = user_data.get('rememberMeId')
+# #   print(f"remember_me_id from select_user {remember_me_id}")
+# #   verification_date = user_data.get('verificationDate')
+# #   email = user_data.get('email')
+# #   existing_user = app_tables.users.get(remember_me_id=remember_me_id) #get row here?
+# #     try:
+# #         new_user = app_tables.users.add_row(
+# #             remember_me_id=remember_me_id, 
+# #             verification_date= verification_date,
+# #             email=email)
+# #         print(f"new_user is users table row? {new_user}")
+# #         login_test_user(new_user) #this should be the row 
+# #         return {"status": "success", "message": "User added successfully"}
+# #     except Exception as e:
+# #         print(f"Error adding to Data Table: {e}") 
+# #         return {"status": "error", "message": str(e)}, 500
 
 # @anvil.server.callable
-# def add_test_user():
-#   user_data = generate_new_user()
-#   remember_me_id = user_data.get('rememberMeId')
-#   print(f"remember_me_id from select_user {remember_me_id}")
-#   verification_date = user_data.get('verificationDate')
-#   email = user_data.get('email')
-#   existing_user = app_tables.users.get(remember_me_id=remember_me_id) #get row here?
-#     try:
-#         new_user = app_tables.users.add_row(
-#             remember_me_id=remember_me_id, 
-#             verification_date= verification_date,
-#             email=email)
-#         print(f"new_user is users table row? {new_user}")
-#         login_test_user(new_user) #this should be the row 
-#         return {"status": "success", "message": "User added successfully"}
-#     except Exception as e:
-#         print(f"Error adding to Data Table: {e}") 
-#         return {"status": "error", "message": str(e)}, 500
-
-@anvil.server.callable
-def login_test_user(user_row):
-    print(f"Hit login with user row {user_row}")
-    if user_row is not None:
-      anvil.users.force_login(user_row)
-      print(f"user: {user_row} is logged-in?")
-      return user_row['remember_me_id']
-    else:
-      print("test_user_login has returned None")
-      return None
+# def login_test_user(user_row):
+#     print(f"Hit login with user row {user_row}")
+#     if user_row is not None:
+#       anvil.users.force_login(user_row)
+#       print(f"user: {user_row} is logged-in?")
+#       return user_row['remember_me_id']
+#     else:
+#       print("test_user_login has returned None")
+#       return None
 
