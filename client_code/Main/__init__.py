@@ -24,10 +24,11 @@ class Main(MainTemplate):
       print("Logging in User")
       user = anvil.users.get_user(allow_remembered=True) #we want to be using the Usets Service expliticitly.
       if user:
-        anvil.js.window.console.log("Client has found User")
-        print(f"Client has found user {user['remember_me_id']}")
+        anvil.js.window.console.log("Client has found Existing User")
+        print(f"Client has found Existing user {user['remember_me_id']}")
         self.remember_me_id = user['remember_me_id']
         self.show_yoti_logged_in_box()
+        anvil.server.call('log_in_embedded_app', self.remember_me_id)
       else:
         print("No Yoti User found")
       # self.show_yoti_logged_in_box()
@@ -136,9 +137,11 @@ class Main(MainTemplate):
 
   def link_digi_leaders_image_click(self, **event_args):
     """This method is called when the link is clicked"""
-    url = 'https://super-kaleidoscopic-wader.anvil.app/' + self.remember_me_id
-    print(f"URL is {url}")
+    url = 'https://adept-right-category.anvil.app'
     self.link_digi_leaders_image.url =url
+    # url = 'https://super-kaleidoscopic-wader.anvil.app/' + self.remember_me_id
+    # print(f"URL is {url}")
+    # self.link_digi_leaders_image.url =url
     
     
 

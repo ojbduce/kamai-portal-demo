@@ -68,6 +68,7 @@ def receive_user_details():
 @anvil.server.callable
 def log_in_embedded_app(remember_me_id):
     try:
+        print("Hit login embedded app.")
         response = requests.post(
             "https://super-kaleidoscopic-wader.anvil.app/_/api/force-login",  # Ensure the correct endpoint
             json={"remember_me_id": remember_me_id}
