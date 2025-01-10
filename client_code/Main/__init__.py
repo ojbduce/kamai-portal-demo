@@ -136,7 +136,7 @@ class Main(MainTemplate):
 
   def link_digi_leaders_image_click(self, **event_args):
     """This method is called when the link is clicked"""
-    url = 'https://adept-right-category.anvil.app/' + self.remember_me_id
+    url = 'https://super-kaleidoscopic-wader.anvil.app/' + self.remember_me_id
     print(f"URL is {url}")
     self.link_digi_leaders_image.url =url
     
