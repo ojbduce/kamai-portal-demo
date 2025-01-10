@@ -54,6 +54,21 @@ db_schema:
       type: datetime
     server: full
     title: Sessions
+  tokens:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: tokens
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: user
+      target: users
+      type: link_single
+    - admin_ui: {order: 2, width: 200}
+      name: created
+      type: datetime
+    server: full
+    title: Tokens
   users:
     client: full
     columns:
