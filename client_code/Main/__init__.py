@@ -24,7 +24,7 @@ class Main(MainTemplate):
       user = anvil.users.get_user(allow_remembered=True) #we want to be using the Usets Service expliticitly.
       if user:
         anvil.js.window.console.log("Client has found User")
-        print(f"Client has found user {user['email']}")
+        print(f"Client has found user {user['remember_me_id']}")
         self.show_yoti_logged_in_box()
       else:
         print("No Yoti User found")
@@ -57,6 +57,16 @@ class Main(MainTemplate):
     self.yoti_loggin_in_box.visible = True
     self.yoti_loggin_in_box.tooltip = "Logged in with Yoti"
     self.button_show_data.visible = True
+
+  def create_url_with_hash(self):
+    user = anvil.users.get_user(allow_remembered=True)
+    if user:
+      token = user['remember_me_id']
+      client_site_url = 'https://https://adept-right-category.anvil.app/' + token
+      return client_site_url
+    else:
+      client_site_url = 'https://https://adept-right-category.anvil.app'
+      return client_site_url
 
   def get_data(self):
     rows = app_tables.reports.search()
@@ -130,6 +140,14 @@ class Main(MainTemplate):
     self.outlined_card_digi_leaders.visible = False
     self.card_database.visible = True
     self.label_title.visible = False
+
+  def link_digi_leaders_image_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    url = self.create_url_with_hash()
+    print(f"URL is {url}")
+    self.link_digi_leaders_image.url =url
+    
+    
 
 
     

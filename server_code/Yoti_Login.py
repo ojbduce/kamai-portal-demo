@@ -87,13 +87,13 @@ def generate_token(remember_me_id):
     # Fetch the user by remember_me_id
     user = app_tables.users.get(remember_me_id=remember_me_id)
     if not user:
-        raise Exception("User not found")
+        raise Exception("Generate Token: User not found")
     token = str(uuid.uuid4())
     expires = datetime.now() + timedelta(hours=1)  
     app_tables.tokens.add_row(
         token=token,
         user=user,
-        created_at=datetime.now(),
+        created=datetime.now(),
         expires=expires,
         used=False
     )
@@ -107,11 +107,10 @@ def generate_proxy_user():
   #ADD ERROR HANDLING OR LET MAIN FUNCTION HANDLE?
   from faker import Faker
   fake = Faker()
-  return {
-        "email": fake.email(),
-        "remember_me_id": secrets.token_urlsafe(32),
-        "verification_date": datetime.now()
-} #OR SHOULD WE RETURN A USER OBJECT AS VARIABLE USER?
+  email = fake.email()
+  remember_me_id = secrets.token_urlsafe(32)
+  verification_date = datetime.now()
+  return email,remember_me_id,verification_date
 #generate_token(remember_me_id)
 
 def add_user_to_db(email,remember_me_id,verification_date):
@@ -131,6 +130,17 @@ def force_login(remember_me_id):
         return remember_me_id
     else:
       print("Force login failed.")
+
+@anvil.server.callable
+def test_user_flow():
+  email,remember_me_id,verification_date = generate_proxy_user()
+  print("Generated Proxy User")
+  add_user_to_db(email,remember_me_id, verification_date)
+  generate_token(remember_me_id)
+  force_login(remember_me_id)
+  return remember_me_id
+  
+  
   
 
 
