@@ -8,8 +8,8 @@ from datetime import datetime
 import uuid
 import anvil.tables as tables
 from anvil.tables import app_tables
-import bcrypt
 import secrets
+
     
 #Main Function
 @anvil.server.http_endpoint("/yka", methods=["POST"], enable_cors=True)
@@ -19,79 +19,68 @@ def receive_user_details():
     print(f"Data Received: {bool(userData)}")  
     print(f"Keys received: {userData.keys()}")  
     print(f"Data dump: {userData}")  
+    
+    # Check required fields
     if not all(key in userData for key in ['email', 'rememberMeId', 'verificationDate']):
         return {"status": "error", "message": "Missing required fields"}, 400
+    
     print("All data available. Adding to the Data Table")
     email = userData['email']
-    print(f"Test printing email address: {email}")
     remember_me_id = userData['rememberMeId']
     verification_date = datetime.now()
-  #split here. Split for testing version but log-in can be a separate function.
-    existing_user = app_tables.users.search(remember_me_id=remember_me_id)
+    
+    # Check if the user already exists
+    existing_user = app_tables.users.get(remember_me_id=remember_me_id)
     if existing_user:
-      try:
-        login_yoti(remember_me_id,verification_date, email)
-        print("Existing user logged in")
+        anvil.users.force_login(existing_user)
+        print("Existing user logged into App 1.")
+        
+        # Try logging into the embedded app
+        try:
+            log_in_embedded_app(remember_me_id)
+            print("Existing User logged into Embedded App.")
+        except Exception as e:
+            print(f"Login to Embedded App failed: {e}")
+        
         return {"status": "success", "message": "Existing user logged in"}
-      except Exception as e:
-        print(f"login_yoti_failed {e}")
-        return {"status": "error", "message": str(e)}, 500
+    
     else:
-      try:
-        add_user_to_db(email,remember_me_id,verification_date)
-        login_yoti(remember_me_id,verification_date,email)
-        print("New user logged in")
-        return {"status": "success", "message": "User added successfully"} # continue in demo mode!
-      except Exception as e:
-          print(f"Error adding to Data Table: {e}") 
-          return {"status": "error", "message": str(e)}, 500
+        # Create and log in new user
+        try:
+            new_user = add_user_to_db(email, remember_me_id, verification_date)
+            anvil.users.force_login(new_user)
+            print("New user logged into App 1.")
+            
+            # Try logging into the embedded app
+            try:
+                log_in_embedded_app(remember_me_id)
+                print("New User logged into Embedded App")
+            except Exception as e:
+                print(f"Login to Embedded App failed: {e}")
+        except Exception as e:
+            print(f"Error adding new user to the database: {e}")
+            return {"status": "error", "message": str(e)}, 500
 
-#login_yoti - Main Function
-'''Part of the external verification pipeline. 
-Takes an id received from the api. Not called Client-sde, atm'''
-@anvil.server.callable
-def login_yoti(remember_me_id,verification_date, email):
-    print(f"Hit login with ID{remember_me_id}")
-    #check for existing user
-    user = app_tables.users.get(remember_me_id=remember_me_id)
-    #system_password = anvil.secrets.get_secret('system_password')
-    if user:
-      anvil.users.force_login(user)
-      #ADD API LOGIN TO SECOND SITE FUNCTION CALL
-    #logging remove later
-      print(f"Anvil Users actual user/id check: {anvil.users.get_user()['remember_me_id']}")#OK
-      print(f"Existing Yoti User {remember_me_id} is logged-in")#OK
-      anvil.server.session['remember_me_id'] = remember_me_id # as Users not working Client-side
-      print(f"login_yoti. Server-side success - remember_me_id from server session {anvil.server.session}")
-      user = app_tables.users.get(remember_me_id=remember_me_id)
-      return user #OR RETURN anvil.users.get_user()? TBD / TEST
-      #else fallback / create user for demo purpposes
-    else:
-      generate_proxy_user()
-      print("Generated proxy user")
-      add_user_to_db(email,remember_me_id,verification_date)
-      print("Added proxy user to db")
-      force_login(remember_me_id)
-      print(f"Logged in proxy_use {remember_me_id}")
-      return user #OR RETURN anvil.users.get_user()? TBD/TEST
+        return {"status": "success", "message": "User added successfully"}
 
 @anvil.server.callable
 def log_in_embedded_app(remember_me_id):
-  try:
-          response = requests.post
-              "https://app3.anvil.app/_/api/force-login",
-              json={"remember_me_id": remember_me_id}
-          )
-          response_data = response.json()
-          if response.status_code == 200:
-              print("App 3 login successful:", response_data)
-          else:
-              print("App 3 login failed:", response_data)
-  except Exception as e:
-      print(f"Error calling App 3 force-login API: {e}")
-      
-      return user
+    try:
+        response = requests.post(
+            "https://super-kaleidoscopic-wader.anvil.app/_/api/force-login",  # Ensure the correct endpoint
+            json={"remember_me_id": remember_me_id}
+        )
+        response_data = response.json()
+        if response.status_code == 200:
+            print("Embedded App login successful:", response_data)
+        else:
+            print("Embedded App login failed:", response_data)
+    except Exception as e:
+        print(f"Error logging into Embedded App: {e}")
 
+      
+
+#Bypass Yoti for testing
 @anvil.server.callable
 def generate_proxy_user():
   #ADD IP ADDRESS? TBD
