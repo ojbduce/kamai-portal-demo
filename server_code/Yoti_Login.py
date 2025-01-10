@@ -138,6 +138,7 @@ def test_user_flow():
   add_user_to_db(email,remember_me_id, verification_date)
   generate_token(remember_me_id)
   force_login(remember_me_id)
+  log_in_embedded_app(remember_me_id)
   return remember_me_id
   
   
