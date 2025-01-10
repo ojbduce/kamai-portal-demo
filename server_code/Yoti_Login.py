@@ -82,24 +82,7 @@ def log_in_embedded_app(remember_me_id):
         print(f"Error logging into Embedded App: {e}")
 
 
-@anvil.server.callable
-def generate_token(remember_me_id):
-    from datetime import datetime, timedelta
-    # Fetch the user by remember_me_id
-    user = app_tables.users.get(remember_me_id=remember_me_id)
-    if not user:
-        raise Exception("Generate Token: User not found")
-    token = str(uuid.uuid4())
-    expires = datetime.now() + timedelta(hours=1)  
-    app_tables.tokens.add_row(
-        token=token,
-        user=user,
-        created=datetime.now(),
-        expires=expires,
-        used=False
-    )
-    return token
-     
+
 
 #Bypass Yoti for testing
 @anvil.server.callable
@@ -123,6 +106,25 @@ def add_user_to_db(email,remember_me_id,verification_date):
   return new_user_row
 
 @anvil.server.callable
+def generate_token(remember_me_id):
+    from datetime import datetime, timedelta
+    # Fetch the user by remember_me_id
+    user = app_tables.users.get(remember_me_id=remember_me_id)
+    if not user:
+        raise Exception("Generate Token: User not found")
+    token = str(uuid.uuid4())
+    expires = datetime.now() + timedelta(hours=1)  
+    app_tables.tokens.add_row(
+        token=token,
+        user=user,
+        created=datetime.now(),
+        expires=expires,
+        used=False
+    )
+    return token
+     
+
+@anvil.server.callable
 def force_login(remember_me_id):
     user = app_tables.users.get(remember_me_id=remember_me_id)
     if user:
@@ -139,7 +141,7 @@ def test_user_flow():
   add_user_to_db(email,remember_me_id, verification_date)
   generate_token(remember_me_id)
   force_login(remember_me_id)
-  log_in_embedded_app(remember_me_id)
+  log_in_embedded_app(remember_me_id) # trying Anvil Users does not work.
   return remember_me_id
   
   

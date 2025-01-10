@@ -34,6 +34,7 @@ class Main(MainTemplate):
       # self.show_yoti_logged_in_box()
       if user is None:
         print("Hit if user is None") #OK
+        #Slightly redundant this fallback as we have a synthetic loin button option from QR_login
         #user = anvil.server.call('fall_back_user') # won't call so try separate func
         self.use_fallback_user()#was fine now doesn't call
         anvil.js.window.console.log("Fallback User")
@@ -55,7 +56,15 @@ class Main(MainTemplate):
     print("Hit fallback user func")
     user = anvil.server.call('fall_back_user')
     return user
-    
+
+  def link_digi_leaders_image_click(self, **event_args):
+      """This method is called when the link is clicked"""
+      # url = 'https://adept-right-category.anvil.app' #users does not work
+      # self.link_digi_leaders_image.url =url
+      url = 'https://super-kaleidoscopic-wader.anvil.app/' + self.remember_me_id
+      print(f"URL is {url}")
+      self.link_digi_leaders_image.url =url
+      
   def show_yoti_logged_in_box(self):
     print("Hit show_yoti_login func")
     self.yoti_loggin_in_box.visible = True
@@ -79,54 +88,36 @@ class Main(MainTemplate):
     """This method is called when the button is clicked"""
     open_form('header')
 
-  def url_test_button_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    share_url = anvil.server.call('yoti_session')
-    self.label_return_message.visible = True
-    self.label_return_message.text = share_url
-    if share_url == "Keys not found":
-      Notification("Keys not found")
-    elif share_url == "Error creating share session.":
-      Notification("Error creating share session.")
-    else:
-      Notification("Share_Url test passed")
+  # def url_test_button_click(self, **event_args):
+  #   """This method is called when the button is clicked"""
+  #   share_url = anvil.server.call('yoti_session')
+  #   self.label_return_message.visible = True
+  #   self.label_return_message.text = share_url
+  #   if share_url == "Keys not found":
+  #     Notification("Keys not found")
+  #   elif share_url == "Error creating share session.":
+  #     Notification("Error creating share session.")
+  #   else:
+  #     Notification("Share_Url test passed")
     
 
-  def button_test_bd_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    self.name = 'test_444'
-    app_tables.files.add_row(name = self.name)
-    print("Added file to files table")
-    for row in app_tables.files.search():
-      print(row['name'])
+  # def button_test_bd_click(self, **event_args):
+  #   """This method is called when the button is clicked"""
+  #   self.name = 'test_444'
+  #   app_tables.files.add_row(name = self.name)
+  #   print("Added file to files table")
+  #   for row in app_tables.files.search():
+  #     print(row['name'])
 
-  def button_1_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    anvil.server.call('check_origin')
-
-  def button_server_session_test_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    anvil.server.call('server_session_data')
-
-  def button_cookies_click(self, **event_args):
-    anvil.server.call('cookies')
-    anvil.server.call('server_session_data')
-    """This method is called when the button is clicked"""
+ 
 
   def link_2_click(self, **event_args):
     """This method is called when the link is clicked"""
     alert("Next...")
 
-  def link_2_copy_click(self, **event_args):
-    """This method is called when the link is clicked"""
-    pass
-
-  def button_3_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    self.get_data()
-    self.outlined_card_digi_leaders.visible = False
-    self.card_database.visible = True
-    self.label_title.visible = False
+  # def link_2_copy_click(self, **event_args):
+  #   """This method is called when the link is clicked"""
+  #   pass
 
   def button_show_data_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -135,13 +126,27 @@ class Main(MainTemplate):
     self.card_database.visible = True
     self.label_title.visible = False
 
-  def link_digi_leaders_image_click(self, **event_args):
-    """This method is called when the link is clicked"""
-    url = 'https://adept-right-category.anvil.app'
-    self.link_digi_leaders_image.url =url
-    # url = 'https://super-kaleidoscopic-wader.anvil.app/' + self.remember_me_id
-    # print(f"URL is {url}")
-    # self.link_digi_leaders_image.url =url
+  def button_about_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    pass
+
+  
+
+
+ # def button_1_click(self, **event_args):
+  #   """This method is called when the button is clicked"""
+  #   anvil.server.call('check_origin')
+
+  # def button_server_session_test_click(self, **event_args):
+  #   """This method is called when the button is clicked"""
+  #   anvil.server.call('server_session_data')
+
+  # def button_cookies_click(self, **event_args):
+  #   anvil.server.call('cookies')
+  #   anvil.server.call('server_session_data')
+  #   """This method is called when the button is clicked"""
+
+  
     
     
 
