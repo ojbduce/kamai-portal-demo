@@ -76,6 +76,23 @@ def login_yoti(remember_me_id,verification_date, email):
       return user #OR RETURN anvil.users.get_user()? TBD/TEST
 
 @anvil.server.callable
+def log_in_embedded_app(remember_me_id):
+  try:
+          response = requests.post
+              "https://app3.anvil.app/_/api/force-login",
+              json={"remember_me_id": remember_me_id}
+          )
+          response_data = response.json()
+          if response.status_code == 200:
+              print("App 3 login successful:", response_data)
+          else:
+              print("App 3 login failed:", response_data)
+  except Exception as e:
+      print(f"Error calling App 3 force-login API: {e}")
+      
+      return user
+
+@anvil.server.callable
 def generate_proxy_user():
   #ADD IP ADDRESS? TBD
   #ADD ERROR HANDLING OR LET MAIN FUNCTION HANDLE?
