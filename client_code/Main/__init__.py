@@ -14,6 +14,7 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
+    self.remember_me_id = ''
     self.yoti_loggin_in_box.visible = False #MOVE UI SET UP TO OWN METHOD?
     self.button_show_data.visible = False
     # anvil.server.call('hello')
@@ -25,6 +26,7 @@ class Main(MainTemplate):
       if user:
         anvil.js.window.console.log("Client has found User")
         print(f"Client has found user {user['remember_me_id']}")
+        self.remember_me_id = user['remember_me_id']
         self.show_yoti_logged_in_box()
       else:
         print("No Yoti User found")
@@ -37,6 +39,7 @@ class Main(MainTemplate):
         user = anvil.users.get_user(allow_remembered=True)
         if user:
           print(f" User logged-in: {user['email']}")
+          self.remember_me_id = user['remember_me_id']
           self.show_yoti_logged_in_box()
       else:
         anvil.js.window.console.log("Reverting to Login Form")
@@ -57,16 +60,6 @@ class Main(MainTemplate):
     self.yoti_loggin_in_box.visible = True
     self.yoti_loggin_in_box.tooltip = "Logged in with Yoti"
     self.button_show_data.visible = True
-
-  def create_url_with_hash(self):
-    user = anvil.users.get_user(allow_remembered=True)
-    if user:
-      token = user['remember_me_id']
-      client_site_url = 'https://https://adept-right-category.anvil.app/' + token
-      return client_site_url
-    else:
-      client_site_url = 'https://https://adept-right-category.anvil.app'
-      return client_site_url
 
   def get_data(self):
     rows = app_tables.reports.search()
@@ -143,7 +136,7 @@ class Main(MainTemplate):
 
   def link_digi_leaders_image_click(self, **event_args):
     """This method is called when the link is clicked"""
-    url = self.create_url_with_hash()
+    url = 'https://adept-right-category.anvil.app/' + self.remember_me_id
     print(f"URL is {url}")
     self.link_digi_leaders_image.url =url
     
