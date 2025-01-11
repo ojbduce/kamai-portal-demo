@@ -64,4 +64,6 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
   def button_login_test_user_click(self, **event_args):
     """This method is called when the button is clicked"""
     user = anvil.server.call('test_user_flow')
-    return user , open_form('Home')
+    print(f"Test User remember_me_id is: {user}")
+    print(anvil.users.get_user(allow_remembered=True))
+    return user , open_form('Main')
