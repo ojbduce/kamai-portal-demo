@@ -22,8 +22,8 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     # iframe = jQuery("<iframe width='100%' height='450px'>").attr("src",'https://kaimaiyoti.azurewebsites.net')
     # iframe.appendTo(get_dom_node(self.iframe_container))
     self.outlined_card.role = 'mid-card'
-    self.button_login_test_user.visible = False
-    self.button_home.visible = False
+    
+
     
 
   def handle_auth_message(self, event):
@@ -46,10 +46,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
       print(f"{duplicate_count}rows removed") #0 
       
 
-  def button_show_tests_click(self, **event_args):
-    self.button_login_test_user.visible = True
-    self.button_home.visible = True
-    self.button_show_tests.visible = False
+  
 
   def label_loading_show(self, **event_args):
     """This method is called when the Label is shown on the screen"""
@@ -57,9 +54,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     time.sleep(5)
     self.label_loading.visible = False
 
-  def button_home_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    open_form('Home')
+ 
 
   def button_login_test_user_click(self, **event_args):
     """This method is called when the button is clicked"""

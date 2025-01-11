@@ -65,20 +65,10 @@ components:
   name: outlined_card
   properties: {background: 'theme:On Secondary', role: mid-card}
   type: ColumnPanel
-- event_bindings: {click: button_show_tests_click}
-  layout_properties: {slot: default}
-  name: button_show_tests
-  properties: {bold: true, font_size: 10, foreground: 'theme:On Surface Variant', text: Unhide tests}
-  type: Button
 - event_bindings: {click: button_login_test_user_click}
   layout_properties: {slot: default}
   name: button_login_test_user
-  properties: {bold: true, enabled: true, foreground: 'theme:On Surface Variant', role: null, text: Synthetic Login, visible: true}
-  type: Button
-- event_bindings: {click: button_home_click}
-  layout_properties: {slot: default}
-  name: button_home
-  properties: {bold: true, foreground: 'theme:On Surface Variant', role: null, text: Home Test}
+  properties: {background: 'theme:Secondary', bold: true, enabled: true, foreground: 'theme:On Secondary', role: null, text: Synthetic Login, visible: true}
   type: Button
 - layout_properties: {slot: default}
   name: spacer_4
