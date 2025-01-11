@@ -63,7 +63,7 @@ class Main(MainTemplate):
       """This method is called when the link is clicked"""
       # url = 'https://adept-right-category.anvil.app' #users does not work
       # self.link_digi_leaders_image.url =url
-      url = 'https://super-kaleidoscopic-wader.anvil.app/#!?remember_me_id=' + self.remember_me_id
+      url = 'https://adept-right-category.anvil.app/#!?remember_me_id=' + self.remember_me_id
       print(f"URL is {url}")
       self.link_digi_leaders_image.url =url
     
