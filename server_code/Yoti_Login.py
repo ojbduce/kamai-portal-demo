@@ -98,6 +98,7 @@ def generate_proxy_user():
 #generate_token(remember_me_id)
 
 def add_user_to_db(email,remember_me_id,verification_date):
+  print("Adding User to database")
   new_user_row = app_tables.users.add_row(
     email=email,
     remember_me_id=remember_me_id,
@@ -138,7 +139,7 @@ def force_login(remember_me_id):
 def test_user_flow():
   email,remember_me_id,verification_date = generate_proxy_user()
   print("Generated Proxy User")
-  add_user_to_db(email,remember_me_id, verification_date)
+  print(add_user_to_db(email,remember_me_id, verification_date))
   generate_token(remember_me_id)
   force_login(remember_me_id)
   log_in_embedded_app(remember_me_id) # trying Anvil Users does not work.
