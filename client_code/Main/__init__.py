@@ -27,6 +27,7 @@ class Main(MainTemplate):
         anvil.js.window.console.log("Client has found Existing User")
         print(f"Client has found Existing user {user['remember_me_id']}")
         self.remember_me_id = user['remember_me_id']
+        print("self.remember_me_id variable is set")
         self.show_yoti_logged_in_box()
         anvil.server.call('log_in_embedded_app', self.remember_me_id)
       else:
@@ -42,6 +43,7 @@ class Main(MainTemplate):
         if user:
           print(f" User logged-in: {user['email']}")
           self.remember_me_id = user['remember_me_id']
+          print('self.remember_me_id is set')
           self.show_yoti_logged_in_box()
       else:
         anvil.js.window.console.log("Reverting to Login Form")
@@ -61,9 +63,10 @@ class Main(MainTemplate):
       """This method is called when the link is clicked"""
       # url = 'https://adept-right-category.anvil.app' #users does not work
       # self.link_digi_leaders_image.url =url
-      url = 'https://super-kaleidoscopic-wader.anvil.app/' + self.remember_me_id
+      url = 'https://super-kaleidoscopic-wader.anvil.app/#!?remember_me_id=' + self.remember_me_id
       print(f"URL is {url}")
       self.link_digi_leaders_image.url =url
+    
       
   def show_yoti_logged_in_box(self):
     print("Hit show_yoti_login func")
