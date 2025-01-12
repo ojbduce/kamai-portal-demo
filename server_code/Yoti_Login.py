@@ -108,32 +108,34 @@ def add_user_to_db(email,remember_me_id,verification_date):
 
 @anvil.server.callable
 def generate_token(remember_me_id):
-    from datetime import datetime, timedelta
+    # from datetime import datetime, timedelta
     # Fetch the user by remember_me_id
     user = app_tables.users.get(remember_me_id=remember_me_id)
     if not user:
         raise Exception("Generate Token: User not found")
-    token = str(uuid.uuid4())
-    expires = datetime.now() + timedelta(hours=1)  
-    app_tables.tokens.add_row(
-        token=token,
-        user=user,
-        created=datetime.now(),
-        expires=expires,
-        used=False
-    )
+    token = 'remember_me_id =' + remember_me_id
+    print(f"Token for url has is: {token}")
+    # expires = datetime.now() + timedelta(hours=1)  
+    # app_tables.tokens.add_row(
+    #     token=token,
+    #     user=user,
+    #     created=datetime.now(),
+    #     expires=expires,
+    #     used=False
+    # )
     return token
      
 
 @anvil.server.callable
-def force_login(remember_me_id):
-    user = app_tables.users.get(remember_me_id=remember_me_id)
+def force_login(user):
     if user:
         anvil.users.force_login(user)
-        print(f"User logged in {remember_me_id}")
-        return remember_me_id
+        print(f"User logged in {user['remember_me_id']}")
+        return f"Logged in with remember_me_id: {user['remember_me_id'][:6]}..."
     else:
-      print("Force login failed.")
+      message = "Force login failed."
+      print(message)
+      return message
 
 @anvil.server.callable
 def test_user_flow():

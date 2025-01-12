@@ -17,6 +17,9 @@ class Main(MainTemplate):
     self.remember_me_id = ''
     self.yoti_loggin_in_box.visible = False #MOVE UI SET UP TO OWN METHOD?
     self.button_show_data.visible = False
+    self.outlined_card_digi_leaders.visible = True
+    self.card_database.visible = False 
+    self.label_title.visible = True
     # anvil.server.call('hello')
     anvil.js.window.console.log("Kaimai Home Page. Logging in User")
     try:
@@ -34,25 +37,34 @@ class Main(MainTemplate):
         print("No Yoti User found")
       # self.show_yoti_logged_in_box()
       if user is None:
-        print("Hit if user is None") #OK
-        #Slightly redundant this fallback as we have a synthetic loin button option from QR_login
-        #user = anvil.server.call('fall_back_user') # won't call so try separate func
-        self.use_fallback_user()#was fine now doesn't call
-        anvil.js.window.console.log("Fallback User")
-        user = anvil.users.get_user(allow_remembered=True)
-        if user:
-          print(f" User logged-in: {user['email']}")
-          self.remember_me_id = user['remember_me_id']
-          print('self.remember_me_id is set')
-          self.show_yoti_logged_in_box()
-      else:
-        anvil.js.window.console.log("Reverting to Login Form")
-        anvil.users.login_with_form(allow_remembered=True)
+        try:
+          print("No Anvil Users Service User. Getting Url_Hash") #OK
+          self.remember_me_id = get_url_hash()
+          user = anvil.users.get_user(remember_me_id = self.remember_me_id)#move server side?
+          if user:
+            logged_in = anvil.server.call('force_login',user)
+            alert(logged_in)
+            print(logged_in)
+        except Exception as e:
+          anvil.js.window.console.log("Error anvil,users force login {e}.")
+        try:
+          #Slightly redundant this fallback as we have a synthetic loin button option from QR_login
+          #user = anvil.server.call('fall_back_user') # won't call so try separate func
+          self.use_fallback_user()#was fine now doesn't call
+          anvil.js.window.console.log("Fallback User")
+          user = anvil.users.get_user(allow_remembered=True)
+          if user:
+            print(f" User logged-in: {user['email']}")
+            self.remember_me_id = user['remember_me_id']
+            print('self.remember_me_id is set')
+            self.show_yoti_logged_in_box()
+          else:
+            anvil.js.window.console.log("Reverting to Login Form")
+            anvil.users.login_with_form(allow_remembered=True)
+        except Exception as e:
+          anvil.js.window.console.log("Error anvil,users.get_user generating {e} null type.User not found Client side")
     except Exception as e:
-      anvil.js.window.console.log("Error anvil,users.get_user generating {e} null type.User not found Client side")
-    self.outlined_card_digi_leaders.visible = True
-    self.card_database.visible = False 
-    self.label_title.visible = True
+          anvil.js.window.console.log("Error anvil,users.get_user generating {e} null type.User not found Client side")
 
   def use_fallback_user(self):
     print("Hit fallback user func")
