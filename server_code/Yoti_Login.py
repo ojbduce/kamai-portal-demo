@@ -114,7 +114,7 @@ def generate_token(remember_me_id):
     if not user:
         raise Exception("Generate Token: User not found")
     token = 'remember_me_id =' + remember_me_id
-    print(f"Token for url has is: {token}")
+    print(f"Token for url hash is: {token}")
     # expires = datetime.now() + timedelta(hours=1)  
     # app_tables.tokens.add_row(
     #     token=token,
