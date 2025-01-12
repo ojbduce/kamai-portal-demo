@@ -14,7 +14,9 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
+    print("Hit init")
     self.remember_me_id = ''
+    print(f"self.remember_me_id is {self.remember_me_id}")
     self.yoti_loggin_in_box.visible = False #MOVE UI SET UP TO OWN METHOD?
     self.button_show_data.visible = False
     self.outlined_card_digi_leaders.visible = True
@@ -161,6 +163,11 @@ class Main(MainTemplate):
   #   anvil.server.call('cookies')
   #   anvil.server.call('server_session_data')
   #   """This method is called when the button is clicked"""
+
+  def form_show(self, **event_args):
+    """This method is called when the form is shown on the page"""
+    self.remember_me_id = anvil.server.call('get_user')
+    print(f"On Form Show Event self.remember_me_id i: {self.remember_me_id}")
 
   
     

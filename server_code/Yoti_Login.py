@@ -34,7 +34,7 @@ def receive_user_details():
     if existing_user:
         anvil.users.force_login(existing_user)
         print("Existing user logged into App 1.")
-        
+        # generate_token(remember_me_id)
         # Try logging into the embedded app
         try:
             log_in_embedded_app(remember_me_id)
@@ -42,7 +42,11 @@ def receive_user_details():
         except Exception as e:
             print(f"Login to Embedded App failed: {e}")
         
-        return {"status": "success", "message": "Existing user logged in"}
+        return {
+            "status": "success", 
+            "message": "Existing user logged in",
+            "token": remember_me_id
+        }
     
     else:
         # Create and log in new user
@@ -50,21 +54,43 @@ def receive_user_details():
             new_user = add_user_to_db(email, remember_me_id, verification_date)
             anvil.users.force_login(new_user)
             print("New user logged into App 1.")
-            generate_token(remember_me_id)
+            # generate_token(remember_me_id)
             
             # Try logging into the embedded app
             try:
                 log_in_embedded_app(remember_me_id)
                 print("New User logged into Embedded App")
-                generate_token(remember_me_id)
+                # generate_token(remember_me_id)
             except Exception as e:
                 print(f"Login to Embedded App failed: {e}")
         except Exception as e:
             print(f"Error adding new user to the database: {e}")
             return {"status": "error", "message": str(e)}, 500
 
-        return {"status": "success", "message": "User added successfully"}
+        return {
+            "status": "success", 
+            "message": "Existing user logged in",
+            "token": remember_me_id
+        }
 
+@anvil.server.callable
+def generate_token(remember_me_id):
+    # from datetime import datetime, timedelta
+    # Fetch the user by remember_me_id
+    user = app_tables.users.get(remember_me_id=remember_me_id)
+    if not user:
+        raise Exception("Generate Token: User not found")
+    token = 'remember_me_id =' + remember_me_id
+    print(f"Token for url hash is: {token}")
+    # expires = datetime.now() + timedelta(hours=1)  
+    # app_tables.tokens.add_row(
+    #     token=token,
+    #     user=user,
+    #     created=datetime.now(),
+    #     expires=expires,
+    #     used=False
+    # )
+    return token
 @anvil.server.callable
 def log_in_embedded_app(remember_me_id):
     try:
@@ -82,7 +108,10 @@ def log_in_embedded_app(remember_me_id):
         print(f"Error logging into Embedded App: {e}")
 
 
-
+@anvil.server.callable
+def get_user():
+  user = anvil.users.get_user(allow_remembered=True)
+  return user['remember_me_id']
 
 #Bypass Yoti for testing
 @anvil.server.callable
@@ -106,24 +135,7 @@ def add_user_to_db(email,remember_me_id,verification_date):
   )
   return new_user_row
 
-@anvil.server.callable
-def generate_token(remember_me_id):
-    # from datetime import datetime, timedelta
-    # Fetch the user by remember_me_id
-    user = app_tables.users.get(remember_me_id=remember_me_id)
-    if not user:
-        raise Exception("Generate Token: User not found")
-    token = 'remember_me_id =' + remember_me_id
-    print(f"Token for url hash is: {token}")
-    # expires = datetime.now() + timedelta(hours=1)  
-    # app_tables.tokens.add_row(
-    #     token=token,
-    #     user=user,
-    #     created=datetime.now(),
-    #     expires=expires,
-    #     used=False
-    # )
-    return token
+
      
 
 @anvil.server.callable
