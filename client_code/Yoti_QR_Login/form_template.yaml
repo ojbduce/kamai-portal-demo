@@ -8,7 +8,7 @@ components:
     name: image_kaimai_logo
     properties:
       alt_text: Kaimai
-      height: 49
+      height: 52.040496826171875
       horizontal_align: left
       margin: [null, 20, null, '12']
       role: null
@@ -18,31 +18,32 @@ components:
     name: spacer_1
     properties: {height: -2}
     type: Spacer
+  - layout_properties: {grid_position: 'KVECLJ,QAGHHE'}
+    name: spacer_6
+    properties: {height: 0.526275634765625}
+    type: Spacer
   - layout_properties: {grid_position: 'RGQRYI,LIDTUL'}
     name: spacer_5
     properties: {height: 0}
     type: Spacer
-  - layout_properties: {grid_position: 'DVKBJT,FIMNIS'}
-    name: image_yoti_logo
-    properties:
-      display_mode: shrink_to_fit
-      height: '26'
-      horizontal_align: right
-      margin: ['9', null, '6', null]
-      source: _/theme/yoti-logo.png
-      spacing_above: medium
-      spacing_below: large
-      vertical_align: center
+  - layout_properties: {grid_position: 'DVKBJT,LLSUBF'}
+    name: image_yoti
+    properties: {height: '22', horizontal_align: right, source: _/theme/yoti-logo_2.png}
     type: Image
   - layout_properties: {grid_position: 'DVKBJT,LHLKGG'}
     name: image_gig_id
     properties:
-      height: '26'
+      height: '22'
       horizontal_align: left
-      margin: [9, null, '6', null]
+      margin: ['4', '0', '4', 0]
       source: _/theme/digital-id.png
+      spacing_below: large
       vertical_align: center
     type: Image
+  - layout_properties: {grid_position: 'OWRIXT,GCKNHS'}
+    name: spacer_8
+    properties: {height: 5.134246826171875}
+    type: Spacer
   - layout_properties: {grid_position: 'YDRLJS,IHUONS'}
     name: label_1
     properties:
@@ -52,7 +53,7 @@ components:
       spacing:
         margin: [3, null, 0, null]
         padding: [0, 15, 0, 13]
-      spacing_above: none
+      spacing_above: large
       spacing_below: none
       text: Sign in
       underline: false
@@ -63,8 +64,12 @@ components:
     type: form:Yoti_iframe
   layout_properties: {slot: default}
   name: outlined_card
-  properties: {background: 'theme:On Secondary', role: mid-card}
+  properties: {background: 'theme:On Secondary', col_widths: '{"LHLKGG":30}', role: mid-card}
   type: ColumnPanel
+- layout_properties: {slot: default}
+  name: spacer_7
+  properties: {height: 2.327423095703125}
+  type: Spacer
 - event_bindings: {click: button_login_test_user_click}
   layout_properties: {slot: default}
   name: button_login_test_user
