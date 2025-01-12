@@ -12,4 +12,4 @@ import anvil.server
 
 @anvil.server.route("/home")
 def serve_my_page(**p):
-  return anvil.server.FormResponse('Home')
+  return anvil.server.FormResponse('Main')
