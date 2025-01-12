@@ -40,9 +40,10 @@ class Main(MainTemplate):
         try:
           print("No Anvil Users Service User. Getting Url_Hash") #OK
           self.remember_me_id = get_url_hash()
-          user = anvil.users.get_user(remember_me_id = self.remember_me_id)#move server side?
+          print(f"remember_me_id from get_url_hash is: {self.remember_me_id}")
+          user = app_tables.users.get(remember_me_id=self.remember_me_id) #move server side?
           if user:
-            logged_in = anvil.server.call('force_login',user)
+            logged_in = anvil.server.call('force_login', user)
             alert(logged_in)
             print(logged_in)
         except Exception as e:
