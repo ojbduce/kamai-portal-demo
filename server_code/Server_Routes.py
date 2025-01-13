@@ -11,5 +11,9 @@ from anvil.tables import app_tables
 import anvil.server
 
 @anvil.server.route("/home")
-def serve_my_page(**p):
+def serve_home_page(**p):
   return anvil.server.FormResponse('Home')
+
+@anvil.server.route("/main")
+def serve_main_page(**p):
+  return anvil.server.FormResponse('Main')
