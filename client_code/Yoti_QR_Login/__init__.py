@@ -24,6 +24,11 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     
   def handle_auth_message(self, event):
     data = event.data
+    anvil.js.window.console.log(type(data))
+    print (type(data))
+    data = dict(data)
+    anvil.js.window.console.log(type(data))
+    print(type(data))
     if isinstance(data, dict) and data.get('type') == 'auth_success':
       remember_me_id = data.get('remember_me_id')
       anvil.js.window.console.log(f"handle_auth has got id {remember_me_id}")
@@ -34,6 +39,15 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
       # print("Yoti Login: Hit handle_auth")
       # anvil.js.window.console.log("Yoti Login: Hit handle_auth")
       anvil.open_form('Home')
+    elif data:
+      anvil.js.window.console.log(f"data is {data}")  
+    else:
+      anvil.js.window.console.log("Error")
+      print("Error")
+      
+            
+      
+      
       
     # data = event.data
     # if data:
