@@ -26,20 +26,25 @@ components:
     name: spacer_5
     properties: {height: 0}
     type: Spacer
-  - layout_properties: {grid_position: 'DVKBJT,LLSUBF'}
-    name: image_yoti
-    properties: {height: '22', horizontal_align: right, source: _/theme/yoti-logo_2.png}
-    type: Image
-  - layout_properties: {grid_position: 'DVKBJT,LHLKGG'}
-    name: image_gig_id
-    properties:
-      height: '22'
-      horizontal_align: left
-      margin: ['4', '0', '4', 0]
-      source: _/theme/digital-id.png
-      spacing_below: large
-      vertical_align: center
-    type: Image
+  - components:
+    - layout_properties: {grid_position: 'KJQRYK,TOCYLS'}
+      name: image_yoti
+      properties: {display_mode: shrink_to_fit, height: '22', horizontal_align: right, source: _/theme/yoti-logo_2.png}
+      type: Image
+    - layout_properties: {grid_position: 'KJQRYK,JVDBGK'}
+      name: image_gig_id
+      properties:
+        height: '22'
+        horizontal_align: left
+        margin: ['4', '0', '4', 0]
+        source: _/theme/digital-id.png
+        spacing_below: large
+        vertical_align: center
+      type: Image
+    layout_properties: {grid_position: 'MDBGOL,OSWASR'}
+    name: column_panel_1
+    properties: {wrap_on: never}
+    type: ColumnPanel
   - layout_properties: {grid_position: 'OWRIXT,GCKNHS'}
     name: spacer_8
     properties: {height: 5.134246826171875}
@@ -64,7 +69,7 @@ components:
     type: form:Yoti_iframe
   layout_properties: {slot: default}
   name: outlined_card
-  properties: {background: 'theme:On Secondary', col_widths: '{"LHLKGG":30}', role: mid-card}
+  properties: {background: 'theme:On Secondary', col_widths: '{}', role: mid-card}
   type: ColumnPanel
 - layout_properties: {slot: default}
   name: spacer_7
