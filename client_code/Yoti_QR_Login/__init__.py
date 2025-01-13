@@ -12,6 +12,7 @@ from anvil.tables import app_tables
 from anvil.js.window import jQuery
 from anvil.js import get_dom_node
 
+
 class Yoti_QR_Login(Yoti_QR_LoginTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -22,8 +23,36 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     self.outlined_card.role = 'mid-card'
     
   def handle_auth_message(self, event):
-    if event.data == 'auth_success':
+    print("Yoti Login: Hit handle_auth")
+    anvil.js.window.console.log("Yoti Login: Hit handle_auth")
+    data = event.data
+    if data:
+      anvil.js.window.console.log("Data")
+      if isinstance(data, dict) and data.get('type') == 'auth_success':
+          print("data,dict auth_success")
+          anvil.js.window.console.log("data,dict auth_success")
+          remember_me_id = data.get('remember_me_id')
+          # remember_me_id = unquote(unquote(remember_me_id))
+          print(f"Decoded remember_me_id: {remember_me_id}")
+          print(remember_me_id)
+          anvil.js.window.console.log(remember_me_id)
+          anvil.open_form('Home')
+      elif event.data == 'auth_success':
+        print("Just auth success")
+        anvil.js.window.console.log("Just auth")
+        anvil.open_form('Home')
+      elif event.data == 'auth_success':
+        print("Just auth success. Trying Main")
+        anvil.js.window.console.log("Just auth Trying Main")
+        anvil.open_form('Main')
+    else:
+      print("Error")
+      anvil.js.window.console.log("Error")
       anvil.open_form('Home')
+      
+        # Construct URL with remember_me_id
+    # if event.data == 'auth_success':
+    #   
 
     
   def cleanup_duplicate_ids(self):#why doesn't work??
