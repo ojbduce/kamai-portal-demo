@@ -25,53 +25,53 @@ def receive_user_details():
         return {"status": "error", "message": "Missing required fields"}, 400
     
     print("All data available. Adding to the Data Table")
-    email = userData['email']
-    remember_me_id = userData['rememberMeId']
-    verification_date = datetime.now()
+    # email = userData['email']
+    # remember_me_id = userData['rememberMeId']
+    # verification_date = datetime.now()
     
-    # Check if the user already exists
-    existing_user = app_tables.users.get(remember_me_id=remember_me_id)
-    if existing_user:
-        anvil.users.force_login(existing_user)
-        print("Existing user logged into App 1.")
-        # generate_token(remember_me_id)
-        # Try logging into the embedded app
-        try:
-            log_in_embedded_app(remember_me_id)
-            print("Existing User logged into Embedded App.")
-        except Exception as e:
-            print(f"Login to Embedded App failed: {e}")
+    # # Check if the user already exists
+    # existing_user = app_tables.users.get(remember_me_id=remember_me_id)
+    # if existing_user:
+    #     anvil.users.force_login(existing_user)
+    #     print("Existing user logged into App 1.")
+    #     # generate_token(remember_me_id)
+    #     # Try logging into the embedded app
+    #     try:
+    #         log_in_embedded_app(remember_me_id)
+    #         print("Existing User logged into Embedded App.")
+    #     except Exception as e:
+    #         print(f"Login to Embedded App failed: {e}")
         
-        return {
-            "status": "success", 
-            "message": "Existing user logged in",
-            "token": remember_me_id
-        }
+    return {
+        "status": "success", 
+        "message": "Existing user logged in",
+        # "token": remember_me_id
+    }
     
-    else:
-        # Create and log in new user
-        try:
-            new_user = add_user_to_db(email, remember_me_id, verification_date)
-            anvil.users.force_login(new_user)
-            print("New user logged into App 1.")
-            # generate_token(remember_me_id)
+    # else:
+    #     # Create and log in new user
+    #     try:
+    #         new_user = add_user_to_db(email, remember_me_id, verification_date)
+    #         anvil.users.force_login(new_user)
+    #         print("New user logged into App 1.")
+    #         # generate_token(remember_me_id)
             
-            # Try logging into the embedded app
-            try:
-                log_in_embedded_app(remember_me_id)
-                print("New User logged into Embedded App")
-                # generate_token(remember_me_id)
-            except Exception as e:
-                print(f"Login to Embedded App failed: {e}")
-        except Exception as e:
-            print(f"Error adding new user to the database: {e}")
-            return {"status": "error", "message": str(e)}, 500
+    #         # Try logging into the embedded app
+    #         try:
+    #             log_in_embedded_app(remember_me_id)
+    #             print("New User logged into Embedded App")
+    #             # generate_token(remember_me_id)
+    #         except Exception as e:
+    #             print(f"Login to Embedded App failed: {e}")
+    #     except Exception as e:
+    #         print(f"Error adding new user to the database: {e}")
+    #         return {"status": "error", "message": str(e)}, 500
 
-        return {
-            "status": "success", 
-            "message": "Existing user logged in",
-            "token": remember_me_id
-        }
+    #     return {
+    #         "status": "success", 
+    #         "message": "Existing user logged in",
+    #         "token": remember_me_id
+    #     }
 
 @anvil.server.callable
 def generate_token(remember_me_id):
