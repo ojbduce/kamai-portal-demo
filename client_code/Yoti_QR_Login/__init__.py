@@ -23,11 +23,16 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     self.outlined_card.role = 'mid-card'
     
   def handle_auth_message(self, event):
-    if event.data == 'auth_success':
+    data = event.data
+    if isinstance(data, dict) and data.get('type') == 'auth_success':
+      remember_me_id = data.get('remember_me_id')
+      anvil.js.window.console.log(f"handle_auth has got id {remember_me_id}")
+      print(f"handle_auth has got id {remember_me_id}")
+    # if event.data == 'auth_success':
       # user = anvil.users.get_user(allow_remembered=True)
       # print(user)
-      print("Yoti Login: Hit handle_auth")
-      anvil.js.window.console.log("Yoti Login: Hit handle_auth")
+      # print("Yoti Login: Hit handle_auth")
+      # anvil.js.window.console.log("Yoti Login: Hit handle_auth")
       anvil.open_form('Home')
       
     # data = event.data
