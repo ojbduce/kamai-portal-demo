@@ -23,27 +23,51 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     self.outlined_card.role = 'mid-card'
     
   def handle_auth_message(self, event):
-    data = event.data
-    anvil.js.window.console.log(type(data))
-    print (type(data))
-    data = dict(data)
-    anvil.js.window.console.log(type(data))
-    print(type(data))
-    if isinstance(data, dict) and data.get('type') == 'auth_success':
-      remember_me_id = data.get('remember_me_id')
-      anvil.js.window.console.log(f"handle_auth has got id {remember_me_id}")
-      print(f"handle_auth has got id {remember_me_id}")
+    print("\n=== Message Inspection ===")
+    print("1. Raw data:", event.data)
+    print("2. Type:", type(event.data))
+    
+    # For proxy objects (like system messages)
+    if hasattr(event.data, 'keys'):
+        keys = list(event.data.keys())
+        print("3. Available keys:", keys)
+        
+        if 'fn' in keys:
+            print(f"System message: {event.data['fn']}")
+            return  # Skip system messages
+            
+    # For our auth message (should be a string)
+    if isinstance(event.data, str):
+        if event.data.startswith('auth_success:'):
+            _, remember_me_id = event.data.split(':', 1)
+            print(f"Got remember_me_id: {remember_me_id}")
+            anvil.open_form('Home')
+            return
+            
+    print("Unhandled message type or format")
+
+      
+    # print("Raw event data:", event.data)
+    # anvil.js.window.console.log("Raw event data:", event.data)
+    # if isinstance(event.data, str):
+    #   if event.data.startswith('auth_success:'):
+    #     # Split the string to get the remember_me_id
+    #     _, remember_me_id = event.data.split(':', 1)  # Use maxsplit=1
+    #     print(f"Got remember_me_id: {remember_me_id}")
+    #     anvil.js.window.console.log(f"Got remember_me_id: {remember_me_id}")
+    #     anvil.open_form('Home')
+    #   elif event.data == 'auth_success':
+    #     print("Got simple auth_success message")
+    #     anvil.open_form('Home')
+    # else:
+    #   print(f"Got unexpected data type: {type(event.data)}")
+    #   anvil.js.window.console.log(f"Unexpected message type: {type(event.data)}")
+      
     # if event.data == 'auth_success':
       # user = anvil.users.get_user(allow_remembered=True)
       # print(user)
       # print("Yoti Login: Hit handle_auth")
       # anvil.js.window.console.log("Yoti Login: Hit handle_auth")
-      anvil.open_form('Home')
-    elif data:
-      anvil.js.window.console.log(f"data is {data}")  
-    else:
-      anvil.js.window.console.log("Error")
-      print("Error")
       
             
       
