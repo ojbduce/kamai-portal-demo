@@ -28,6 +28,14 @@ db_schema:
       type: string
     server: full
     title: Files
+  messages:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: messages
+      type: string
+    server: full
+    title: Messages
   reports:
     client: full
     columns:
