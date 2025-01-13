@@ -12,8 +12,6 @@ from anvil.tables import app_tables
 from anvil.js.window import jQuery
 from anvil.js import get_dom_node
 
-
-
 class Yoti_QR_Login(Yoti_QR_LoginTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -23,9 +21,6 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     # iframe.appendTo(get_dom_node(self.iframe_container))
     self.outlined_card.role = 'mid-card'
     
-
-    
-
   def handle_auth_message(self, event):
     if event.data == 'auth_success':
       anvil.open_form('Home')
