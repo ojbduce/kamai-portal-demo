@@ -119,7 +119,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
       
 
   
-
+#Now redundant?
   def label_loading_show(self, **event_args):
     """This method is called when the Label is shown on the screen"""
     self.label_loading.text = "Your Yoti QR Code is loading..."
@@ -127,7 +127,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     self.label_loading.visible = False
 
  
-
+##Does this work with Users Service? Add url hash? Add Existing user version.
   def button_login_test_user_click(self, **event_args):
     """This method is called when the button is clicked"""
     user = anvil.server.call('test_user_flow')
