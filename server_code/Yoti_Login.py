@@ -134,7 +134,7 @@ def add_user_to_db(email,remember_me_id,verification_date):
 @anvil.server.callable
 def force_login(user):
     if user:
-      anvil.users.force_login(user['remember_me_id'])
+      anvil.users.force_login(user)
       print(f"User logged in {user['remember_me_id']}")
       return f"Logged in with remember_me_id: {user['remember_me_id'][:6]}..."
     else:

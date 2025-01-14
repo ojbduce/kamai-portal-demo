@@ -41,6 +41,10 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
         if event.data.startswith('auth_success:'):
             _, remember_me_id = event.data.split(':', 1)
             print(f"Got remember_me_id: {remember_me_id}")
+            user = app_tables.users.get(remember_me_id=remember_me_id)
+            print(f"Identified User from handle_auth: {user['email']}")
+            anvil.server.call('force_login', user) #force login only server-side
+            print(f"handle_auth has force logged in user:{user['email']}")
             anvil.open_form('Home')
             return
             
