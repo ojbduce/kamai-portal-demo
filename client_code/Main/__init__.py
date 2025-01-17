@@ -19,7 +19,7 @@ class Main(MainTemplate):
     self.label_1.scroll_into_view(smooth=False)
     print(f"self.remember_me_id is {self.remember_me_id}")
     self.yoti_loggin_in_box.visible = False #MOVE UI SET UP TO OWN METHOD?
-    self.button_show_data.visible = False
+    self.button_show_data.visible = True
     self.outlined_card_digi_leaders.visible = True
     self.card_database.visible = False 
     self.label_title.visible = True
@@ -88,7 +88,7 @@ class Main(MainTemplate):
     print("Hit show_yoti_login func")
     self.yoti_loggin_in_box.visible = True
     self.yoti_loggin_in_box.tooltip = "Logged in with Yoti"
-    self.button_show_data.visible = True
+    # self.button_show_data.visible = True
 
   def get_data(self):
     rows = app_tables.reports.search()
@@ -98,6 +98,8 @@ class Main(MainTemplate):
       
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
+    current_remember_me_id = self.remember_me_id
+    app_tables.reports.add_row(current_remember_me_id=current_remember_me_id)
     self.get_data()
     self.outlined_card_digi_leaders.visible = False
     self.card_database.visible = True

@@ -49,6 +49,9 @@ db_schema:
       name: remember_me_id
       target: users
       type: link_single
+    - admin_ui: {order: 7, width: 200}
+      name: current_remember_me_id
+      type: string
     server: full
     title: Reports
   sessions:
