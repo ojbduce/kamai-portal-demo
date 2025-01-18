@@ -43,14 +43,20 @@ db_schema:
       name: report_title
       type: string
     - admin_ui: {width: 200}
-      name: report
-      type: string
-    - admin_ui: {width: 200}
       name: remember_me_id
       target: users
       type: link_single
     - admin_ui: {order: 7, width: 200}
       name: current_remember_me_id
+      type: string
+    - admin_ui: {width: 200}
+      name: created
+      type: datetime
+    - admin_ui: {width: 200}
+      name: report_text
+      type: string
+    - admin_ui: {width: 200}
+      name: user
       type: string
     server: full
     title: Reports
@@ -159,5 +165,5 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/anvil/secrets.yml
-startup: {module: Yoti_QR_Login, type: form}
+startup: {module: Home, type: form}
 startup_form: null
