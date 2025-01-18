@@ -42,10 +42,6 @@ db_schema:
     - admin_ui: {width: 200}
       name: report_title
       type: string
-    - admin_ui: {width: 200}
-      name: remember_me_id
-      target: users
-      type: link_single
     - admin_ui: {order: 7, width: 200}
       name: current_remember_me_id
       type: string
@@ -57,6 +53,9 @@ db_schema:
       type: string
     - admin_ui: {width: 200}
       name: user
+      type: string
+    - admin_ui: {width: 200}
+      name: remember_me_id
       type: string
     server: full
     title: Reports
