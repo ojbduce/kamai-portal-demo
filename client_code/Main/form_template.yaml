@@ -27,7 +27,7 @@ components:
           properties: {background: 'theme:Background', display_mode: fill_width, height: 59.521331787109375, source: _/theme/digital_leaders_image copy.png}
           type: Image
         event_bindings: {click: link_digi_leaders_image_click}
-        layout_properties: {grid_position: 'TJTTXD,OUTJSR'}
+        layout_properties: {full_width_row: true, grid_position: 'TJTTXD,OUTJSR'}
         name: link_digi_leaders_image
         properties: {url: 'https://super-kaleidoscopic-wader.anvil.app'}
         type: Link
@@ -42,7 +42,7 @@ components:
           bold: false
           font_size: 16
           foreground: theme:On Background
-          text: "Digital Leaders is an independent platform that fosters digital transformation across public, private, and nonprofit sectors in the UK. \nIt serves as a forum for leaders to explore new ideas, network, and access digital knowledge and solutions.\n\nThe platform offers a variety of programs and events, including: Public Sector Innovation Conference: Scheduled for March 11, 2025, this conference focuses on digital innovation within the public sector. \nDigiLeaders Public Sector Innovation Week: Taking place from March 10 to 14, 2025, this event invites experts to submit online talks related to public sector innovation. \n\nDigiLeaders Impact Awards: Currently open for entries and nominations, these awards recognize excellence in digital transformation. \n\nAdditionally, Digital Leaders provides resources such as the AI Pulse newsletter, which offers insights into AI principles and practices, and the Digital Masterclass series, featuring expert talks and case studies on digital transformation. DigiLeaders: An Advisory Board comprising cross-sector experts guides Digital Leaders, ensuring the platform remains current and independent in the rapidly evolving digital landscape."
+          text: "Digital Leaders is an independent platform that fosters digital transformation across public, private, and nonprofit sectors in the UK. \nIt serves as a forum for leaders to explore new ideas, network, and access digital knowledge and solutions.\n\nThe platform offers a variety of programs and events, including: \n\n Public Sector Innovation Conference: Scheduled for March 11, 2025, this conference focuses on digital innovation within the public sector. \n\nDigiLeaders Impact Awards: Currently open for entries and nominations, these awards recognize excellence in digital transformation. \n\nAdditionally, Digital Leaders provides resources such as the AI Pulse newsletter, which offers insights into AI principles and practices, and the Digital Masterclass series, featuring expert talks and case studies on digital transformation. DigiLeaders: An Advisory Board comprising cross-sector experts guides Digital Leaders, ensuring the platform remains current and independent in the rapidly evolving digital landscape."
         type: Label
       layout_properties: {grid_position: 'QQMAWM,GBQGGH'}
       name: outlined_card_2
