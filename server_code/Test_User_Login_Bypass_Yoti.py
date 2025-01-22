@@ -31,16 +31,16 @@ def fall_back_user(): #change to test user
   print("Hit fall_back_user server side function")
   fall_back_id = anvil.secrets.get_secret("fall_back_id")
   if fall_back_id:
+    user= app_tables.users.get(remember_me_id=fall_back_id)
+    anvil.users.force_login(user)
     print(f"Got fall back ID. {fall_back_id}")
-    fall_back_user = app_tables.users.get(remember_me_id=fall_back_id)
-    user = anvil.users.force_login(fall_back_user)
-    print(f"Reverting to SECRET fall-back user. Logging in {user['remember_me_id']}")
-    return anvil.users.get_user(allow_remembered=True)
+    return user
   elif fall_back_id is None:
     fall_back_id = BACKUP_FALL_BACK_ID # this is nonsensisal?
     print("Got fall fall back ID.")
     fall_back_user = app_tables.users.get(remember_me_id=fall_back_id)
     user = anvil.users.force_login(fall_back_user)
+    user = anvil.users.get_user()
     print(f"Reverting to OPEN fall-back user {user['remember_me_id']}")
     return anvil.users.get_user(allow_remembered=True)
   else:

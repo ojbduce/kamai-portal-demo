@@ -55,13 +55,18 @@ class Main(MainTemplate):
         try:
           #Slightly redundant this fallback as we have a synthetic loin button option from QR_login
           #user = anvil.server.call('fall_back_user') # won't call so try separate func
-          self.use_fallback_user()#was fine now doesn't call
+          user= anvil.server.call('fall_back_user')#was fine now doesn't call
+          print("Client User")
           anvil.js.window.console.log("Fallback User")
           user = anvil.users.get_user(allow_remembered=True)
+          print(user)
           if user:
             print(f" User logged-in: {user['email']}")
             self.remember_me_id = user['remember_me_id']
             print('self.remember_me_id is set')
+            alert("Logged-in in Admin Mode")
+            # Notification("Logged-in in Admin Mode")
+            self.button_show_data.visible = True
             self.show_yoti_logged_in_box()
           else:
             anvil.js.window.console.log("Reverting to Login Form")
@@ -73,8 +78,9 @@ class Main(MainTemplate):
 
   def use_fallback_user(self):
     print("Hit fallback user func")
-    user = anvil.server.call('fall_back_user')
-    return user
+    fall_back_user = anvil.server.call('fall_back_user')
+    
+   
 
   def link_digi_leaders_image_click(self, **event_args):
       """This method is called when the link is clicked"""
@@ -143,10 +149,11 @@ class Main(MainTemplate):
 
   def button_show_data_click(self, **event_args):
     """This method is called when the button is clicked"""
-    self.get_data()
-    self.outlined_card_digi_leaders.visible = False
-    self.card_database.visible = True
-    self.label_title.visible = False
+    # self.get_data()
+    # self.outlined_card_digi_leaders.visible = False
+    # self.card_database.visible = True
+    # self.label_title.visible = False
+    open_form('Admin')
 
   def button_about_click(self, **event_args):
     """This method is called when the button is clicked"""
