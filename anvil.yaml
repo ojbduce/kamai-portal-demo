@@ -146,8 +146,8 @@ secrets:
     type: secret
     value: {A73QCPUVM7RLSTK5: deBouwg14fKG0QTCc4VWDlpDGdreFTK8mdTrJeoJm4e0asD+An1clcQ0pLHw/BAu/4WMxlYzXZNBAt9wz9XTEa4WNyX5Fj/Tl+UCbNdnM0EQ4t6RS1wJ+E1iYDhnp9lkxGVCnuo0FUejQQj2zZZN2No986RL+eMOs8LknlacWqB6}
 services:
-- client_config: {}
-  server_config: {}
+- client_config: {enable_v2: true}
+  server_config: {auto_create_missing_columns: true}
   source: /runtime/services/tables.yml
 - client_config: {allow_remember_me: true, allow_signup: true, confirm_email: false, enable_automatically: false, remember_me_days: 30, share_login_status: true, use_email: false, use_facebook: false, use_google: false}
   server_config: {user_table: users}
@@ -164,5 +164,5 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/anvil/secrets.yml
-startup: {module: Main, type: form}
+startup: {module: Yoti_QR_Login, type: form}
 startup_form: null

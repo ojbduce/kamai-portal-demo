@@ -43,7 +43,7 @@ components:
       type: Image
     layout_properties: {grid_position: 'MDBGOL,OSWASR'}
     name: column_panel_1
-    properties: {wrap_on: never}
+    properties: {background: 'theme:Surface', wrap_on: never}
     type: ColumnPanel
   - layout_properties: {grid_position: 'OWRIXT,GCKNHS'}
     name: spacer_8
@@ -69,7 +69,7 @@ components:
     type: form:Yoti_iframe
   layout_properties: {slot: default}
   name: outlined_card
-  properties: {background: 'theme:On Secondary', col_widths: '{}', role: mid-card}
+  properties: {background: 'theme:On Primary', col_widths: '{}', role: null}
   type: ColumnPanel
 - layout_properties: {slot: default}
   name: spacer_7
@@ -84,30 +84,6 @@ components:
   name: spacer_4
   properties: {height: 254}
   type: Spacer
-- layout_properties: {slot: default}
-  name: button_5
-  properties: {text: button_5, visible: false}
-  type: Button
-- layout_properties: {slot: default}
-  name: button_4
-  properties: {text: button_4, visible: false}
-  type: Button
-- layout_properties: {slot: default}
-  name: button_3
-  properties: {text: button_3, visible: false}
-  type: Button
-- layout_properties: {slot: default}
-  name: button_6
-  properties: {text: button_6, visible: false}
-  type: Button
-- layout_properties: {slot: default}
-  name: button_2
-  properties: {text: button_2, visible: false}
-  type: Button
-- layout_properties: {slot: default}
-  name: button_1
-  properties: {text: button_1, visible: false}
-  type: Button
 - layout_properties: {slot: default}
   name: spacer_3
   properties: {height: -14}
