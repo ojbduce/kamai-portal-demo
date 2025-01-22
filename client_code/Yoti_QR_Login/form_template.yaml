@@ -1,7 +1,7 @@
 components:
 - layout_properties: {slot: default}
   name: spacer_2
-  properties: {height: 34.676849365234375}
+  properties: {height: 62.27912902832031}
   type: Spacer
 - components:
   - layout_properties: {grid_position: 'NIEEPI,MEZNPZ'}
