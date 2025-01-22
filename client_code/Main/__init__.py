@@ -14,6 +14,7 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
+    self.timer_1.interval = 0
     self.remember_me_id = ''
     self.label_1.scroll_into_view(smooth=False)
     print(f"self.remember_me_id is {self.remember_me_id}")
@@ -34,8 +35,8 @@ class Main(MainTemplate):
         self.remember_me_id = user['remember_me_id']
         print("self.remember_me_id variable is set")
         self.show_yoti_logged_in_box()
-        alert("Logged-in in Admin Mode")
-        self.button_show_data.visible = True
+        # alert("Logged-in in Admin Mode")
+        # self.button_show_data.visible = True
         anvil.server.call('log_in_embedded_app', self.remember_me_id)
       else:
         print("No Yoti User found")
@@ -64,7 +65,7 @@ class Main(MainTemplate):
             print(f" User logged-in: {user['email']}")
             self.remember_me_id = user['remember_me_id']
             print('self.remember_me_id is set')
-            alert("Logged-in in Admin Mode")
+            # alert("Logged-in in Admin Mode")
             # Notification("Logged-in in Admin Mode")
             self.button_show_data.visible = True
             self.show_yoti_logged_in_box()
@@ -179,6 +180,10 @@ class Main(MainTemplate):
   #   """This method is called when the form is shown on the page"""
   #   self.remember_me_id = anvil.server.call('get_user')
   #   print(f"On Form Show Event self.remember_me_id i: {self.remember_me_id}")
+
+  
+
+  
 
   
     

@@ -6,8 +6,9 @@ components:
       properties:
         background: ''
         bold: true
-        font_size: 18
+        font_size: 22
         foreground: ''
+        role: title
         spacing:
           margin: [null, 0, null, 2]
         text: Admin
@@ -17,6 +18,7 @@ components:
       properties:
         background: theme:Primary Overlay 1
         bold: true
+        font_size: 18
         foreground: theme:On Surface Variant
         icon: fa:child
         spacing:
@@ -125,10 +127,6 @@ components:
   name: column_panel_2
   properties: {}
   type: ColumnPanel
-- layout_properties: {slot: title}
-  name: label_2
-  properties: {bold: true, text: Kaimai Directory}
-  type: Label
 container:
   event_bindings: {}
   properties: {background: 'theme:Surface', html: '@theme:standard-page.html'}
