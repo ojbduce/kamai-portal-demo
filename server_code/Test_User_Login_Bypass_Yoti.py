@@ -35,9 +35,10 @@ def fall_back_user(): #change to test user
     user = app_tables.users.get(remember_me_id=fall_back_id)
     print(f"Got fall back ID. {user['remember_me_id']}")
     anvil.users.force_login(user)
-    return user
+    remember_me_id = user['remember_me_id']
+    return user,remember_me_id
   elif fall_back_id is None:
-    fall_back_id = BACKUP_FALL_BACK_ID # this is nonsensisal?
+    fall_back_id = FALL_BACK_ID # 
     print("Got fall fall back ID.")
     # fall_back_user = app_tables.users.get(remember_me_id=fall_back_id)
     # user = anvil.users.force_login(fall_back_user)

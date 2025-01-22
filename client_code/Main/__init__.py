@@ -10,6 +10,7 @@ from anvil.tables import app_tables
 import anvil.users
 
 
+
 class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
@@ -57,7 +58,8 @@ class Main(MainTemplate):
           #Slightly redundant this fallback as we have a synthetic loin button option from QR_login
           #user = anvil.server.call('fall_back_user') # won't call so try separate func
           print("Using fall back user")
-          user = anvil.server.call('fall_back_user')
+          user,self.remember_me_id = anvil.server.call('fall_back_user')
+          print('remember_me_id')
           print(f"fallback_id {user['remember_me_id]']}")#was fine now doesn't call
           anvil.js.window.console.log("Fallback User")
           print(user)
@@ -67,7 +69,7 @@ class Main(MainTemplate):
             print('self.remember_me_id is set')
             # alert("Logged-in in Admin Mode")
             # Notification("Logged-in in Admin Mode")
-            self.button_show_data.visible = True
+            # self.button_show_data.visible = True
             self.show_yoti_logged_in_box()
           else:
             anvil.js.window.console.log("Reverting to Login Form")
@@ -180,6 +182,20 @@ class Main(MainTemplate):
   #   """This method is called when the form is shown on the page"""
   #   self.remember_me_id = anvil.server.call('get_user')
   #   print(f"On Form Show Event self.remember_me_id i: {self.remember_me_id}")
+
+  def form_show(self, **event_args):
+    """This method is called when the form is shown on the page"""
+    self.button_show_data.visible=False
+    alert("Admin Mode")
+    self.button_show_data.visible = True
+
+  
+  
+
+    
+    
+  
+    
 
   
 
