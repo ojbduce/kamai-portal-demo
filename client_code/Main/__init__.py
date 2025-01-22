@@ -55,10 +55,10 @@ class Main(MainTemplate):
         try:
           #Slightly redundant this fallback as we have a synthetic loin button option from QR_login
           #user = anvil.server.call('fall_back_user') # won't call so try separate func
-          user= anvil.server.call('fall_back_user')#was fine now doesn't call
-          print("Client User")
+          print("Using fall back user")
+          user = anvil.server.call('fall_back_user')
+          print(f"fallback_id {user['remember_me_id]']}")#was fine now doesn't call
           anvil.js.window.console.log("Fallback User")
-          user = anvil.users.get_user(allow_remembered=True)
           print(user)
           if user:
             print(f" User logged-in: {user['email']}")
@@ -76,9 +76,9 @@ class Main(MainTemplate):
     except Exception as e:
           anvil.js.window.console.log("Error anvil,users.get_user generating {e} null type.User not found Client side")
 
-  def use_fallback_user(self):
-    print("Hit fallback user func")
-    fall_back_user = anvil.server.call('fall_back_user')
+  # def use_fallback_user(self):
+  #   print("Hit fallback user func")
+  #   fall_back_user = anvil.server.call('fall_back_user')
     
    
 

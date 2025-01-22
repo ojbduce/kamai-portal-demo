@@ -15,7 +15,7 @@ from .Existing_Fake_Users import existing_users
 
 import anvil.secrets
 
-BACKUP_FALL_BACK_ID = 'XttxTVjEY8GebX+izgbj1oMsLZ/WFJk+uSAow9ezq2fuZ4WcJGsy8ydHCmvNUbXp'
+FALL_BACK_ID = 'XttxTVjEY8GebX+izgbj1oMsLZ/WFJk+uSAow9ezq2fuZ4WcJGsy8ydHCmvNUbXp'
 # FALL_BACK_USER = app_tables.users.get(remember_me_id=FALL_BACK_ID)
 
 # FALL_BACK_ID_REAL = anvil.secrets("fallback_id")
@@ -29,20 +29,21 @@ def hello():
 @anvil.server.callable
 def fall_back_user(): #change to test user
   print("Hit fall_back_user server side function")
-  fall_back_id = anvil.secrets.get_secret("fall_back_id")
+  # 
+  fall_back_id = FALL_BACK_ID
   if fall_back_id:
-    user= app_tables.users.get(remember_me_id=fall_back_id)
+    user = app_tables.users.get(remember_me_id=fall_back_id)
+    print(f"Got fall back ID. {user['remember_me_id']}")
     anvil.users.force_login(user)
-    print(f"Got fall back ID. {fall_back_id}")
     return user
   elif fall_back_id is None:
     fall_back_id = BACKUP_FALL_BACK_ID # this is nonsensisal?
     print("Got fall fall back ID.")
-    fall_back_user = app_tables.users.get(remember_me_id=fall_back_id)
-    user = anvil.users.force_login(fall_back_user)
-    user = anvil.users.get_user()
+    # fall_back_user = app_tables.users.get(remember_me_id=fall_back_id)
+    # user = anvil.users.force_login(fall_back_user)
+    # user = anvil.users.get_user()
     print(f"Reverting to OPEN fall-back user {user['remember_me_id']}")
-    return anvil.users.get_user(allow_remembered=True)
+    return fall_back_id
   else:
     print("No fallback!")
 
