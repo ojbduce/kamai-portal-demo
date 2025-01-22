@@ -9,6 +9,7 @@ import uuid
 import anvil.tables as tables
 from anvil.tables import app_tables
 import secrets
+import random
 
     
 #Main Function
@@ -116,15 +117,22 @@ def generate_proxy_user():
   email = fake.email()
   remember_me_id = secrets.token_urlsafe(32)
   verification_date = datetime.now()
-  return email,remember_me_id,verification_date
+  gender_list = ['male', 'female','other']
+  gender = random.choice(gender_list)
+  date_of_birth = datetime.now
+  nationality = 'British'
+  return email,remember_me_id,verification_date,gender,date_of_birth,nationality
 #generate_token(remember_me_id)
 
-def add_user_to_db(email,remember_me_id,verification_date):
+def add_user_to_db(email,remember_me_id,verification_date,gender,date_of_birth,nationality):
   print("Adding User to database")
   new_user_row = app_tables.users.add_row(
     email=email,
     remember_me_id=remember_me_id,
-    verification_date=verification_date
+    verification_date=verification_date,
+    gender=gender,
+    date_of_birth = date_of_birth,
+    nationality=nationality
   )
   return new_user_row
 

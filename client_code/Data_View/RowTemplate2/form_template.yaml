@@ -1,3 +1,27 @@
-components: []
+components:
+- data_bindings:
+  - {code: 'self.item[''remember_me_id'']', property: text, writeback: false}
+  layout_properties: {column: JKSDUP}
+  name: label_1
+  properties: {font_size: 10}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''gender'']', property: text, writeback: false}
+  layout_properties: {column: OJLQEN}
+  name: label_3
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''date_of_birth'']', property: text, writeback: false}
+  layout_properties: {column: MSFSMY}
+  name: label_4
+  properties: {}
+  type: Label
+- data_bindings:
+  - {code: 'self.item[''nationality'']', property: text, writeback: false}
+  layout_properties: {column: KDQQSY}
+  name: label_5
+  properties: {}
+  type: Label
 container: {type: DataRowPanel}
 is_package: true

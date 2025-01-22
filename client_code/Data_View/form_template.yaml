@@ -25,29 +25,54 @@ components:
       type: Label
     - layout_properties: {grid_position: 'RKNWUP,XPESWV'}
       name: spacer_3
-      properties: {height: 9.926849365234375}
+      properties: {height: 1.607269287109375}
       type: Spacer
+    - layout_properties: {grid_position: 'GBPWVV,EJJTBA'}
+      name: label_3
+      properties: {align: left, bold: true, text: Persona Data}
+      type: Label
     - components:
       - name: repeating_panel_2
         properties: {item_template: Data_View.RowTemplate2}
         type: RepeatingPanel
-      layout_properties: {grid_position: 'UDLNUQ,DHSUPZ'}
+      layout_properties: {full_width_row: true, grid_position: 'UDLNUQ,DHSUPZ'}
       name: data_grid_2
       properties:
         auto_header: true
         columns:
-        - {data_key: column_1, id: JKSDUP, title: User}
-        - {data_key: column_2, id: VJQQOR, title: Report Requests}
-        - {data_key: column_3, id: OJLQEN, title: Gender}
-        - {data_key: column_1, id: MSFSMY, title: Date Of Birth}
-        - {data_key: column_1, id: KDQQSY, title: Nationality}
+        - {data_key: remember_me_id, expand: false, id: JKSDUP, title: User, width: 431.04266357421875}
+        - {data_key: gender, id: OJLQEN, title: Gender}
+        - {data_key: date_of_birth, id: MSFSMY, title: Date Of Birth}
+        - {data_key: nationality, id: KDQQSY, title: Nationality}
         role: tonal-data-grid
       type: DataGrid
     layout_properties: {grid_position: 'ENNIVG,ZOWQKF'}
     name: card_database
-    properties: {role: outlined-card}
+    properties: {role: elevated-card}
     type: ColumnPanel
-  - layout_properties: {grid_position: 'THXDGQ,ENDURR'}
+  - layout_properties: {grid_position: 'TZFGXG,EPBWOO'}
+    name: label_4
+    properties: {bold: true, text: User Reports}
+    type: Label
+  - components:
+    - components:
+      - name: repeating_panel_reports
+        properties: {item_template: Data_View.RowTemplate3}
+        type: RepeatingPanel
+      layout_properties: {full_width_row: true, grid_position: 'LXZKUM,CUIJFA'}
+      name: data_grid_1
+      properties:
+        columns:
+        - {data_key: remember_me_id, id: JKSDUP, title: User}
+        - {data_key: report_title, id: VJQQOR, title: Report}
+        role: tonal-data-grid
+      type: DataGrid
+    layout_properties: {grid_position: 'EYIJAN,PUCPMT'}
+    name: outlined_card_1
+    properties: {role: elevated-card}
+    type: ColumnPanel
+  - components: []
+    layout_properties: {grid_position: 'THXDGQ,ENDURR'}
     name: column_panel_1
     properties: {}
     type: ColumnPanel
@@ -77,7 +102,8 @@ components:
   properties: {}
   type: FlowPanel
 - components:
-  - layout_properties: {grid_position: 'XKGXJS,GQFTCY'}
+  - event_bindings: {click: button_1_click}
+    layout_properties: {grid_position: 'XKGXJS,GQFTCY'}
     name: button_1
     properties: {background: '', bold: true, font_size: 14, foreground: 'theme:On Secondary Container', icon: 'fa:home', role: null, text: Home}
     type: Button
@@ -89,7 +115,7 @@ components:
   - event_bindings: {click: button_show_data_click}
     layout_properties: {grid_position: 'AAHUUV,WLKXCR'}
     name: button_show_data
-    properties: {background: '', bold: true, foreground: 'theme:On Secondary Container', icon: 'fa:database', role: null, text: Admin}
+    properties: {background: 'theme:Primary Overlay 1', bold: true, foreground: 'theme:On Secondary Container', icon: 'fa:database', role: null, text: Admin}
     type: Button
   - layout_properties: {grid_position: 'LLIOVL,NGOQTF'}
     name: spacer_1
@@ -104,7 +130,7 @@ components:
   properties: {bold: true, text: Kaimai Directory}
   type: Label
 container:
-  event_bindings: {show: form_show}
+  event_bindings: {}
   properties: {background: 'theme:Surface', html: '@theme:standard-page.html'}
   type: HtmlTemplate
 custom_component: true
