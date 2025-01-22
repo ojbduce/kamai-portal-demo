@@ -14,4 +14,5 @@ class Data_View(Data_ViewTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
+    rows = app_tables.users.search()
     

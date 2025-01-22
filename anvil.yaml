@@ -136,6 +136,10 @@ db_schema:
     - admin_ui: {order: 11, width: 200}
       name: nationality
       type: string
+    - admin_ui: {order: 12, width: 200}
+      name: reports
+      target: reports
+      type: link_single
     server: full
     title: Users
 dependencies: []
@@ -176,5 +180,5 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/anvil/secrets.yml
-startup: {module: Yoti_QR_Login, type: form}
+startup: {module: Admin, type: form}
 startup_form: null
