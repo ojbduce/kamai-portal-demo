@@ -1,10 +1,6 @@
 components:
-- layout_properties: {slot: default}
-  name: spacer_2
-  properties: {height: 34.676849365234375}
-  type: Spacer
 - components:
-  - layout_properties: {grid_position: 'NIEEPI,MEZNPZ'}
+  - layout_properties: {grid_position: 'SJCFMG,KFOBMC'}
     name: image_kaimai_logo
     properties:
       alt_text: Kaimai
@@ -30,9 +26,9 @@ components:
     - layout_properties: {grid_position: 'KJQRYK,JVDBGK'}
       name: image_gig_id
       properties:
-        height: 33.419769287109375
+        height: 30.227996826171875
         horizontal_align: center
-        margin: ['3', 0, '2', '2']
+        margin: ['4', 2, '4', 0]
         source: _/theme/digital-id.png
         spacing_below: large
         vertical_align: center
@@ -56,7 +52,7 @@ components:
       bold: true
       font_size: 22
       spacing:
-        margin: [1, 12, 0, 15]
+        margin: [0, 12, 0, 15]
         padding: [0, 15, 0, '15']
       spacing_above: large
       spacing_below: none
@@ -67,10 +63,6 @@ components:
     name: yoti_iframe_1
     properties: {}
     type: form:Yoti_iframe
-  - layout_properties: {grid_position: 'QQAKUD,DWQDGT'}
-    name: spacer_9
-    properties: {height: -2.1129150390625}
-    type: Spacer
   - event_bindings: {click: button_login_test_user_click}
     layout_properties: {grid_position: 'ORRQIQ,RQCTRU'}
     name: button_login_test_user

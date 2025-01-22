@@ -14,12 +14,11 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
-    print("Hit init")
     self.remember_me_id = ''
     self.label_1.scroll_into_view(smooth=False)
     print(f"self.remember_me_id is {self.remember_me_id}")
     self.yoti_loggin_in_box.visible = False #MOVE UI SET UP TO OWN METHOD?
-    self.button_show_data.visible = True
+    self.button_show_data.visible = False
     self.outlined_card_digi_leaders.visible = True
     self.card_database.visible = False 
     self.label_title.visible = True
@@ -175,6 +174,8 @@ class Main(MainTemplate):
   def form_show(self, **event_args):
     """This method is called when the form is shown on the page"""
     self.image_dig_leaders.scroll_into_view(smooth=False)
+    # alert("Logged in with Admin mode")
+    self.button_show_data.visible = True
 
   
     
