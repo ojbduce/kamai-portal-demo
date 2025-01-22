@@ -1,13 +1,7 @@
 components:
 - components:
   - data_bindings:
-    - {code: 'self.fruits[''kind'']', property: text, writeback: false}
-    layout_properties: {grid_position: 'KHFINJ,DBGPAN'}
-    name: label_1
-    properties: {text: ''}
-    type: Label
-  - data_bindings:
-    - {code: 'self.item[''meat'']', property: text, writeback: false}
+    - {code: 'self.item['''']', property: text, writeback: false}
     layout_properties: {grid_position: 'YKZPAX,XYBSSP'}
     name: label_2
     properties: {}

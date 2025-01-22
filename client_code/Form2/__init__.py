@@ -14,7 +14,9 @@ class Form2(Form2Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.item = {'meat':'pork','vegetable':'potatoe'}
+    # self.item = {'meat':'pork','vegetable':'potatoe'}
+    self.items = row
+    
     
     
 
