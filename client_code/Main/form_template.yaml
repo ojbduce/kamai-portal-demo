@@ -18,7 +18,7 @@ components:
           properties: {height: 3.581695556640625}
           type: Spacer
         - event_bindings: {}
-          layout_properties: {full_width_row: true, grid_position: 'QPLFCI,HKMYSI'}
+          layout_properties: {full_width_row: false, grid_position: 'QPLFCI,HKMYSI'}
           name: image_dig_leaders
           properties: {alt_text: image of Digital Leaders website, background: 'theme:Background', display_mode: fill_width, height: 59.521331787109375, source: _/theme/insights_report_screenshot.jpg}
           type: Image
@@ -27,11 +27,11 @@ components:
         name: link_digi_leaders_image
         properties: {align: left, url: 'https://super-kaleidoscopic-wader.anvil.app'}
         type: Link
-      - layout_properties: {full_width_row: true, grid_position: 'DYWEZX,JMSICL'}
+      - layout_properties: {full_width_row: false, grid_position: 'DYWEZX,JMSICL'}
         name: link_3
         properties: {background: 'theme:On Primary', bold: true, font_size: 18, foreground: 'theme:On Background', text: Digital Leaders}
         type: Link
-      - layout_properties: {full_width_row: true, grid_position: 'MZLKUR,YMMSEG'}
+      - layout_properties: {full_width_row: false, grid_position: 'MZLKUR,YMMSEG'}
         name: label_4
         properties:
           background: theme:On Primary
