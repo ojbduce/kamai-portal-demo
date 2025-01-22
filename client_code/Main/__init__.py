@@ -186,7 +186,7 @@ class Main(MainTemplate):
   def form_show(self, **event_args):
     """This method is called when the form is shown on the page"""
     self.button_show_data.visible=False
-    alert("Admin Mode")
+    # alert("Admin Mode")
     self.button_show_data.visible = True
 
   
