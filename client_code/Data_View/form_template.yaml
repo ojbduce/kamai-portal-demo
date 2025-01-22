@@ -1,0 +1,114 @@
+components:
+- components:
+  - layout_properties: {grid_position: 'CGICBS,LTZKQD'}
+    name: spacer_2
+    properties: {height: 21.474441528320312}
+    type: Spacer
+  - components:
+    - layout_properties: {grid_position: 'IXKEKS,HUXWPK'}
+      name: label_data_views
+      properties:
+        background: ''
+        bold: true
+        font_size: 18
+        foreground: ''
+        spacing:
+          margin: [null, 0, null, 2]
+        text: Admin
+      type: Label
+    - layout_properties: {grid_position: 'TAMDSG,FLPFID'}
+      name: label_1
+      properties:
+        background: theme:Primary Overlay 1
+        bold: true
+        foreground: theme:On Surface Variant
+        icon: fa:child
+        spacing:
+          margin: [null, null, null, 4]
+        text: Persona Data
+      type: Label
+    - layout_properties: {grid_position: 'RKNWUP,XPESWV'}
+      name: spacer_3
+      properties: {height: 9.926849365234375}
+      type: Spacer
+    - components:
+      - name: repeating_panel_2
+        properties: {item_template: Data_View.RowTemplate2}
+        type: RepeatingPanel
+      layout_properties: {grid_position: 'UDLNUQ,DHSUPZ'}
+      name: data_grid_2
+      properties:
+        auto_header: true
+        columns:
+        - {data_key: column_1, id: JKSDUP, title: User}
+        - {data_key: column_2, id: VJQQOR, title: Report Requests}
+        - {data_key: column_3, id: OJLQEN, title: Gender}
+        - {data_key: column_1, id: MSFSMY, title: Date Of Birth}
+        - {data_key: column_1, id: KDQQSY, title: Nationality}
+        role: tonal-data-grid
+      type: DataGrid
+    layout_properties: {grid_position: 'ENNIVG,ZOWQKF'}
+    name: card_database
+    properties: {role: outlined-card}
+    type: ColumnPanel
+  - layout_properties: {grid_position: 'THXDGQ,ENDURR'}
+    name: column_panel_1
+    properties: {}
+    type: ColumnPanel
+  layout_properties: {slot: default}
+  name: content_panel_home
+  properties: {background: 'theme:Surface', col_widths: '{}', spacing_above: none}
+  type: ColumnPanel
+- components:
+  - components:
+    - data_bindings:
+      - {code: 'self.item['''']', property: tooltip, writeback: false}
+      layout_properties: {width: 35.2421875}
+      name: yoti_loggin_in_box
+      properties:
+        display_mode: shrink_to_fit
+        height: 39.30078125
+        horizontal_align: center
+        margin: [null, null, null, '0']
+        source: _/theme/yoti-logo.png
+        vertical_align: center
+      type: Image
+    name: flow_panel_1
+    properties: {}
+    type: FlowPanel
+  layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+- components:
+  - layout_properties: {grid_position: 'XKGXJS,GQFTCY'}
+    name: button_1
+    properties: {background: '', bold: true, font_size: 14, foreground: 'theme:On Secondary Container', icon: 'fa:home', role: null, text: Home}
+    type: Button
+  - event_bindings: {click: button_about_click}
+    layout_properties: {grid_position: 'BGKMDT,HKTNKH'}
+    name: button_about
+    properties: {background: '', bold: true, font_size: 14, foreground: 'theme:On Secondary Container', icon: 'fa:info', role: null, text: About}
+    type: Button
+  - event_bindings: {click: button_show_data_click}
+    layout_properties: {grid_position: 'AAHUUV,WLKXCR'}
+    name: button_show_data
+    properties: {background: '', bold: true, foreground: 'theme:On Secondary Container', icon: 'fa:database', role: null, text: Admin}
+    type: Button
+  - layout_properties: {grid_position: 'LLIOVL,NGOQTF'}
+    name: spacer_1
+    properties: {height: 253.32421875}
+    type: Spacer
+  layout_properties: {slot: left-nav}
+  name: column_panel_2
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {slot: title}
+  name: label_2
+  properties: {bold: true, text: Kaimai Directory}
+  type: Label
+container:
+  event_bindings: {show: form_show}
+  properties: {background: 'theme:Surface', html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true
