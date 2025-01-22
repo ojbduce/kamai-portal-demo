@@ -111,4 +111,5 @@ container:
   event_bindings: {show: form_show}
   properties: {background: 'theme:Surface', html: '@theme:standard-page.html'}
   type: HtmlTemplate
+custom_component: true
 is_package: true
