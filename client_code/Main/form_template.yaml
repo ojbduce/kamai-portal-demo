@@ -1,33 +1,18 @@
 components:
 - components:
-  - components:
-    - layout_properties: {full_width_row: true, grid_position: 'GCGGRD,FZUVZI', row_background: 'theme:Surface'}
-      name: label_1
-      properties:
-        background: theme:Light Overlay 2
-        bold: true
-        font_size: 22
-        foreground: theme:On Surface
-        icon: ''
-        icon_align: left_edge
-        role: title
-        spacing:
-          margin: [0, null, 0, null]
-        text: 'Kaimai Directory                            '
-      type: Label
-    layout_properties: {grid_position: 'YIYDMF,XUTTMU'}
-    name: column_panel_3
-    properties: {background: 'theme:Surface'}
-    type: ColumnPanel
+  - layout_properties: {grid_position: 'ZQICNG,XLSWAT'}
+    name: label_1
+    properties: {bold: true, role: title, text: Kaimai Directory}
+    type: Label
+  - data_bindings:
+    - {code: 'self.item['''']', property: icon, writeback: false}
+    layout_properties: {grid_position: 'AILLXI,MRGFDI'}
+    name: label_title
+    properties: {align: left, background: '', bold: true, font_size: 19, foreground: 'theme:On Primary Container', icon: '', role: headline, text: 'Spotlight: Digital Leaders Insights Report  '}
+    type: Label
   - components:
     - components:
       - components:
-        - data_bindings:
-          - {code: 'self.item['''']', property: icon, writeback: false}
-          layout_properties: {full_width_row: true, grid_position: 'MJFQHI,BCUWNS'}
-          name: label_title
-          properties: {background: '', bold: true, font_size: 19, foreground: 'theme:On Primary Container', icon: '', role: headline, text: 'Spotlight: Digital Leaders Insights Report  '}
-          type: Label
         - layout_properties: {grid_position: 'TDHLKS,LUEUVP'}
           name: spacer_3
           properties: {height: 3.581695556640625}
@@ -40,13 +25,13 @@ components:
         event_bindings: {click: link_digi_leaders_image_click}
         layout_properties: {full_width_row: true, grid_position: 'TJTTXD,OUTJSR'}
         name: link_digi_leaders_image
-        properties: {url: 'https://super-kaleidoscopic-wader.anvil.app'}
+        properties: {align: left, url: 'https://super-kaleidoscopic-wader.anvil.app'}
         type: Link
-      - layout_properties: {grid_position: 'DYWEZX,JMSICL'}
+      - layout_properties: {full_width_row: true, grid_position: 'DYWEZX,JMSICL'}
         name: link_3
         properties: {background: 'theme:On Primary', bold: true, font_size: 18, foreground: 'theme:On Background', text: Digital Leaders}
         type: Link
-      - layout_properties: {grid_position: 'MZLKUR,YMMSEG'}
+      - layout_properties: {full_width_row: true, grid_position: 'MZLKUR,YMMSEG'}
         name: label_4
         properties:
           background: theme:On Primary
@@ -55,7 +40,7 @@ components:
           foreground: theme:On Background
           text: "Digital Leaders is an independent platform that fosters digital transformation across public, private, and nonprofit sectors in the UK. \nIt serves as a forum for leaders to explore new ideas, network, and access digital knowledge and solutions.\n\nThe platform offers a variety of programs and events, including: \n\n Public Sector Innovation Conference: Scheduled for March 11, 2025, this conference focuses on digital innovation within the public sector. \n\nDigiLeaders Impact Awards: Currently open for entries and nominations, these awards recognize excellence in digital transformation. \n\nAdditionally, Digital Leaders provides resources such as the AI Pulse newsletter, which offers insights into AI principles and practices, and the Digital Masterclass series, featuring expert talks and case studies on digital transformation. DigiLeaders: An Advisory Board comprising cross-sector experts guides Digital Leaders, ensuring the platform remains current and independent in the rapidly evolving digital landscape."
         type: Label
-      layout_properties: {grid_position: 'QQMAWM,GBQGGH'}
+      layout_properties: {full_width_row: true, grid_position: 'QQMAWM,GBQGGH'}
       name: outlined_card_2
       properties: {background: 'theme:Background', foreground: 'theme:On Surface Variant', role: elevated-card, tooltip: One of many online resources...}
       type: ColumnPanel
