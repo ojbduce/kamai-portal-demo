@@ -3,7 +3,7 @@ components:
   - {code: 'self.item[''remember_me_id'']', property: text, writeback: false}
   layout_properties: {column: JKSDUP}
   name: label_1
-  properties: {font_size: 10}
+  properties: {font_size: 12}
   type: Label
 - data_bindings:
   - {code: 'self.item[''gender'']', property: text, writeback: false}

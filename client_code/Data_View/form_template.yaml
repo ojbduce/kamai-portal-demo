@@ -65,7 +65,7 @@ components:
       name: data_grid_1
       properties:
         columns:
-        - {data_key: remember_me_id, id: JKSDUP, title: User}
+        - {data_key: remember_me_id, expand: false, id: JKSDUP, title: User, width: 508.5120849609375}
         - {data_key: report_title, id: VJQQOR, title: Report}
         role: tonal-data-grid
       type: DataGrid
