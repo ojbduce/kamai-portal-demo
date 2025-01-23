@@ -186,8 +186,8 @@ class Main(MainTemplate):
   #try mouse event?
   def form_show(self, **event_args):
     """This method is called when the form is shown on the page"""
-    # self.button_show_data.visible=False
-    # alert("Admin Mode")
+    self.button_show_data.visible=False
+    anvil.js.window.alert("Logged-in in Admin Mode.")
     self.button_show_data.visible = True
 
   
