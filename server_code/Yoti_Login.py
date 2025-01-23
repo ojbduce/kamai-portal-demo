@@ -137,7 +137,9 @@ def add_user_to_db(email,remember_me_id,verification_date,gender,date_of_birth,n
   return new_user_row
 
 
-     
+@anvil.server.callable
+def admin_test():
+  return True
 
 @anvil.server.callable
 def force_login(user):

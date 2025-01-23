@@ -8,6 +8,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.users
+import anvil.designer
 
 
 
@@ -183,12 +184,15 @@ class Main(MainTemplate):
   #   self.remember_me_id = anvil.server.call('get_user')
   #   print(f"On Form Show Event self.remember_me_id i: {self.remember_me_id}")
 
-  #try mouse event?
   def form_show(self, **event_args):
     """This method is called when the form is shown on the page"""
+    if anvil.designer.in_designer:
+      return
     self.button_show_data.visible=False
-    anvil.js.window.alert("Logged-in in Admin Mode.")
+    alert("Logged-in in Admin Mode")
     self.button_show_data.visible = True
+
+  
 
   
   
