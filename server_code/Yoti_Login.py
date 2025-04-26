@@ -117,22 +117,22 @@ def generate_proxy_user():
   email = fake.email()
   remember_me_id = secrets.token_urlsafe(32)
   verification_date = datetime.now()
-  gender_list = ['male', 'female','other']
-  gender = random.choice(gender_list)
-  date_of_birth = datetime.now
-  nationality = 'British'
-  return email,remember_me_id,verification_date,gender,date_of_birth,nationality
+  # gender_list = ['male', 'female','other']
+  # gender = random.choice(gender_list)
+  # date_of_birth = datetime.now
+  # nationality = 'British'
+  return email,remember_me_id,verification_date
 #generate_token(remember_me_id)
 
-def add_user_to_db(email,remember_me_id,verification_date,gender,date_of_birth,nationality):
+def add_user_to_db(email,remember_me_id,verification_date):
   print("Adding User to database")
   new_user_row = app_tables.users.add_row(
     email=email,
     remember_me_id=remember_me_id,
     verification_date=verification_date,
-    gender=gender,
-    date_of_birth = date_of_birth,
-    nationality=nationality
+    # gender=gender,
+    # date_of_birth = date_of_birth,
+    # nationality=nationality
   )
   return new_user_row
 
