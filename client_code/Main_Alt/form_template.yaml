@@ -20,7 +20,7 @@ components:
   - layout_properties: {grid_position: 'EVNBVW,IIZHNV'}
     name: custom_directory_1
     properties: {}
-    type: form:Custom_Directory
+    type: form:Arrive
   layout_properties: {slot: default}
   name: column_panel_1
   properties: {}

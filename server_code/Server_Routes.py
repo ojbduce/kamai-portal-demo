@@ -17,3 +17,7 @@ def serve_home_page(**p):
 @anvil.server.route("/main")
 def serve_main_page(**p):
   return anvil.server.FormResponse('Main')
+
+@anvil.server.route("/arrive")
+def serve_main_page(**p):
+  return anvil.server.FormResponse('Arrive')
