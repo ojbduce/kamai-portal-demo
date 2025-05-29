@@ -18,7 +18,6 @@ class Main(MainTemplate):
     self.init_components(**properties)
     self.timer_1.interval = 0
     self.remember_me_id = ''
-    self.label_1.scroll_into_view(smooth=False)
     print(f"self.remember_me_id is {self.remember_me_id}")
     self.yoti_loggin_in_box.visible = False #MOVE UI SET UP TO OWN METHOD?
     self.button_show_data.visible = False

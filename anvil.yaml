@@ -176,5 +176,5 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/anvil/secrets.yml
-startup: {module: Yoti_QR_Login, type: form}
+startup: {module: Arrive, type: form}
 startup_form: null

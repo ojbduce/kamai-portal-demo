@@ -21,3 +21,7 @@ def serve_main_page(**p):
 @anvil.server.route("/arrive")
 def serve_main_page(**p):
   return anvil.server.FormResponse('Arrive')
+
+@anvil.server.route("/login")
+def serve_main_page(**p):
+  return anvil.server.FormResponse('Yoti_QR_Login')
