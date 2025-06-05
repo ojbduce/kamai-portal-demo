@@ -2,28 +2,30 @@ components:
 - components:
   - layout_properties: {full_width_row: true, grid_position: 'ELHAFC,RPJGDB', row_background: ''}
     name: label_title
-    properties: {align: left, background: '', bold: true, font_size: 22, foreground: '', icon: '', role: title, text: 'Digital Leaders '}
+    properties: {align: left, background: '', bold: true, font_size: 23, foreground: '', icon: '', role: title, text: 'Digital Leaders '}
     type: Label
   - layout_properties: {full_width_row: true, grid_position: 'AJKDKC,LSOBNU'}
     name: rich_text_1
     properties:
       align: left
-      background: theme:Primary
-      content: "**Add Digital Leaders to your Kaimai Subscribtion**: \n* Custom Digital Leaders' Insights Reports\n* Custom Reports and Chat with the Website via FIDO\n"
+      background: theme:On Primary Container
+      content: "**Explore Full Access to Digital Leaders with your Kaimai Yoti Subscription**: \n* Custom-tailored Digital Leaders' Insights Reports\n* Interactive Insight Reports and A.I Chat via FIDO"
       font: ''
       font_size: 12
-      foreground: theme:On Primary
+      foreground: theme:Primary Container
+      spacing:
+        padding: [9, null, 5, 5]
     type: RichText
   - components:
     - layout_properties: {full_width_row: true, grid_position: 'QQJZZO,AWXYQK'}
       name: label_4
       properties:
         background: theme:On Primary
-        bold: false
+        bold: true
         font: ''
         font_size: 14
         foreground: theme:On Background
-        text: "\nDigital Leaders is an independent platform that fosters digital transformation across public, private, and nonprofit sectors in the UK. \nIt serves as a forum for leaders to explore new ideas, network, and access digital knowledge and solutions.\n\nThe platform offers a variety of programs and events, including: \n\n Public Sector Innovation Conference: Scheduled for March 11, 2025, this conference focuses on digital innovation within the public sector. \n\nDigiLeaders Impact Awards: Currently open for entries and nominations, these awards recognize excellence in digital transformation. \n\n"
+        text: "\nDigital Leaders is an independent platform that fosters digital transformation across public, private, and nonprofit sectors in the UK. \n\nIt serves as a forum for leaders to explore new ideas, network, and access digital knowledge and solutions.\n\nThe platform offers a variety of programs and events throughout the year.\n\n \n\n"
       type: Label
     - components:
       - layout_properties: {grid_position: 'ZHKMKD,LDMIHD'}
