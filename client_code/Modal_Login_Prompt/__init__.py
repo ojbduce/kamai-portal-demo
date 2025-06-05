@@ -19,3 +19,4 @@ class Modal_Login_Prompt(Modal_Login_PromptTemplate):
   def link_1_click(self, **event_args):
     """This method is called when the link is clicked"""
     open_form('Yoti_QR_Login')
+    self.raise_event("x-close-alert")

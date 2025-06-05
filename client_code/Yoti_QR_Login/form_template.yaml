@@ -1,8 +1,4 @@
 components:
-- layout_properties: {slot: default}
-  name: spacer_2
-  properties: {height: 62.27912902832031}
-  type: Spacer
 - components:
   - layout_properties: {grid_position: 'NIEEPI,MEZNPZ'}
     name: image_kaimai_logo
@@ -14,13 +10,13 @@ components:
       role: null
       source: _/theme/kaimai_image.webp
     type: Image
+  - layout_properties: {grid_position: 'UHPRMM,WPPWQM'}
+    name: spacer_6
+    properties: {height: 15.316055297851562}
+    type: Spacer
   - layout_properties: {grid_position: 'USTKRZ,ZLXTXP'}
     name: spacer_1
     properties: {height: -2}
-    type: Spacer
-  - layout_properties: {grid_position: 'KVECLJ,QAGHHE'}
-    name: spacer_6
-    properties: {height: 22.073150634765625}
     type: Spacer
   - layout_properties: {grid_position: 'RGQRYI,LIDTUL'}
     name: spacer_5
@@ -30,7 +26,8 @@ components:
     - layout_properties: {grid_position: 'KJQRYK,JVDBGK'}
       name: image_gig_id
       properties:
-        height: 33.419769287109375
+        display_mode: shrink_to_fit
+        height: 28.9375
         horizontal_align: center
         margin: ['3', 0, '2', '2']
         source: _/theme/digital-id.png
@@ -49,20 +46,6 @@ components:
     name: spacer_8
     properties: {height: -3.912628173828125}
     type: Spacer
-  - layout_properties: {grid_position: 'YDRLJS,IHUONS'}
-    name: label_1
-    properties:
-      align: center
-      bold: true
-      font_size: 22
-      spacing:
-        margin: [1, 12, 0, 15]
-        padding: [0, 15, 0, '15']
-      spacing_above: large
-      spacing_below: none
-      text: Sign in
-      underline: false
-    type: Label
   - layout_properties: {grid_position: 'GOLTWE,GLGXYF'}
     name: yoti_iframe_1
     properties: {}
@@ -74,20 +57,12 @@ components:
   - event_bindings: {click: button_login_test_user_click}
     layout_properties: {grid_position: 'ORRQIQ,RQCTRU'}
     name: button_login_test_user
-    properties: {align: center, background: 'theme:Secondary', bold: true, enabled: true, foreground: 'theme:On Secondary', role: null, text: Test User, visible: true}
+    properties: {align: center, background: 'theme:Secondary', bold: true, enabled: true, font_size: 13, foreground: 'theme:On Secondary', role: null, text: Bypass, visible: true}
     type: Button
   layout_properties: {slot: default}
   name: outlined_card
   properties: {background: 'theme:On Primary', col_widths: '{}', role: elevated-card}
   type: ColumnPanel
-- layout_properties: {slot: default}
-  name: spacer_7
-  properties: {height: 2.327423095703125}
-  type: Spacer
-- layout_properties: {slot: default}
-  name: spacer_4
-  properties: {height: 260.6612548828125}
-  type: Spacer
 - layout_properties: {slot: default}
   name: spacer_3
   properties: {height: -14}

@@ -17,6 +17,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.raise_event("x-close-alert")
     anvil.js.window.addEventListener('message', lambda event: self.handle_auth_message(event))
     # iframe = jQuery("<iframe width='100%' height='450px'>").attr("src",'https://kaimaiyoti.azurewebsites.net')
     # iframe.appendTo(get_dom_node(self.iframe_container))

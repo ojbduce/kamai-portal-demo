@@ -9,6 +9,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..Modal_Login_Prompt import Modal_Login_Prompt
+from ..Yoti_QR_Login import Yoti_QR_Login
 
 
 class Arrive(ArriveTemplate):
@@ -20,6 +21,9 @@ class Arrive(ArriveTemplate):
 
   def form_show(self, **event_args):
     """This method is called when the form is shown on the page"""
-    modal = Modal_Login_Prompt()
-    alert(content = modal )
+    # modal_link = Modal_Login_Prompt()
+    # alert(content = modal_link, buttons=[] )
+    modal_login_page = Yoti_QR_Login()
+    alert(content = modal_login_page, large=True,buttons=[])
+    
     
