@@ -110,10 +110,11 @@ components:
     type: Button
   - data_bindings:
     - {code: 'self.item['''']', property: tooltip, writeback: false}
+    layout_properties: {}
     name: yoti_loggin_in_box
     properties:
       display_mode: shrink_to_fit
-      height: 39.30078125
+      height: 32.6527099609375
       horizontal_align: center
       margin: [null, null, null, '0']
       source: _/theme/yoti-logo.png
