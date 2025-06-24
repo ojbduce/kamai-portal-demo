@@ -46,6 +46,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
             print(f"Identified User from handle_auth: {user['email']}")
             anvil.server.call('force_login', user) #force login only server-side
             print(f"handle_auth has force logged in user:{user['email']}")
+            self.raise_event("x-close-alert")
             anvil.open_form('Home')
             return
             
@@ -107,7 +108,7 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
     # if event.data == 'auth_success':
     #   
 
-    
+  #What is this nonsense??  
   def cleanup_duplicate_ids(self):#why doesn't work??
     duplicates = set()
     duplicate_count = 0
@@ -124,18 +125,14 @@ class Yoti_QR_Login(Yoti_QR_LoginTemplate):
       
 
   
-#Now redundant?
-  def label_loading_show(self, **event_args):
-    """This method is called when the Label is shown on the screen"""
-    self.label_loading.text = "Your Yoti QR Code is loading..."
-    time.sleep(5)
-    self.label_loading.visible = False
+
 
  
-##Does this work with Users Service? Add url hash? Add Existing user version.
+##Bypass Button .
   def button_login_test_user_click(self, **event_args):
     """This method is called when the button is clicked"""
     user = anvil.server.call('test_user_flow')
     print(f"Test User remember_me_id is: {user}")
     print(anvil.users.get_user(allow_remembered=True))
-    return user , open_form('Main')
+    self.raise_event("x-close-alert")
+    return user , open_form('Home')

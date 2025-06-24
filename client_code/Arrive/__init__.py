@@ -25,7 +25,8 @@ class Arrive(ArriveTemplate):
     """This method is called when the form is shown on the page"""
     # modal_link = Modal_Login_Prompt()
     # alert(content = modal_link, buttons=[] )
-    modal_login_page = Yoti_QR_Login()
+    # modal_login_page = Yoti_QR_Login()
+    modal_login_page = Modal_Login_Prompt()
     alert(content = modal_login_page,large = True, buttons=[])
     
     

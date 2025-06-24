@@ -16,6 +16,7 @@ class Main(MainTemplate):
   def __init__(self, **properties):
     # Set Form pfrom ._anvil_designer import MainTemplate
     self.init_components(**properties)
+    self.raise_event("x-close-alert")
     self.timer_1.interval = 0
     self.remember_me_id = ''
     print(f"self.remember_me_id is {self.remember_me_id}")
