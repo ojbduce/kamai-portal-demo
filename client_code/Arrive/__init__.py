@@ -26,6 +26,6 @@ class Arrive(ArriveTemplate):
     # modal_link = Modal_Login_Prompt()
     # alert(content = modal_link, buttons=[] )
     modal_login_page = Yoti_QR_Login()
-    alert(content = modal_login_page, large=True,buttons=[])
+    alert(content = modal_login_page,large = True, buttons=[])
     
     
