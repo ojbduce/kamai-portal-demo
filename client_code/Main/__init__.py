@@ -21,7 +21,7 @@ class Main(MainTemplate):
     self.remember_me_id = ''
     print(f"self.remember_me_id is {self.remember_me_id}")
     self.yoti_loggin_in_box.visible = False #MOVE UI SET UP TO OWN METHOD?
-    self.button_show_data.visible = False
+    self.button_show_data.visible = True
     self.outlined_card_digi_leaders.visible = True
     self.card_database.visible = False 
     self.label_title.visible = True

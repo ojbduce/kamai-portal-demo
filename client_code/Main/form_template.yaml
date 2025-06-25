@@ -1,53 +1,50 @@
 components:
 - components:
-  - layout_properties: {full_width_row: true, grid_position: 'ELHAFC,RPJGDB', row_background: ''}
-    name: label_title
-    properties: {align: left, background: '', bold: true, font_size: 23, foreground: '', icon: '', role: title, text: 'Digital Leaders '}
-    type: Label
-  - layout_properties: {full_width_row: true, grid_position: 'AJKDKC,LSOBNU'}
-    name: rich_text_1
-    properties:
-      align: left
-      background: theme:On Primary Container
-      content: "**Explore Full Access to Digital Leaders with your Kaimai Yoti Subscription**: \n* Custom-tailored Digital Leaders' Insights Reports\n* Interactive Insight Reports and A.I Chat via FIDO"
-      font: ''
-      font_size: 12
-      foreground: theme:Primary Container
-      spacing:
-        padding: [9, null, 5, 5]
-    type: RichText
   - components:
-    - layout_properties: {full_width_row: true, grid_position: 'QQJZZO,AWXYQK'}
-      name: label_4
-      properties:
-        background: theme:On Primary
-        bold: true
-        font: ''
-        font_size: 14
-        foreground: theme:On Background
-        text: "\nDigital Leaders is an independent platform that fosters digital transformation across public, private, and nonprofit sectors in the UK. \n\nIt serves as a forum for leaders to explore new ideas, network, and access digital knowledge and solutions.\n\nThe platform offers a variety of programs and events throughout the year.\n\n \n\n"
-      type: Label
     - components:
-      - layout_properties: {grid_position: 'ZHKMKD,LDMIHD'}
-        name: spacer_3
-        properties: {height: 3.581695556640625}
-        type: Spacer
+      - layout_properties: {grid_position: 'ZKPNEW,IZCAOC'}
+        name: label_title
+        properties: {align: left, background: '', bold: true, font_size: 23, foreground: 'theme:On Secondary Container', icon: '', role: title, text: 'Digital Leaders '}
+        type: Label
+      - layout_properties: {grid_position: 'ZCBHQE,LTDWSA'}
+        name: rich_text_1
+        properties:
+          align: left
+          background: theme:On Primary Container
+          content: "**Explore Full Access to Digital Leaders with your Kaimai Yoti Subscription**: \n* Custom-tailored Digital Leaders' Insights Reports\n* Interactive Insight Reports and A.I Chat via FIDO"
+          font: ''
+          font_size: 12
+          foreground: theme:Primary Container
+          spacing:
+            padding: [9, null, 5, 5]
+        type: RichText
+      - layout_properties: {grid_position: 'TIYPBP,DHHSOO'}
+        name: label_4
+        properties:
+          align: left
+          background: theme:On Primary
+          bold: true
+          font: ''
+          font_size: 14
+          foreground: theme:On Surface Variant
+          text: "\nDigital Leaders is an independent platform that fosters digital transformation across public, private, and nonprofit sectors in the UK. \n\nIt serves as a forum for leaders to explore new ideas, network, and access digital knowledge and solutions.\n\nThe platform offers a variety of programs and events throughout the year.\n\nFIDO Insight's Reports - Generate custom reports grounded on real data, proprietary content authored by some of the leading voices in Tech.\n \n\n"
+        type: Label
       - event_bindings: {}
         layout_properties: {grid_position: 'TIYPBP,CIEIUX'}
         name: image_dig_leaders_copy
-        properties: {alt_text: image of Digital Leaders website, background: 'theme:Background', display_mode: original_size, height: 141.672607421875, horizontal_align: center, source: _/theme/insights_report_screenshot.jpg}
+        properties: {alt_text: image of Digital Leaders website, background: 'theme:Light Overlay 2', display_mode: original_size, height: 141.672607421875, horizontal_align: center, source: _/theme/insights_report_screenshot.jpg}
         type: Image
       event_bindings: {click: link_digi_leaders_image_click}
-      layout_properties: {grid_position: 'QQJZZO,ZMZEBT'}
+      layout_properties: {grid_position: ''}
       name: link_digi_leaders_image
       properties: {align: left, url: 'https://super-kaleidoscopic-wader.anvil.app'}
       type: Link
-    layout_properties: {full_width_row: true, grid_position: 'MCDBOK,MOQVHY'}
-    name: column_panel_2
-    properties: {}
-    type: ColumnPanel
-  - components: []
-    layout_properties: {full_width_row: true, grid_position: 'OWXGXH,EKLLBM'}
+    - components: []
+      layout_properties: {grid_position: ''}
+      name: column_panel_2
+      properties: {}
+      type: ColumnPanel
+    layout_properties: {grid_position: 'ERVJJE,QWRUHP'}
     name: outlined_card_digi_leaders
     properties: {background: 'theme:On Primary', role: elevated-card}
     type: ColumnPanel
@@ -103,8 +100,9 @@ components:
     spacing_above: none
   type: ColumnPanel
 - components:
-  - name: label_1
-    properties: {font_size: 10, text: Logged-in as Admin}
+  - layout_properties: {}
+    name: label_1
+    properties: {background: 'theme:Primary Overlay 1', border: '', font_size: 10, icon: 'fa:database', icon_align: right_edge, text: ' Logged-in as Admin.  '}
     type: Label
   - data_bindings:
     - {code: 'self.item['''']', property: tooltip, writeback: false}
@@ -127,22 +125,26 @@ components:
   properties: {}
   type: FlowPanel
 - components:
+  - layout_properties: {grid_position: 'WXRQYK,PBGFWD'}
+    name: button_1
+    properties: {bold: true, font_size: 12, foreground: 'theme:On Surface Variant', icon: 'fa:university', text: Browse}
+    type: Button
+  - layout_properties: {grid_position: 'FYWGHY,MTBYSS'}
+    name: button_2
+    properties: {bold: true, font_size: 12, foreground: 'theme:On Surface Variant', icon: 'fa:bookmark', text: Saved}
+    type: Button
   - event_bindings: {click: button_show_data_click, show: button_show_data_show}
-    layout_properties: {grid_position: 'WXHIVZ,NRRQST'}
+    layout_properties: {grid_position: 'UILSKO,OPRENI'}
     name: button_show_data
     properties:
-      background: ''
+      background: theme:Primary Overlay 1
       bold: true
       font_size: 12
-      foreground: theme:On Surface Variant
+      foreground: theme:Secondary
       icon: fa:database
       role: null
       text: |
         Admin
-    type: Button
-  - layout_properties: {grid_position: 'WXRQYK,PBGFWD'}
-    name: button_1
-    properties: {foreground: 'theme:On Surface Variant', icon: 'fa:book', text: Home}
     type: Button
   layout_properties: {slot: left-nav}
   name: column_panel_3
