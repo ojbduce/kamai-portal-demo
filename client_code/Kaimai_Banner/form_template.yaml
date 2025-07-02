@@ -2,8 +2,6 @@ components: []
 container:
   properties:
     html: |-
-      /*Banner Form Custom HTML*/
-
       <!DOCTYPE html>
       <html lang="en">
         <head>
