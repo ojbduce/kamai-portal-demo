@@ -30,27 +30,28 @@ class Arrive(ArriveTemplate):
 
   def openForm(self, title=None, **kwargs):
     """This method is called when a visit button is clicked"""
-    # Map publication titles to Anvil forms
-    # You can map different publications to different forms:
-    # 'Digital Leaders': 'DigiLeaders',  # If you create a DigiLeaders form
-    # 'Science Today': 'ScienceForm',   # If you create a ScienceForm
-    # etc.
-    form_mapping = {
-      'Digital Leaders': 'Home',  # You can change this to any available form
-      'Science Today': 'Home',
-      'The Culinary Chronicle': 'Home',
-      'Global Affairs': 'Home',
-      'Digital Marketing Trends': 'Home',
-      'Historical Studies Quarterly': 'Home',
-      'Architectural Digest': 'Home',
-      'Health & Wellness Journal': 'Home',
-      'Breaking News Network': 'Home',
-      'Travel Enthusiast': 'Home',
-      'Economic Review': 'Home'
-    }
+    alert("Clicked")
+    # # Map publication titles to Anvil forms
+    # # You can map different publications to different forms:
+    # # 'Digital Leaders': 'DigiLeaders',  # If you create a DigiLeaders form
+    # # 'Science Today': 'ScienceForm',   # If you create a ScienceForm
+    # # etc.
+    # form_mapping = {
+    #   'Digital Leaders': 'Home',  # You can change this to any available form
+    #   'Science Today': 'Home',
+    #   'The Culinary Chronicle': 'Home',
+    #   'Global Affairs': 'Home',
+    #   'Digital Marketing Trends': 'Home',
+    #   'Historical Studies Quarterly': 'Home',
+    #   'Architectural Digest': 'Home',
+    #   'Health & Wellness Journal': 'Home',
+    #   'Breaking News Network': 'Home',
+    #   'Travel Enthusiast': 'Home',
+    #   'Economic Review': 'Home'
+    # }
 
-    # Get the form name from the mapping, default to 'Home'
-    form_name = form_mapping.get(title, 'Home')
+    # # Get the form name from the mapping, default to 'Home'
+    # form_name = form_mapping.get(title, 'Home')
 
-    # Open the appropriate form
-    open_form(form_name)
+    # # Open the appropriate form
+    open_form('Home')
