@@ -7,6 +7,7 @@ unique_ids:
     digital_leaders_image copy.png: '1734072507356685692890448.1854'
     insights_report_screenshot.jpg: '173752755501052612909502.001816'
     kaimai_image.webp: '1733224691113479736238140.5501'
+    new_file.html: '1757950733102930277172536.5662'
     standard-page.html: MZP6FRFANS5B5MUS32EPVWOFUMZE3COU
     theme.css: FXUN3QV6LBCL52JPQJ5CTWZCKJMPQG2R
     yoti-logo.png: '1727763941428603753504496.6152'
@@ -36,8 +37,11 @@ unique_ids:
     Yoti_QR_Login: '1733123254906494742499883.132'
     Yoti_QR_Login_Alt: '1737525119522831386214254.4277'
     Yoti_iframe: '1733224886401743746551627.781'
+    a_form: '1757949132942221077734459.54437'
+    adjusted_page: '1757950481231805280824271.4355'
     iframe_container: '1733573265591474783203664.94385'
     new_banner: '1757944509261149923427883.8444'
+    subtext: '1757949349963890401082225.1768'
   modules: {}
   scripts: {}
   server_modules:
