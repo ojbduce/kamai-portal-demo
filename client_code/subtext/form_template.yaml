@@ -1,7 +1,11 @@
-components: []
+components:
+- layout_properties: {slot: default}
+  name: new_banner_1
+  properties: {}
+  type: form:new_banner
 container:
   properties:
-    html: "<div class=\"custom-top-banner\" role=\"banner\">\n  \n    <div class=\"brand-subrow\">\n      <span class=\"brand-subtext\">FIDO For</span>\n      <img src=\"_/theme/yoti-logo_2.png\" alt=\"Yoti\" title=\"Login with Yoti\" class=\"yoti-logo\">\n    </div>\n  </div>\n</div>\n\n<style>\n  .custom-top-banner {\n    position: fixed;\n    top: 0;\n    left: 1;\n    width: 100%;\n    z-index: 1100;\n    background-color: white;\n    color: #1C1B1F;\n    display: flex;\n    align-items: center;\n    padding: 12px 16px;\n    box-sizing: border-box;\n  }\n  @media (min-width: 991px) {\n    .custom-top-banner { padding: 12px 24px; }\n  }\n  .brand {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    gap: 4px;\n  }\n  .banner-logo {\n    max-height: 50px;\n    width: auto;\n\n  }\n  .brand-subrow {\n    display: flex;\n    align-items: center;\n    gap: 5px;\n    margin-left: 8px;\n  }\n  .brand-subtext {\n    margin-right: 1px;\n    font-size: 16px;\n    font-weight: 600;\n    color: #49454E;\n    letter-spacing: 0.01em;\n    white-space: nowrap;\n    line-height: 0.5;\n  }\n  .yoti-logo {\n    max-height: 20px;\n    width: auto;\n    display: inline-block;\n  }\n</style>\n\n  <div anvil-slot=\"default\"></div>\n\n"
+    html: "<div class=\"custom-top-banner\" role=\"banner\">\n  \n    <div class=\"brand-subrow\">\n      <span class=\"brand-subtext\">FIDO For</span>\n      <img src=\"_/theme/yoti-logo_2.png\" alt=\"Yoti\" title=\"Login with Yoti\" class=\"yoti-logo\">\n    </div>\n  </div>\n</div>\n\n<style>\n  .custom-top-banner {\n    left: 100;\n    width: 100%;\n    z-index: 1100;\n    background-color: white;\n    color: #1C1B1F;\n    display: flex;\n    align-items: center;\n    padding: 12px 16px;\n    box-sizing: border-box;\n  }\n  @media (min-width: 991px) {\n    .custom-top-banner { padding: 12px 24px; }\n  }\n  .brand {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    gap: 4px;\n  }\n  .banner-logo {\n    max-height: 50px;\n    width: auto;\n\n  }\n  .brand-subrow {\n    display: flex;\n    align-items: center;\n    gap: 5px;\n    margin-left: 8px;\n  }\n  .brand-subtext {\n    margin-right: 1px;\n    font-size: 16px;\n    font-weight: 600;\n    color: #49454E;\n    letter-spacing: 0.01em;\n    white-space: nowrap;\n    line-height: 0.5;\n  }\n  .yoti-logo {\n    max-height: 20px;\n    width: auto;\n    display: inline-block;\n  }\n</style>\n\n  <div anvil-slot=\"default\"></div>\n\n"
   type: HtmlTemplate
 custom_component: true
 is_package: true
