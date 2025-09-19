@@ -1,0 +1,6 @@
+components: []
+container:
+  properties:
+    html: "<!-- Replace static elements with slots -->\n<h1>Hello</h1> \n<span id=\"login-status\" anvil-slot=\"login_status_slot\"></span>\n<div class=\"nav-buttons\">\n  <div anvil-slot=\"home_btn_slot\"></div>\n  <div anvil-slot=\"admin_btn_slot\"></div>\n  <div anvil-slot=\"about_btn_slot\"></div>\n  <div anvil-slot=\"login_btn_slot\"></div>\n</div>"
+  type: HtmlTemplate
+is_package: true
