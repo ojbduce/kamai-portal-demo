@@ -4,17 +4,25 @@ components:
     - components:
       - layout_properties: {grid_position: 'ZKPNEW,IZCAOC'}
         name: label_title
-        properties: {align: left, background: '', bold: true, font_size: 23, foreground: 'theme:On Secondary Container', icon: '', role: title, text: 'Digital Leaders '}
+        properties: {align: left, background: 'theme:Light Overlay 1', bold: true, font_size: 23, foreground: 'theme:On Surface', icon: '', role: title, text: 'Digital Leaders '}
         type: Label
-      - layout_properties: {grid_position: 'ZCBHQE,LTDWSA'}
+      - event_bindings: {}
+        layout_properties: {grid_position: 'IVPQJV,OLSNSF'}
+        name: image_dig_leaders_copy
+        properties: {alt_text: image of Digital Leaders website, background: 'theme:Tertiary Container', display_mode: original_size, height: 141.672607421875, horizontal_align: center, source: _/theme/insights_report_screenshot.jpg}
+        type: Image
+      - layout_properties: {grid_position: 'QNFRFN,UYAENF'}
         name: rich_text_1
         properties:
           align: left
           background: theme:Secondary
-          content: "**Explore Full Access to Digital Leaders with your Kaimai Yoti Subscription**: \n* Custom-tailored Digital Leaders' Insights Reports\n* Interactive Insight Reports and A.I Chat via FIDO"
+          content: |2-
+             Full Access to Digital Leaders with your Kaimai Yoti Subscription
+            * Custom-tailored Digital Leaders' Insights Reports
+            * Interactive Insight Reports and A.I Chat via FIDO
           font: ''
           font_size: 12
-          foreground: theme:On Secondary
+          foreground: theme:Surface Variant
           spacing:
             padding: [9, null, 5, 5]
         type: RichText
@@ -29,15 +37,10 @@ components:
           foreground: theme:On Surface Variant
           text: "\nDigital Leaders is an independent platform that fosters digital transformation across public, private, and nonprofit sectors in the UK. \n\nIt serves as a forum for leaders to explore new ideas, network, and access digital knowledge and solutions.\n\nThe platform offers a variety of programs and events throughout the year.\n\nFIDO Insight's Reports - Generate custom reports grounded on real data, proprietary content authored by some of the leading voices in Tech.\n \n\n"
         type: Label
-      - event_bindings: {}
-        layout_properties: {grid_position: 'TIYPBP,CIEIUX'}
-        name: image_dig_leaders_copy
-        properties: {alt_text: image of Digital Leaders website, background: 'theme:Light Overlay 2', display_mode: original_size, height: 141.672607421875, horizontal_align: center, source: _/theme/insights_report_screenshot.jpg}
-        type: Image
       event_bindings: {click: link_digi_leaders_image_click}
       layout_properties: {grid_position: ''}
       name: link_digi_leaders_image
-      properties: {align: left, url: 'https://super-kaleidoscopic-wader.anvil.app'}
+      properties: {align: left, background: '', foreground: '', url: 'https://super-kaleidoscopic-wader.anvil.app'}
       type: Link
     - components: []
       layout_properties: {grid_position: ''}
@@ -92,7 +95,7 @@ components:
   layout_properties: {slot: default}
   name: content_panel_home
   properties:
-    background: theme:Surface
+    background: ''
     col_widths: '{}'
     spacing:
       margin: [0, null, 7, null]
@@ -131,7 +134,7 @@ components:
       align: left
       background: ''
       bold: true
-      font_size: 12
+      font_size: 18
       foreground: theme:Secondary
       icon: fa:database
       role: null
@@ -140,11 +143,11 @@ components:
     type: Button
   - layout_properties: {grid_position: 'WXRQYK,PBGFWD'}
     name: button_1
-    properties: {bold: true, font_size: 12, foreground: 'theme:On Surface Variant', icon: 'fa:university', text: Browse}
+    properties: {bold: true, font_size: 18, foreground: 'theme:On Surface Variant', icon: 'fa:university', text: Browse}
     type: Button
   - layout_properties: {grid_position: 'FYWGHY,MTBYSS'}
     name: button_2
-    properties: {bold: true, font_size: 12, foreground: 'theme:On Surface Variant', icon: 'fa:bookmark', text: Saved}
+    properties: {bold: true, font_size: 18, foreground: 'theme:On Surface Variant', icon: 'fa:bookmark', text: Saved}
     type: Button
   layout_properties: {slot: left-nav}
   name: column_panel_3
