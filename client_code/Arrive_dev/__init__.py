@@ -37,42 +37,49 @@ class Arrive_dev(Arrive_devTemplate):
         self.is_authenticated = True
         self.show_yoti_logged_in_status()
       else:
-        print("Arrive: No Anvil Users Service user found")
-
-      # If still not authenticated, try URL hash fallback
-      if not self.is_authenticated:
-        try:
-          print("Arrive: Trying URL hash fallback")
-          hash_val = get_url_hash()
-          if hash_val:
-            self.remember_me_id = hash_val
-            print(f"remember_me_id from URL hash: {self.remember_me_id}")
-            user = app_tables.users.get(remember_me_id=self.remember_me_id)
-            if user:
-              logged_in = anvil.server.call('force_login', user)
-              print(logged_in)
-              self.is_authenticated = True
-              self.show_yoti_logged_in_status()
-        except Exception as e:
-          anvil.js.window.console.log("Arrive URL-hash fallback error {e}")
-
-      # If still not authenticated, try server fallback user (testing)
-      if not self.is_authenticated:
-        try:
-          print("Arrive: Using fallback user")
-          user, self.remember_me_id = anvil.server.call('fall_back_user')
-          if user:
-            print(f"Fallback user: {user['email']}")
-            self.remember_me_id = user['remember_me_id']
-            self.is_authenticated = True
-            self.show_yoti_logged_in_status()
-          else:
-            anvil.js.window.console.log("Arrive: No fallback user. Showing login form")
-            anvil.users.login_with_form(allow_remembered=True)
-        except Exception as e:
-          anvil.js.window.console.log("Arrive fallback user error {e}")
+        print("Arrive: No Anvil Users Service user found. Launching login")
+        modal_login_page = Yoti_QR_Login()
+        alert(content = modal_login_page, large=True,buttons=[])
     except Exception as e:
       anvil.js.window.console.log("Arrive auth error {e}")
+
+        #If fallback required make the callback go to another version of this form that includes as per below.
+
+      # # If still not authenticated, try URL hash fallback
+      # if not self.is_authenticated:
+      #   try:
+      #     print("Arrive: Trying URL hash fallback")
+      #     hash_val = get_url_hash()
+      #     if hash_val:
+      #       self.remember_me_id = hash_val
+      #       print(f"remember_me_id from URL hash: {self.remember_me_id}")
+      #       user = app_tables.users.get(remember_me_id=self.remember_me_id)
+      #       if user:
+      #         logged_in = anvil.server.call('force_login', user)
+      #         print(logged_in)
+      #         self.is_authenticated = True
+      #         self.show_yoti_logged_in_status()
+      #   except Exception as e:
+      #     anvil.js.window.console.log("Arrive URL-hash fallback error {e}")
+
+      # If still not authenticated, try server fallback user (testing)
+      # if not self.is_authenticated:
+        
+      #     try:
+      #       print("Arrive: Using fallback user")
+      #       user, self.remember_me_id = anvil.server.call('fall_back_user')
+      #       if user:
+      #         print(f"Fallback user: {user['email']}")
+      #         self.remember_me_id = user['remember_me_id']
+      #         self.is_authenticated = True
+      #         self.show_yoti_logged_in_status()
+      #       else:
+      #         anvil.js.window.console.log("Arrive: No fallback user. Showing login form")
+      #         anvil.users.login_with_form(allow_remembered=True)
+      #     except Exception as e:
+      #       anvil.js.window.console.log("Arrive fallback user error {e}")
+      # except Exception as e:
+      #   anvil.js.window.console.log("Arrive auth error {e}")
 
   def show_yoti_logged_in_status(self):
     """Update UI to show logged in status"""
