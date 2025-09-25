@@ -330,7 +330,7 @@ roles:
   name: tonal-data-grid
 - components: [TextBox, TextArea, DatePicker, DropDown]
   name: outlined-error
-- components: [TextBox, TextArea, DatePicker, DropDown]
-  name: input-error
+- {components: null, name: input-error}
 - {name: iframe-container}
 - {name: mid-card}
+- {name: big-card}

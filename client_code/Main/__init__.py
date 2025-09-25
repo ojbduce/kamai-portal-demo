@@ -107,14 +107,12 @@ class Main(MainTemplate):
     #print(rows)# Bind rows to the Repeating Panel
     
       
-  def link_1_click(self, **event_args):
-    """This method is called when the link is clicked"""
-    current_remember_me_id = self.remember_me_id
-    app_tables.reports.add_row(current_remember_me_id=current_remember_me_id)
-    self.get_data()
-    self.outlined_card_digi_leaders.visible = False
-    self.card_database.visible = True
-    self.label_title.visible = False
+  def link_visit_click(self, **event_args):
+    url = 'https://adept-right-category.anvil.app/#?remember_me_id=' + self.remember_me_id
+    print(f"URL is {url}")
+    self.link_digi_leaders_image.url =url
+    
+   
 
   def outlined_button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
